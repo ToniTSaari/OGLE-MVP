@@ -1,0 +1,152 @@
+{
+    "className":"Wizard",
+    "hitPoints":
+    {
+        "dice":6,
+        "average":4
+    },
+    "saving":
+    {
+        "int":true,
+        "wis":true
+    },
+    "proficiencies":
+    {
+        "weapons":["Dagger","Dart","Sling","Quarterstaff","Light Crossbow"],
+        "skills":
+        {
+            "num":2,
+            "skill":
+            [
+                "Arcana","History","Insight","Investigation","Medicine","Religion"
+            ]
+        }
+    },
+    "leveling":
+    [
+        {
+            "proficiency":2,
+            "features":["Arcane Recovery"],
+            "spellcasting":
+            {
+                "int":true
+            },
+            "slots":[2],
+            "cantrips":3
+        },
+        {
+            "proficiency":2,
+            "features":["Arcane Tradition"],
+            "slots":[3],
+            "cantrips":3
+        },
+        {
+            "proficiency":2,
+            "features":[],
+            "slots":[4,2],
+            "cantrips":3
+        },
+        {
+            "proficiency":2,
+            "features":["Ability Score Improvement"],
+            "slots":[4,3],
+            "cantrips":4
+        },
+        {
+            "proficiency":3,
+            "features":[],
+            "slots":[4,3,2],
+            "cantrips":4
+        },
+        {
+            "proficiency":3,
+            "features":["Arcane Tradition feature"],
+            "slots":[4,3,3],
+            "cantrips":4
+        },
+        {
+            "proficiency":3,
+            "features":[],
+            "slots":[4,3,3,1],
+            "cantrips":4
+        },
+        {
+            "proficiency":3,
+            "features":["Ability Score Improvement"],
+            "slots":[4,3,3,2],
+            "cantrips":4
+        },
+        {
+            "proficiency":4,
+            "features":[],
+            "slots":[4,3,3,3,1],
+            "cantrips":4
+        },
+        {
+            "proficiency":4,
+            "features":["Arcane Tradition feature"],
+            "slots":[4,3,3,3,2],
+            "cantrips":5
+        },
+        {
+            "proficiency":4,
+            "features":[],
+            "slots":[4,3,3,3,2,1],
+            "cantrips":5
+        },
+        {
+            "proficiency":4,
+            "features":["Ability Score Improvement"],
+            "slots":[4,3,3,3,2,1],
+            "cantrips":5
+        },
+        {
+            "proficiency":5,
+            "features":[],
+            "slots":[4,3,3,3,2,1,1],
+            "cantrips":5
+        },
+        {
+            "proficiency":5,
+            "features":["Arcane Tradition feature"],
+            "slots":[4,3,3,3,2,1,1],
+            "cantrips":5
+        },
+        {
+            "proficiency":5,
+            "features":[],
+            "slots":[4,3,3,3,2,1,1,1],
+            "cantrips":5
+        },
+        {
+            "proficiency":5,
+            "features":["Ability Score Improvement"],
+            "slots":[4,3,3,3,2,1,1,1],
+            "cantrips":5
+        },
+        {
+            "proficiency":6,
+            "features":[],
+            "slots":[4,3,3,3,2,1,1,1,1],
+            "cantrips":5
+        },
+        {
+            "proficiency":6,
+            "features":["Spell Mastery"],
+            "slots":[4,3,3,3,3,1,1,1,1],
+            "cantrips":5
+        },
+        {
+            "proficiency":6,
+            "features":["Ability Score Improvement"],
+            "slots":[4,3,3,3,3,2,1,1,1],
+            "cantrips":5
+        },
+        {
+            "proficiency":6,
+            "features":["Signature Spell"],
+            "slots":[4,3,3,3,3,2,2,1,1],
+            "cantrips":5
+        }
+    ]
+}

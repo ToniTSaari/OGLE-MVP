@@ -1,0 +1,136 @@
+{
+    "className":"Paladin",
+    "hitPoints":
+    {
+        "dice":10,
+        "average":6
+    },
+    "saving":
+    {
+        "wis":true,
+        "cha":true
+    },
+    "proficiencies":
+    {
+        "armour":["Light","Medium","Heavy","Shield"],
+        "weapons":["Simple","Martial"],
+        "saving":["wis","cha"],
+        "skills":
+        {
+            "num":2,
+            "skill":
+            [
+                "Athletics","Insight","Intimidation","Medicine","Persuasion","Religion"
+            ]
+        }
+    },
+    "leveling":
+    [
+        {
+            "proficiency":2,
+            "features":["Divine Sense","Lay on Hands"]
+        },
+        {
+            "proficiency":2,
+            "features":["Fighting Style"],
+            "spellcasting":
+            {
+                "wis":true
+            },
+            "slots":[2],
+            "divineSmite":1
+        },
+        {
+            "proficiency":2,
+            "features":["Divine Health","Sacred Oath"],
+            "slots":[3]
+        },
+        {
+            "proficiency":2,
+            "features":["Ability Score Improvement"],
+            "slots":[3]
+        },
+        {
+            "proficiency":3,
+            "features":[],
+            "extraAttack":1,
+            "slots":[4,2]
+        },
+        {
+            "proficiency":3,
+            "features":["Aura of Protection"],
+            "slots":[4,2]
+        },
+        {
+            "proficiency":3,
+            "features":["Sacred Oath feature"],
+            "slots":[4,3]
+        },
+        {
+            "proficiency":3,
+            "features":["Ability Score Improvement"],
+            "slots":[4,3]
+        },
+        {
+            "proficiency":4,
+            "features":[],
+            "slots":[4,3,2]
+        },
+        {
+            "proficiency":4,
+            "features":["Aura of Courage"],
+            "slots":[4,3,2]
+        },
+        {
+            "proficiency":4,
+            "features":[],
+            "divineSmite":2,
+            "slots":[4,3,3]
+        },
+        {
+            "proficiency":4,
+            "features":["Ability Score Improvement"],
+            "slots":[4,3,3]
+        },
+        {
+            "proficiency":5,
+            "features":[],
+            "slots":[4,3,3,1]
+        },
+        {
+            "proficiency":5,
+            "features":["Cleansing Touch"],
+            "slots":[4,3,3,1]
+        },
+        {
+            "proficiency":5,
+            "features":["Sacred Oath feature"],
+            "slots":[4,3,3,2]
+        },
+        {
+            "proficiency":5,
+            "features":["Ability Score Improvement"],
+            "slots":[4,3,3,2]
+        },
+        {
+            "proficiency":6,
+            "features":[],
+            "slots":[4,3,3,3,1]
+        },
+        {
+            "proficiency":6,
+            "features":["Aura improvements"],
+            "slots":[4,3,3,3,1]
+        },
+        {
+            "proficiency":6,
+            "features":["Ability Score Improvement"],
+            "slots":[4,3,3,3,2]
+        },
+        {
+            "proficiency":6,
+            "features":["Sacred Oath feature"],
+            "slots":[4,3,3,3,2]
+        }
+    ]
+}

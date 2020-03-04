@@ -1,0 +1,62 @@
+[
+    {
+        "abilityName":"False Appearance",
+        "description":["While the animated object remains motionless, it is indistinguishable from a normal object."]
+    },
+    {
+        "abilityName":"Keen Smell",
+        "description":["The creature has advantage on Wisdom (Perception) checks that rely on smell."]
+    },
+    {
+        "abilityName":"Echolocation",
+        "description":["The creature can’t use its blindsight while deafened."]
+    },
+    {
+        "abilityName":"Keen Hearing",
+        "description":["The creature has advantage on Wisdom (Perception) checks that rely on hearing."]
+    },
+    {
+        "abilityName":"Charge",
+        "description":["If the creature moves at least 20 feet straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra 2 (1d4) bludgeoning damage. If the target is a creature, it must succeed on a DC 10 Strength saving throw or be knocked prone."]
+    },
+    {
+        "abilityName":"Sure-Footed",
+        "description":["The creature has advantage on Strength and Dexterity saving throws made against effects that would knock it prone."]
+    },
+    {
+        "abilityName":"Telepathic Bond",
+        "description":["While the creature is on the same plane of existence as its master, it can magically convey what it senses to its master, and the two can communicate telepathically."]
+    },
+    {
+        "abilityName":"Pack Tactics",
+        "description":["The hyena has advantage on an attack roll against a creature if at least one of the hyena’s allies is within 5 feet of the creature and the ally isn’t incapacitated."]
+    },
+    {
+        "abilityName":"Swarm",
+        "description":["The swarm can occupy larger creature’s space and vice versa, and the swarm can move through any opening large enough for creatures of their size. The swarm can’t regain hit points or gain temporary hit points."]
+    },
+    {
+        "abilityName":"Sunlight Sensitivity",
+        "description":["While in sunlight, the creature has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."]
+    },
+    {
+        "abilityName":"Amphibious",
+        "description":["The creature can breathe air and water."]
+    },
+    {
+        "abilityName":"Amorphous",
+        "description":["The creature can move through a space as narrow as 1 inch wide without squeezing."]
+    },
+    {
+        "abilityName":"Shadow Evolution",
+        "description":["Shrouds instantly become shadows once they cause a total of 12 damage. Any damage they’ve suffered is subtracted from the shadow’s total hit points or abilities."]
+    },
+    {
+        "abilityName":"Shroud Stealth",
+        "description":["When in dim light or darkness, the shroud can take the Hide action as a bonus action."]
+    },
+    {
+        "abilityName":"Sunlight Weakness",
+        "description":["While in sunlight, the creature has disadvantage on attack rolls, ability checks, and saving throws."]
+    }
+]

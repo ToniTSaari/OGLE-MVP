@@ -1,0 +1,169 @@
+{
+    "className":"Monk",
+    "hitPoints":
+    {
+        "dice":8,
+        "average":5
+    },
+    "saving":
+    {
+        "str":true,
+        "dex":true
+    },
+    "proficiencies":
+    {
+        "weapons":["Simple","Shortsword"],
+        "tools":"Choose one type of artisan's tools or one musical instrument",
+        "saving":["str","dex"],
+        "skills":
+        {
+            "num":2,
+            "skill":
+            [
+                "Acrobatics","Athletics","History","Insight","Religion","Stealth"
+            ]
+        }
+    },
+    "leveling":
+    [
+        {
+            "proficiency":2,
+            "features":["Martial Artist","Unarmored Defence"],
+            "martialArts":4
+        },
+        {
+            "proficiency":2,
+            "features":[],
+            "martialArts":4,
+            "ki":2,
+            "unarmorMove":10
+        },
+        {
+            "proficiency":2,
+            "features":["Monastic Tradition","Deflect Missiles"],
+            "martialArts":4,
+            "ki":3,
+            "unarmorMove":10
+        },
+        {
+            "proficiency":2,
+            "features":["Ability Score Improvement","Slow Fall"],
+            "martialArts":4,
+            "ki":4,
+            "unarmorMove":10
+        },
+        {
+            "proficiency":3,
+            "extraAttack":1,
+            "features":["Stunning Strike"],
+            "martialArts":6,
+            "ki":5,
+            "unarmorMove":10
+        },
+        {
+            "proficiency":3,
+            "features":["Monastic Tradition feature","kiStrike"],
+            "martialArts":6,
+            "ki":6,
+            "unarmorMove":15
+        },
+        {
+            "proficiency":3,
+            "features":["Evasion","Stillness of Mind"],
+            "martialArts":6,
+            "ki":7,
+            "unarmorMove":15
+        },
+        {
+            "proficiency":3,
+            "features":["Ability Score Improvement"],
+            "martialArts":6,
+            "ki":8,
+            "unarmorMove":15
+        },
+        {
+            "proficiency":4,
+            "features":["Unarmored Movement improvement"],
+            "martialArts":6,
+            "ki":9,
+            "unarmorMove":15
+        },
+        {
+            "proficiency":4,
+            "features":["Purity of Body"],
+            "martialArts":6,
+            "ki":10,
+            "unarmorMove":20
+        },
+        {
+            "proficiency":4,
+            "features":["Monastic Tradition feature"],
+            "martialArts":8,
+            "ki":11,
+            "unarmorMove":20
+        },
+        {
+            "proficiency":4,
+            "features":["Ability Score Improvement"],
+            "martialArts":8,
+            "ki":12,
+            "unarmorMove":20
+        },
+        {
+            "proficiency":5,
+            "features":["Tongue of the Sun and Moon"],
+            "martialArts":8,
+            "ki":13,
+            "unarmorMove":20
+        },
+        {
+            "proficiency":5,
+            "features":["Diamond Soul"],
+            "martialArts":8,
+            "ki":14,
+            "unarmorMove":25
+        },
+        {
+            "proficiency":5,
+            "features":["Timeless Body"],
+            "martialArts":8,
+            "ki":15,
+            "unarmorMove":25
+        },
+        {
+            "proficiency":5,
+            "features":["Ability Score Improvement"],
+            "martialArts":8,
+            "ki":16,
+            "unarmorMove":25
+        },
+        {
+            "proficiency":6,
+            "features":["Monastic Tradition feature"],
+            "martialArts":10,
+            "ki":17,
+            "unarmorMove":25
+        },
+        {
+            "proficiency":6,
+            "features":["Empty Body"],
+            "martialArts":10,
+            "ki":18,
+            "unarmorMove":30
+        },
+        {
+            "proficiency":6,
+            "features":["Ability Score Improvement"],
+            "martialArts":10,
+            "ki":19,
+            "unarmorMove":30
+        },
+        {
+            "proficiency":6,
+            "features":["Perfect Self"],
+            "martialArts":10,
+            "ki":20,
+            "unarmorMove":30
+        }
+    ]
+}

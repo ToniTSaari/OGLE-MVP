@@ -1,0 +1,154 @@
+{
+    "className":"Ranger",
+    "hitPoints":
+    {
+        "dice":10,
+        "average":6
+    },
+    "saving":
+    {
+        "str":true,
+        "dex":true
+    },
+    "proficiencies":
+    {
+        "armour":["Light","Medium","Shield"],
+        "weapons":["Simple","Martial"],
+        "saving":["str","dex"],
+        "skills":
+        {
+            "num":3,
+            "skill":
+            [
+                "Animal Handling","Athletics","Insight","Investigation","Nature","Perception",
+                "Stealth","Survival"
+            ]
+        }
+    },
+    "leveling":
+    [
+        {
+            "proficiency":2,
+            "features":["Favoured Enemy","Natural Explorer"]
+        },
+        {
+            "proficiency":2,
+            "features":["Fighting Style"],
+            "spellcasting":
+            {
+                "wis":true
+            },
+            "slots":[2],
+            "spellsKnown":2
+        },
+        {
+            "proficiency":2,
+            "features":["Ranger Archetype","Primeval Awareness"],
+            "slots":[3],
+            "spellsKnown":3
+        },
+        {
+            "proficiency":2,
+            "features":["Ability Score Improvement"],
+            "slots":[3],
+            "spellsKnown":3
+        },
+        {
+            "proficiency":3,
+            "features":[],
+            "extraAttack":1,
+            "slots":[4,2],
+            "spellsKnown":4
+        },
+        {
+            "proficiency":3,
+            "features":["Favored Enemy improvements","Natural Explorer improvements"],
+            "slots":[4,2],
+            "spellsKnown":4
+        },
+        {
+            "proficiency":3,
+            "features":["Ranger Archetype feature"],
+            "slots":[4,3],
+            "spellsKnown":5
+        },
+        {
+            "proficiency":3,
+            "features":["Ability Score Improvement","Land's Stride"],
+            "slots":[4,3],
+            "spellsKnown":5
+        },
+        {
+            "proficiency":4,
+            "features":[],
+            "slots":[4,3,2],
+            "spellsKnown":6
+        },
+        {
+            "proficiency":4,
+            "features":["Natural Explorer improvements","Hide in Plain Sight"],
+            "slots":[4,3,2],
+            "spellsKnown":6
+        },
+        {
+            "proficiency":4,
+            "features":["Ranger Archetype feature"],
+            "slots":[4,3,3],
+            "spellsKnown":7
+        },
+        {
+            "proficiency":4,
+            "features":["Ability Score Improvement"],
+            "slots":[4,3,3],
+            "spellsKnown":7
+        },
+        {
+            "proficiency":5,
+            "features":[],
+            "slots":[4,3,3,1],
+            "spellsKnown":8
+        },
+        {
+            "proficiency":5,
+            "features":["Favored Enemy improvements","Vanish"],
+            "slots":[4,3,3,1],
+            "spellsKnown":8
+        },
+        {
+            "proficiency":5,
+            "features":["Ranger Archetype feature"],
+            "slots":[4,3,3,2],
+            "spellsKnown":9
+        },
+        {
+            "proficiency":5,
+            "features":["Ability Score Improvement"],
+            "slots":[4,3,3,2],
+            "spellsKnown":9
+        },
+        {
+            "proficiency":6,
+            "features":[],
+            "slots":[4,3,3,3,1],
+            "spellsKnown":10
+        },
+        {
+            "proficiency":6,
+            "features":["Feral Senses"],
+            "slots":[4,3,3,3,1],
+            "spellsKnown":10
+        },
+        {
+            "proficiency":6,
+            "features":["Ability Score Improvement"],
+            "slots":[4,3,3,3,2],
+            "spellsKnown":11
+        },
+        {
+            "proficiency":6,
+            "features":["Foe Slayer"],
+            "slots":[4,3,3,3,2],
+            "spellsKnown":11
+        }
+    ]
+}

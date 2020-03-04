@@ -1,0 +1,160 @@
+{
+    "className":"Druid",
+    "hitPoints":
+    {
+        "dice":8,
+        "average":5
+    },
+    "saving":
+    {
+        "int":true,
+        "wis":true
+    },
+    "proficiencies":
+    {
+        "armour":["Light","Medium","Shield"],
+        "weapons":
+        [
+            "Club","Dagger","Dart","Javelin","Mace","Quarterstaff","Scimitar",
+            "Sickle", "Sling","Spear"
+        ],
+        "tools":"Herbalism kit",
+        "saving":["int","wis"],
+        "skills":
+        {
+            "num":2,
+            "skill":
+            [
+                "Arcana","Animal Handling","Insight","Medicine","Nature","Perception",
+                "Religion","Survival"
+            ]
+        }
+    },
+    "leveling":
+    [
+        {
+            "proficiency":2,
+            "spellcasting":
+            {
+                "wis":true
+            },
+            "features":["Druidic"],
+            "slots":[2],
+            "cantrips":2
+        },
+        {
+            "proficiency":2,
+            "features":["Wild Shape","Druid Circle"],
+            "slots":[3],
+            "cantrips":2
+        },
+        {
+            "proficiency":2,
+            "features":{},
+            "slots":[4,2],
+            "cantrips":2
+        },
+        {
+            "proficiency":2,
+            "features":["Wild Shape Improvement","Ability Score Improvement"],
+            "slots":[4,3],
+            "cantrips":3
+        },
+        {
+            "proficiency":3,
+            "features":[],
+            "slots":[4,3,2],
+            "cantrips":3
+        },
+        {
+            "proficiency":3,
+            "features":["Druid Circle feature"],
+            "slots":[4,3,3],
+            "cantrips":3
+        },
+        {
+            "proficiency":3,
+            "features":[],
+            "slots":[4,3,3,1],
+            "cantrips":3
+        },
+        {
+            "proficiency":3,
+            "features":["wildShape","Ability Score Improvement"],
+            "slots":[4,3,3,2],
+            "cantrips":3
+        },
+        {
+            "proficiency":4,
+            "features":[],
+            "slots":[4,3,3,3,1],
+            "cantrips":3
+        },
+        {
+            "proficiency":4,
+            "features":["Druid Circle feature"],
+            "slots":[4,3,3,3,2],
+            "cantrips":4
+        },
+        {
+            "proficiency":4,
+            "features":[],
+            "slots":[4,3,3,3,2,1],
+            "cantrips":4
+        },
+        {
+            "proficiency":4,
+            "features":["Ability Score Improvement"],
+            "slots":[4,3,3,3,2,1],
+            "cantrips":4
+        },
+        {
+            "proficiency":5,
+            "features":[],
+            "slots":[4,3,3,3,2,1,1],
+            "cantrips":4
+        },
+        {
+            "proficiency":5,
+            "features":["Druid Circle feature"],
+            "slots":[4,3,3,3,2,1,1],
+            "cantrips":4
+        },
+        {
+            "proficiency":5,
+            "features":[],
+            "slots":[4,3,3,3,2,1,1,1],
+            "cantrips":4
+        },
+        {
+            "proficiency":5,
+            "features":["Ability Score Improvement"],
+            "slots":[4,3,3,3,2,1,1,1],
+            "cantrips":4
+        },
+        {
+            "proficiency":6,
+            "features":[],
+            "slots":[4,3,3,3,2,1,1,1,1],
+            "cantrips":4
+        },
+        {
+            "proficiency":6,
+            "features":["Timeless Body","Beast Spells"],
+            "slots":[4,3,3,3,3,1,1,1,1],
+            "cantrips":4
+        },
+        {
+            "proficiency":6,
+            "features":["Ability Score Improvement"],
+            "slots":[4,3,3,3,3,2,1,1,1],
+            "cantrips":4
+        },
+        {
+            "proficiency":6,
+            "features":["Archdruid"],
+            "slots":[4,3,3,3,3,2,2,1,1],
+            "cantrips":4
+        }
+    ]
+}

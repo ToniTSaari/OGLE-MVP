@@ -1,0 +1,70 @@
+$BGcolor:rgb(228, 222, 208);
+$navColor:rgb(87, 89, 177);
+$highlight:rgb(133, 134, 197);
+*
+{
+    background-color:  $BGcolor;
+}
+button, .button
+{
+    margin: 1px;
+    background-color:rgb(187, 131, 87);
+    border:none;
+    color: white;
+}
+button:hover
+{
+    background-color: rgb(26, 8, 75);
+    transition-duration: 1s;
+}
+button:disabled
+{
+    background-color: $BGcolor;
+    color: $BGcolor;
+}
+.main
+{
+    margin:15px;
+    padding: 5px;
+}
+hr
+{
+    border: 1.5px solid rgb(128, 55, 55)
+}
+.navbar
+{
+    background-color: $navColor;
+    padding:15px;
+}
+a
+{
+    text-decoration: none;
+    padding: 5px;
+    background-color: $navColor;
+    color: white;
+}
+a:hover
+{
+    background-color: $highlight;
+    transition-duration: 0.4s;
+}
+table
+{
+    margin:5px;
+    padding: 5px;
+    border-spacing: 5px;
+}
+tr:nth-child(even)
+{
+    background-color: rgb(252, 237, 190);
+}
+#statblock
+{
+    margin: 10px;
+}
+#statBox
+{
+    width: 100px;
+    margin:2px;
+    display: inline-block;
+}

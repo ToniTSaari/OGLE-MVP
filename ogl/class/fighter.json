@@ -1,0 +1,119 @@
+{
+    "className":"Fighter",
+    "hitPoints":
+    {
+        "dice":10,
+        "average":6
+    },
+    "saving":
+    {
+        "str":true,
+        "con":true
+    },
+    "proficiencies":
+    {
+        "armour":["Light","Medium","Heavy","Shield"],
+        "weapons":["Simple","Martial"],
+        "saving":["str","con"],
+        "skills":
+        {
+            "num":2,
+            "skill":
+            [
+                "Acrobatics","Animal Handling","Athletics","History","Intimidation",
+                "Perception","Survival"
+            ]
+        }
+    },
+    "leveling":
+    [
+        {
+            "proficiency":2,
+            "features":["Fighting Style","Second Wind"]
+        },
+        {
+            "proficiency":2,
+            "features":[],
+            "actionSurge":1
+        },
+        {
+            "proficiency":2,
+            "features":["Martial Archetype"]
+        },
+        {
+            "proficiency":2,
+            "features":["Ability Score Improvement"]
+        },
+        {
+            "proficiency":3,
+            "extraAttack":1,
+            "features":[]
+        },
+        {
+            "proficiency":3,
+            "features":["Ability Score Improvement"]
+        },
+        {
+            "proficiency":3,
+            "features":["Martial Archetype feature"]
+        },
+        {
+            "proficiency":3,
+            "features":["Ability Score Improvement"]
+        },
+        {
+            "proficiency":4,
+            "indominable":1,
+            "features":[]
+        },
+        {
+            "proficiency":4,
+            "features":["Martial Archetype feature"]
+        },
+        {
+            "proficiency":4,
+            "extraAttack":2,
+            "features":[]
+        },
+        {
+            "proficiency":4,
+            "features":["Ability Score Improvement"]
+        },
+        {
+            "proficiency":5,
+            "indominable":2,
+            "features":[]
+        },
+        {
+            "proficiency":5,
+            "features":["Ability Score Improvement"]
+        },
+        {
+            "proficiency":5,
+            "features":["Martial Archetype feature"]
+        },
+        {
+            "proficiency":5,
+            "features":["Ability Score Improvement"]
+        },
+        {
+            "proficiency":6,
+            "features":[],
+            "actionSurge":2,
+            "indominable":3
+        },
+        {
+            "proficiency":6,
+            "features":["Martial Archetype feature"]
+        },
+        {
+            "proficiency":6,
+            "features":["Ability Score Improvement"]
+        },
+        {
+            "proficiency":6,
+            "features":[],
+            "extraAttack":3
+        }
+    ]
+}

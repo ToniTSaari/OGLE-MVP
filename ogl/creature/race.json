@@ -1,0 +1,80 @@
+[
+    {
+        "raceName":"Dwarf",
+        "desc":"A short, greedy and angry alcoholic.",
+        "stats":
+        {
+            "con":2
+        },
+        "age":[50,350],
+        "alignment":["Lawful","Good"],
+        "size":"medium",
+        "darkvision":true,
+        "racials":
+        [
+            "Dwarven Resilience","Dwarven Combat Training","Stonecunning", "Dwarven Tools"
+        ],
+        "languages":["Common","Dwarvish"],
+        "subraces":
+        [{
+            "subName":"Hilldwarf",
+            "subDesc":"Just as short, greedy and angry. But also a redneck alcoholic.",
+            "stats":
+            {
+                "wis":1
+            },
+            "racials":["Dwarven Toughness"]
+        }]
+    },
+    {
+        "raceName":"Elf",
+        "desc":"A soulless knife-eared treehugger.",
+        "stats":
+        {
+            "dex":2
+        },
+        "age":[100,750],
+        "alignment":["Chaotic","Good"],
+        "size":"medium",
+        "darkvision":true,
+        "racials":
+        [
+            "Keen Senses", "Fey Ancestry", "Trance"
+        ],
+        "languages":["Common","Elvish"],
+        "subraces":
+        [{
+            "subName":"High Elf",
+            "subDesc":"Knife-eared potsmoker.",
+            "stats":
+            {
+                "int":1
+            },
+            "racials":["Elf Weapon Training", "Cantrip", "Extra Language"]
+        }]
+    },
+    {
+        "raceName":"Human",
+        "desc":"Boring...",
+        "stats":
+        {
+            "str":1,
+            "con":1,
+            "dex":1,
+            "int":1,
+            "wis":1,
+            "cha":1
+        },
+        "age":[50,350],
+        "alignment":["True","Neutral"],
+        "size":"medium",
+        "darkvision":false,
+        "racials":
+        [
+            "Extra Language"
+        ],
+        "languages":["Common"],
+        "subraces":
+        [{}]
+    }
+]

@@ -1,0 +1,165 @@
+{
+    "className":"Barbarian",
+    "hitPoints":
+    {
+        "dice":12,
+        "average":7
+    },
+    "saving":
+    {
+        "str":true,
+        "con":true
+    },
+    "proficiencies":
+    {
+        "armour":["Light", "Medium", "Shield"],
+        "weapons":["Simple", "Martial"],
+        "skills":
+        {
+            "num":2,
+            "any":false,
+            "skill":
+            [
+                "Animal Handling","Athletics","Intimidation","Nature","Perception","Survival"
+            ]
+        }
+    },
+    "leveling":
+    [
+        {
+            "proficiency":2,
+            "features":["Rage","Unarmored Defence"],
+            "infiniteRage":false,
+            "rages":2,
+            "rageDamage":2
+        },
+        {
+            "proficiency":2,
+            "features":["Recless Attack","Danger Sense"],
+            "rages":2,
+            "rageDamage":2
+        },
+        {
+            "proficiency":2,
+            "features":["Primal Path"],
+            "rages":3,
+            "rageDamage":2
+        },
+        {
+            "proficiency":2,
+            "features":["Ability Score Improvement"],
+            "rages":3,
+            "rageDamage":2
+        },
+        {
+            "proficiency":3,
+            "features":["Fast Movement"],
+            "extraAttack":1,
+            "rages":3,
+            "rageDamage":2
+        },
+        {
+            "proficiency":3,
+            "features":["Path feature"],
+            "rages":4,
+            "rageDamage":2
+        },
+        {
+            "proficiency":3,
+            "features":["Feral Instinct"],
+            "rages":4,
+            "rageDamage":2
+        },
+        {
+            "proficiency":3,
+            "features":["Ability Score Improvement"],
+            "rages":4,
+            "rageDamage":2
+        },
+        {
+            "proficiency":4,
+            "features":[],
+            "brutalCritical":1,
+            "rages":4,
+            "rageDamage":3
+        },
+        {
+            "proficiency":4,
+            "features":["Path feature"],
+            "brutalCritical":1,
+            "rages":4,
+            "rageDamage":3
+        },
+        {
+            "proficiency":4,
+            "features":["Relentless Rage"],
+            "brutalCritical":1,
+            "rages":4,
+            "rageDamage":3
+        },
+        {
+            "proficiency":4,
+            "features":["Ability Score Improvement"],
+            "brutalCritical":1,
+            "rages":5,
+            "rageDamage":3
+        },
+        {
+            "proficiency":5,
+            "features":[],
+            "brutalCritical":2,
+            "rages":5,
+            "rageDamage":3
+        },
+        {
+            "proficiency":5,
+            "features":["Path feature"],
+            "brutalCritical":2,
+            "rages":5,
+            "rageDamage":3
+        },
+        {
+            "proficiency":5,
+            "features":["Persistent Rage"],
+            "brutalCritical":2,
+            "rages":5,
+            "rageDamage":3
+        },
+        {
+            "proficiency":5,
+            "features":["Ability Score Improvement"],
+            "brutalCritical":2,
+            "rages":5,
+            "rageDamage":4
+        },
+        {
+            "proficiency":5,
+            "features":[],
+            "brutalCritical":3,
+            "rages":5,
+            "rageDamage":4
+        },
+        {
+            "proficiency":6,
+            "features":["Indominable Might"],
+            "brutalCritical":3,
+            "rages":6,
+            "rageDamage":4
+        },
+        {
+            "proficiency":6,
+            "features":["Ability Score Improvement"],
+            "brutalCritical":3,
+            "rages":6,
+            "rageDamage":4
+        },
+        {
+            "proficiency":6,
+            "features":["Primal Champion"],
+            "brutalCritical":3,
+            "rages":null,
+            "infiniteRage":true,
+            "rageDamage":4
+        }
+    ]
+}

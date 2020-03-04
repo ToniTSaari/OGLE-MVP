@@ -1,0 +1,134 @@
+{
+    "className":"Rogue",
+    "hitPoints":
+    {
+        "dice":8,
+        "average":5
+    },
+    "saving":
+    {
+        "dex":true,
+        "int":true
+    },
+    "proficiencies":
+    {
+        "armour":["Light"],
+        "weapons":
+        [
+            "Simple","Hand Crossbow","Longsword","Rapier","Shortsword"
+        ],
+        "tools":"Thieves' tools",
+        "skills":
+        {
+            "num":4,
+            "skill":
+            [
+                "Acrobatics","Athletics","Deception","Insight","Intimidation","Investigation",
+                "Perception","Performance","Persuasion","Sleight of Hand","Stealth"
+            ]
+        }
+    },
+    "leveling":
+    [
+        {
+            "proficiency":2,
+            "features":["Expertise","Thieves' Cant"],
+            "sneakAttack":1
+        },
+        {
+            "proficiency":2,
+            "features":["Cunning Action"],
+            "sneakAttack":1
+        },
+        {
+            "proficiency":2,
+            "features":["Rougish Archetype"],
+            "sneakAttack":2
+        },
+        {
+            "proficiency":2,
+            "features":["Ability Score Improvement"],
+            "sneakAttack":2
+        },
+        {
+            "proficiency":3,
+            "features":["Uncanny Dodge"],
+            "sneakAttack":3
+        },
+        {
+            "proficiency":3,
+            "features":["Expertise"],
+            "sneakAttack":3
+        },
+        {
+            "proficiency":3,
+            "features":["Evasion"],
+            "sneakAttack":4
+        },
+        {
+            "proficiency":3,
+            "features":["Ability Score Improvement"],
+            "sneakAttack":4
+        },
+        {
+            "proficiency":4,
+            "features":["Rougish Archetype feature"],
+            "sneakAttack":5
+        },
+        {
+            "proficiency":4,
+            "features":["Ability Score Improvement"],
+            "sneakAttack":5
+        },
+        {
+            "proficiency":4,
+            "features":["Reliable Talent"],
+            "sneakAttack":6
+        },
+        {
+            "proficiency":4,
+            "features":["Ability Score Improvement"],
+            "sneakAttack":6
+        },
+        {
+            "proficiency":5,
+            "features":["Rougish Archetype feature"],
+            "sneakAttack":7
+        },
+        {
+            "proficiency":5,
+            "features":["Blindsense"],
+            "sneakAttack":7
+        },
+        {
+            "proficiency":5,
+            "features":["Slippery Mind"],
+            "sneakAttack":8
+        },
+        {
+            "proficiency":5,
+            "features":["Ability Score Improvement"],
+            "sneakAttack":8
+        },
+        {
+            "proficiency":6,
+            "features":["Rougish Archetype feature"],
+            "sneakAttack":9
+        },
+        {
+            "proficiency":6,
+            "features":["Elusive"],
+            "sneakAttack":9
+        },
+        {
+            "proficiency":6,
+            "features":["Ability Score Improvement"],
+            "sneakAttack":10
+        },
+        {
+            "proficiency":6,
+            "features":["Stroke of Luck"],
+            "sneakAttack":10
+        }
+    ]
+}
