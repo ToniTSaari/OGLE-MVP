@@ -36,7 +36,7 @@ class DeleteForm extends React.Component
                 Account: {window.localStorage.getItem('email')}<br/>
                 <form onSubmit={this.submit}>
                     Confirm deletion;<br/>
-                    <input type="submit" value="Delete"/>
+                    <input id="delButton" type="submit" value="Delete"/>
                 </form>
             </div>
         )

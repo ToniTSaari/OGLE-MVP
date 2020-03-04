@@ -42,11 +42,13 @@ exports.character = async (req, res) =>
         console.log('Found: ' + find.charName + ' - ' + date)
         payload[i] = 
         {
+            id:find._id,
             character:find.charName,
             race:find.race,
             stats:find.stats,
             Class:find.Classes[0],
-            saving:find.saving
+            saving:find.saving,
+            armour:find.proficiencies.armour
         }
         i++
         const n = i-1

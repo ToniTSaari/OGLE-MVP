@@ -58,6 +58,15 @@ tr:nth-child(even)
 {
     background-color: rgb(252, 237, 190);
 }
+#mainBox
+{
+    border: 2px solid rgb(128, 55, 55);
+    border-radius: 6px;
+    float: left;
+    margin: 5px;
+    margin-top: 10px;
+    padding: 15px;
+}
 #statblock
 {
     margin: 10px;
@@ -67,4 +76,15 @@ tr:nth-child(even)
     width: 100px;
     margin:2px;
     display: inline-block;
+}
+#delButton
+{
+    border-radius: 6px;
+    padding: 4px;
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+#delButton:hover
+{
+    background-color: rgb(143, 11, 11)
 }

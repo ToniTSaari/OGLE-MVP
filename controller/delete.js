@@ -26,9 +26,20 @@ exports.ability = async (req, res) =>
 
 exports.character = async (req, res) =>
 {
-    character.deleteOne({_id:req.body.id}, function(err)
+    const obj = req.body
+    console.log('Delete request data: ' + JSON.stringify(obj) + ' Time: ' + date)
+    character.findOneAndDelete(obj, function(err)
     {
-        if(err){console.log(err)}else{console.log('Character deletion successful! ' + date)}
+        if(err){console.log(err)}
+        else
+        {
+            character.findOne(obj, function(err, find)
+            {
+                if(err){console.log(err)}
+                if(find){console.log('Character deletion unsuccessful!')}
+                else{console.log('Character deletion successful! ' + date)}
+            })
+        }
     })
 }
 

@@ -87,6 +87,7 @@ exports.player = (req, res) =>
     player.findOneAndUpdate({_id:req.body.id}, req.body.update, {new:true}, (err, doc) =>
     {
         if(err){console.log(err)}
+        doc.password = "It's a secret >:D"
         console.log(doc)
     })
     

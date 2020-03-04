@@ -24,6 +24,15 @@
                 "wis":1
             },
             "racials":["Dwarven Toughness"]
+        },
+        {
+            "subName":"Fjordwarf",
+            "subDesc":"An alcoholic wot lives onna fjord.",
+            "stats":
+            {
+                "str":1
+            },
+            "racials":["Dwarven Shield Training"]
         }]
     },
     {
@@ -65,7 +74,7 @@
             "wis":1,
             "cha":1
         },
-        "age":[50,350],
+        "age":[18,100],
         "alignment":["True","Neutral"],
         "size":"medium",
         "darkvision":false,

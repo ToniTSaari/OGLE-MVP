@@ -7,6 +7,7 @@ import DeleteForm from './pages/DeleteForm'
 import UpdateForm from './pages/UpdateForm'
 import PCCreateForm from './pages/PCCreateForm'
 import HomePage from './pages/homePage'
+import FriendsList from './pages/FriendsList'
 import './style/pages.scss'
 
 const Home = () =>
@@ -37,6 +38,11 @@ const PCCreate = () =>
   <div><PCCreateForm /></div>
 )
 
+const Friends = () =>
+(
+  <div><FriendsList /></div>
+)
+
 const Delete = () => 
 (
   <div><DeleteForm /></div>
@@ -53,13 +59,14 @@ const App = () => {
   <div>
     <nav>
       <Router >
-        <div>
+        <div className="mainControl">
           {email ?
             <div className="navbar">
-              <Link className="Link" to="/">~ Home ~</Link>  
+              <Link to="/">~ Home ~</Link>  
               <Link to="/upAcc">~ Update account ~</Link>
               <Link to="/logOut">~ LogOut ~</Link> 
               <Link to="/del">~ Delete account ~</Link> 
+              <Link to="/friends">~ Friends List ~</Link>
             </div>:
             <div className="navbar">
               ~ <Link to="/login">Login </Link> ~
@@ -72,6 +79,7 @@ const App = () => {
         <Route exact path="/signUp" render={() => <SignUp />} />
         <Route exact path="/logOut" render={() => <Logout />} />
         <Route exact path="/del" render={() => <Delete />} />
+        <Route exact path="/friends" render={() => <Friends />} />
         <Route exact path="/PCCreate" render={() => <PCCreate />} />
         
       </Router>

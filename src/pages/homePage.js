@@ -9,6 +9,8 @@ class HomePage extends React.Component
     super(props)
     this.state = {value: ''}
     this.state = {characters: []}
+    this.charDel = this.charDel.bind(this)
+    this.friendApprove = this.friendApprove.bind(this)
     var data = {url:"/findAcc", content:{email:window.localStorage.getItem('email')}}
     requestService.poster(data).then((res) => 
     {
@@ -20,6 +22,8 @@ class HomePage extends React.Component
       {
         window.localStorage.setItem('user', res.playerName)
       })
+      window.localStorage.setItem('id', res._id)
+      this.setState({friendReqs:res.friendRequestGot})
     })
     data = {url:"/listChar", content:{email:window.localStorage.getItem('email')}}
     requestService.poster(data).then((res) =>
@@ -34,17 +38,30 @@ class HomePage extends React.Component
           {
             characters.push(
               {
+                id:res[i].id,
                 charName:res[i].character,
                 race:res[i].race,
                 stats:res[i].stats,
                 Class:res[i].Class,
-                saving:res[i].saving
+                saving:res[i].saving,
+                armour:res[i].armour
               })
           }
           this.setState({characters:characters})
         })
       }
     })
+  }
+  friendApprove = (event) =>
+  {
+    alert(JSON.stringify(event.target.value))
+
+  }
+  charDel = (event) =>
+  {
+    alert(event.target.value)
+    const del = {url:"/delChar", content:{_id:event.target.value}}
+    requestService.poster(del).then(window.location.reload())
   }
   render()
   {
@@ -53,14 +70,26 @@ class HomePage extends React.Component
        Logged in as: {this.state.email}
       {this.state.user ? <div> With name: {this.state.user}</div>:<div> anonymously</div>}
       <hr/>
+      {this.state.friendReqs ? 
+      <div>
+        You have recieved the following friend requests;
+        {this.state.friendReqs.map((friend)=>
+        <div>
+          {friend.friend} <button value={friend.ID} onClick={this.friendApprove}>Accept request</button><br/>
+        </div>)}
+        <hr/>
+      </div>
+      
+      :<div></div>}  
       {this.state.characters ?
         <div>
-        <Link to="/PCCreate">Create character</Link>
-      </div>:<div><Link to="/PCCreate">Create new character</Link></div>}
+        <Link to="/PCCreate">~ Create new character ~</Link>
+      </div>:<div><Link to="/PCCreate">~ Create character ~</Link></div>}
       {this.state.characters.map((character)=>
       (
-      <div><hr/><b>{character.charName}</b> a 
-      level {character.Class.level} {character.race} {character.Class.Class}
+      <div id="mainBox"><b>{character.charName}</b> a 
+      level {character.Class.level} {character.race} {character.Class.Class}.
+      <button id="delButton" style={{float:"right"}} value={character.id} onClick={this.charDel}>Delete {character.charName}</button>
           <table>
             <thead>
               <tr>
@@ -103,6 +132,9 @@ class HomePage extends React.Component
           </div>
           :<div></div>
         }
+        <div>
+          <b>Armour: </b>{character.armour}
+        </div>
         </div>
       ))}
     </div>

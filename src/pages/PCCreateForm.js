@@ -168,7 +168,10 @@ class PCCreateForm extends React.Component
               this.setState({subraces:subList})
             })
           }
-          else{this.setState({subraces:undefined})}
+          else{this.setState({subraces:undefined}, () => 
+          {
+            this.setState({racials:racials})
+          })}
         })
       })
     })  
