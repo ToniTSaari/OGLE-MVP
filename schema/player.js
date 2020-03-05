@@ -7,17 +7,7 @@ const player = new mongoose.Schema(
     password: {type:String, required:true},
     characters:[String],
     campaigns:[String],
-    friends:[String],
-    friendRequestSent:
-    [{
-        friend:String,
-        ID:String
-    }],
-    friendRequestGot:
-    [{
-        friend:String,
-        ID:String
-    }]
+    friends:[String]
 })
 
 module.exports = mongoose.model('player', player)

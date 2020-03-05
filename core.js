@@ -14,6 +14,7 @@ const rRead = require('./controller/read')
 const rList = require('./controller/list')
 const rPut = require('./controller/update')
 const rCreate = require('./controller/create')
+const rFriend = require('./controller/friendRequest')
 
 var url = "mongodb://localhost:27017/ogl"
 
@@ -27,6 +28,12 @@ app.post("/upAcc", rPut.player)
 
 app.post("/login", rAuth.login)
 app.post("/signup", rAuth.signup)
+
+app.post("/friendReq", rFriend.req)
+app.post("/listGot", rFriend.gotList)
+app.post("/listSent", rFriend.sentList)
+app.post("/appFriend", rFriend.approve)
+app.post("/decFriend", rFriend.decline)
 
 app.post("/findAcc", rRead.player)
 app.post("/findChar", rRead.character)

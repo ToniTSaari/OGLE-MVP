@@ -15,8 +15,8 @@ class DeleteForm extends React.Component
         event.preventDefault()
         try
         {
-            const data = {email:window.localStorage.getItem('email')}
-            await requestService.poster({url:"/findAcc", data}).then((res)=>
+            const content = {email:window.localStorage.getItem('email')}
+            await requestService.poster({url:"/findAcc", content:content}).then((res)=>
             {
                 requestService.poster({url:"/delAcc", content:{email:res.email}})
                 requestService.poster({url:"/delChar", content:{email:res.email}})

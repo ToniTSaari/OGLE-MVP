@@ -27,9 +27,7 @@ const Update = () =>
 
 const Logout = () => 
 {
-  window.localStorage.clear('email')
-  window.localStorage.clear('user')
-  window.localStorage.clear('charName')
+  window.localStorage.clear('*')
   window.location.href = '/'
 }
 

@@ -10,6 +10,11 @@ class FriendsList extends React.Component
 
         this.submit = this.submit.bind(this)
         this.request = this.request.bind(this)
+        const data = {url:"/findAcc", content:{email:window.localStorage.getItem('email')}}
+        requestService.poster(data).then((res)=>
+        {
+            this.setState({user:res.email,id:res._id})
+        })
     }
     change = (event) =>
     {
@@ -24,64 +29,39 @@ class FriendsList extends React.Component
         const data = {url:"/findAcc", content:{email:this.state.friendMail}}
         requestService.poster(data).then((res) =>
         {
-            this.setState({friend:res.playerName,id:res._id})
+            this.setState({friendName:res.playerName,friend:res.email,friendID:res._id})
         })
     }
     request = async (event) =>
     {
-        const toFriend =
+        const data =
         {
-            url:"/upAcc",
-            content:
+            url:"/friendReq", content:
             {
-                id:this.state.id,
-                update:
-                {
-                    friendRequestGot:
-                    {
-                        friend:window.localStorage.getItem('email'),
-                        ID:window.localStorage.getItem('id')
-                    }
-                }
+                requester:this.state.user,
+                requesterID:this.state.id,
+                requestee:this.state.friend,
+                requesteeID:this.state.friendID
             }
         }
-        const toYou = 
-        {
-            url:"/upAcc",
-            content:
-            {
-                id:window.localStorage.getItem('id'),
-                update:
-                {
-                    friendRequestSent:
-                    {
-                        friend:this.state.friendMail,
-                        ID:this.state.id
-                    }
-                }
-            }
-        }
-        requestService.poster(toFriend).then(
-            requestService.poster(toYou)
-        )
+        requestService.poster(data)
     }
     render()
     {
         return(
             <div className="main">
+                <b><p>{this.state.user} is searching friends by email {this.state.friendMail}:</p></b>
+                <form onSubmit={this.submit}>
+                    <input type="text" name="friendMail" onChange={this.change} required></input>
+                    <input type="submit" value="Find" />
+                </form>
                 {this.state.friend ? 
                 <div id="mainBox">
+                    {this.state.friend.friendName ? <b>{this.state.friend.friendName}</b>:<b></b>}
                     <b>{this.state.friend}</b><br/>
                     <button value={this.state.id} onClick={this.request}>Send friend request</button>
                 </div>
-                :
-                <div>
-                    Search friends by email:
-                    <form onSubmit={this.submit}>
-                        <input type="text" name="friendMail" onChange={this.change} required></input>
-                        <input type="submit" value="Find" />
-                    </form>
-                </div>}
+                :<div></div>}
             </div>
         )
     }
