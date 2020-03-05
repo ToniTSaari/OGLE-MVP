@@ -13,9 +13,9 @@ const date = rawDate.getHours() + ':'
 exports.req = async (req,res)=>
 {
     const obj = req.body
-    console.log(obj)
     const friendReq = new friend(obj)
     console.log(friendReq)
+    console.log(date)
     friendReq.save()
 }
 
@@ -104,7 +104,7 @@ exports.approve = async (req,res) =>
     friend.findByIdAndDelete(obj.reqID, (err,doc)=>
     {
         if(err){console.log(err)}
-        console.log(doc)
+        console.log('Friendship of ' + obj.requester + ' accepted by ' + obj.requestee + ' on ' + date)
     })
 }
 
@@ -114,6 +114,6 @@ exports.decline = async (req,res) =>
     friend.findByIdAndDelete(obj.reqID, (err,doc)=>
     {
         if(err){console.log(err)}
-        console.log(doc)
+        console.log('Friendship of ' + obj.requester + ' rejected by ' + obj.requestee + ' on ' + date)
     })
 }

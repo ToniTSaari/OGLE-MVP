@@ -99,11 +99,12 @@ class HomePage extends React.Component
       <div className="main">
        Logged in as: {this.state.email}
       {this.state.user ? <div> With name: {this.state.user}</div>:<div> anonymously</div>}
+      <hr/>
       {this.state.friends ? 
         <div>
-          <b>Friends with; </b>
+          <b>Friends with; </b><br/>
           {this.state.friends.map((friend)=>
-          <i>{friend} </i>
+          <b id="friendBox">{friend}</b>
           )}
         </div>
       :<div></div>}
@@ -130,9 +131,9 @@ class HomePage extends React.Component
       </div>
       :<div></div>}
       {this.state.characters ?
-        <div>
+        <div><br/>
         <Link to="/PCCreate">~ Create new character ~</Link>
-      </div>:<div><Link to="/PCCreate">~ Create character ~</Link></div>}
+      <hr/></div>:<div><br/><Link to="/PCCreate">~ Create character ~</Link><hr/></div>}
       {this.state.characters.map((character)=>
       (
       <div id="mainBox"><b>{character.charName}</b> a 
@@ -180,9 +181,9 @@ class HomePage extends React.Component
           </div>
           :<div></div>
         }
-        <div>
-          <b>Armour: </b>{character.armour}
-        </div>
+          <div>
+            <b>Armour: </b>{character.armour}
+          </div>
         </div>
       ))}
     </div>
