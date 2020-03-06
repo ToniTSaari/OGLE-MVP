@@ -44,7 +44,7 @@ class FriendsList extends React.Component
             this.setState({friendName:res.playerName,friend:res.email,friendID:res._id})
         })
     }
-    request = async (event) =>
+    request = async () =>
     {
         const data =
         {

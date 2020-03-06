@@ -28,7 +28,22 @@ exports.monster = async (req, res) => {}
 
 exports.player = async (req, res) => 
 {
-    
+    const obj = req.body
+    const campaign = obj.campaign
+    console.log(obj)
+    player.findById(obj.id, (err,doc) =>
+    {
+        if(err){console.log(err)}
+        var campaigns = doc.campaigns
+        campaigns.push(campaign)
+        console.log(campaigns)
+        player.findByIdAndUpdate(doc._id, {campaigns:campaigns}, {new:true}, (err,doc) =>
+        {
+            if(err){console.log(err)}
+            doc.password = "Cheeky! ;D"
+            console.log(doc)
+        })
+    })
 }
 
 exports.spell = async (req, res) => {}

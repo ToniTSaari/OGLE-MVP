@@ -11,14 +11,13 @@ class Campaign extends React.Component
 
         this.change = this.change.bind(this)
         this.submit = this.submit.bind(this)
-        this.roller = this.roller.bind(this)
         this.modCampaign = this.modCampaign.bind(this)
 
         const data = {url:"/findAcc", content:{email:window.localStorage.getItem('email')}}
         requestService.poster(data).then((res)=>
         {
-            this.setState({email:res.email})
-            if(res[0]){this.setState({campaign:res.campaigns})}
+            this.setState({email:res.email,id:res._id})
+            if(res.campaigns[0]){this.setState({campaigns:res.campaigns})}
             if(res.playerName){this.setState({user:res.playerName})}else{this.setState({user:"Anon"})}
         })
     }
@@ -26,12 +25,8 @@ class Campaign extends React.Component
     {
         alert('nothing yet')
     }
-    roller()
+    change = (event) =>
     {
-        const die = rollService(1,20)
-        this.setState({roll:die})
-    }
-    change = (event) => {
         let nam = event.target.name
         let val = event.target.value
     
@@ -40,15 +35,12 @@ class Campaign extends React.Component
         window.localStorage.setItem('class', this.state.class)
         window.localStorage.setItem('race', this.state.race)
     }
-    submit = (event) =>
+    submit = () =>
     {
         const campaign = {url:"/makeCamp", content:{GM:this.state.email, campaignName:this.state.campaignName}}
-        requestService.poster(campaign).then(()=>
-        {
-            //const data = {url}
-            //requestService.poster(data).then(window.location.reload())
-            
-        })
+        requestService.poster(campaign)
+        const data = {url:"/pushPlayer",content:{id:this.state.id,campaign:this.state.campaignName}}
+        requestService.poster(data).then(window.location.reload())
     }
     render()
     {
@@ -56,17 +48,16 @@ class Campaign extends React.Component
             <div className="main">
                 {this.state.user ? 
                 <div>
-                    Hello, {this.state.user}<br/>{this.state.campaignName}
-                    
-                    {this.state.campaign ?
-                        <button className="bigInput">Modify Campaign</button>:
+                    <b>Hello, {this.state.user}</b><br/>{this.state.campaignName}
+                    {this.state.campaigns ?
+                        <div>
+                            {this.state.campaigns.map((campaign)=><button id="button" className="bigInput">Modify {campaign}</button>)}
+                        <hr/></div>:<i></i>}
                         <form onSubmit={this.submit}>
                             <input type="text" name="campaignName" className="bigInput" onChange={this.change}/>
                             <input type="submit" value="New Campaign" id="button" className="bigInput"/>
-                        </form>}
+                        </form>
                     </div>:<i></i>}
-                <button onClick={this.roller}>Roll</button>
-                {this.state.roll ? <i>{this.state.roll}</i>:<i></i>}
             </div>
         )
     }

@@ -13,6 +13,7 @@ const rDelete = require('./controller/delete')
 const rRead = require('./controller/read')
 const rList = require('./controller/list')
 const rPut = require('./controller/update')
+const rPush = require('./controller/push')
 const rCreate = require('./controller/create')
 const rFriend = require('./controller/friendRequest')
 
@@ -59,6 +60,8 @@ app.get("/listClass", rList.Class)
 
 app.post("/makePC", rCreate.character)
 app.post("/makeCamp", rCreate.campaign)
+
+app.post("/pushPlayer", rPush.player)
 
 app.post("/delAcc", rDelete.player)
 app.post("/delChar", rDelete.character)
