@@ -8,6 +8,7 @@ import UpdateForm from './pages/UpdateForm'
 import PCCreateForm from './pages/PCCreateForm'
 import HomePage from './pages/homePage'
 import FriendsList from './pages/FriendsList'
+import Campaign from './pages/campaign'
 import './style/pages.scss'
 
 const Home = () =>
@@ -67,8 +68,8 @@ const App = () => {
               <Link to="/friends">~ Friends List ~</Link>
             </div>:
             <div className="navbar">
-              ~ <Link to="/login">Login </Link> ~
-              ~ <Link to="/signUp">Sign Up </Link> ~
+              <Link to="/login">~ Login ~</Link> 
+              <Link to="/signUp">~ Sign Up ~</Link> 
             </div>}
         </div>
         <Route exact path="/" render={() => email ? <Home /> : <Redirect to="/login"/>}/>
@@ -79,7 +80,7 @@ const App = () => {
         <Route exact path="/del" render={() => <Delete />} />
         <Route exact path="/friends" render={() => <Friends />} />
         <Route exact path="/PCCreate" render={() => <PCCreate />} />
-        
+        <Route exact path="/campaign" render={() => <Campaign/>} />
       </Router>
     </nav>
   </div>)

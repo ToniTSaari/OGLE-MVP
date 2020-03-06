@@ -10,10 +10,22 @@ class FriendsList extends React.Component
 
         this.submit = this.submit.bind(this)
         this.request = this.request.bind(this)
-        const data = {url:"/findAcc", content:{email:window.localStorage.getItem('email')}}
+        const content = {email:window.localStorage.getItem('email')}
+        const data = {url:"/findAcc", content:content}
+        this.friendApprove = this.friendApprove.bind(this)
+        this.friendDisapprove = this.friendDisapprove.bind(this)
         requestService.poster(data).then((res)=>
         {
             this.setState({user:res.email,id:res._id})
+            if(res.friends[0]){this.setState({friends:res.friends})}
+        })
+        requestService.poster({url:"/listGot", content}).then((res)=>
+        {
+        if(res[0]){this.setState({gotReqs:res})}
+        })
+        requestService.poster({url:"/listSent", content}).then((res)=>
+        {
+        if(res[0]){this.setState({sentReqs:res})}
         })
     }
     change = (event) =>
@@ -46,6 +58,32 @@ class FriendsList extends React.Component
         }
         requestService.poster(data)
     }
+    friendApprove = (event) =>
+    {
+        const friend =
+        {
+            url:"/appFriend",
+            content:
+            {
+                reqID:event.target.value
+            }
+        }
+        requestService.poster(friend)
+        window.location.reload()
+    }
+    friendDisapprove = (event) =>
+    {
+        const friend =
+        {
+            url:"/decFriend",
+            content:
+            {
+                reqID:event.target.value
+            }
+        }
+        requestService.poster(friend)
+        window.location.reload()
+    }
     render()
     {
         return(
@@ -56,11 +94,46 @@ class FriendsList extends React.Component
                     <input type="submit" value="Find" />
                 </form>
                 {this.state.friend ? 
-                <div id="mainBox">
-                    {this.state.friend.friendName ? <b>{this.state.friend.friendName}</b>:<b></b>}
-                    <b>{this.state.friend}</b><br/>
-                    <button value={this.state.id} onClick={this.request}>Send friend request</button>
-                </div>
+                    <div id="mainBox">
+                        {this.state.friend.friendName ? <b>{this.state.friend.friendName}</b>:<b></b>}
+                        <b>{this.state.friend}</b><br/>
+                        <button value={this.state.id} onClick={this.request}>Send friend request</button>
+                    </div>
+                :<div></div>}
+                <hr/>
+                {this.state.friends ? 
+                    <div>
+                        <b>Friends with; </b><br/>
+                        {this.state.friends.map((friend)=>
+                            <div id="friendBox"><b>{friend}</b><br/>
+                            <button>Invite to Campaign</button></div>
+                        )}
+                    </div>
+                :<div></div>}
+                <hr/>
+                {this.state.gotReqs ? 
+                    <div>
+                        <b>You have recieved the following friend requests;</b>
+                        {this.state.gotReqs.map((friend)=>
+                            <div>
+                                {friend.requester ? <div id="friendBox">{friend.requester} <button value={friend.reqID} onClick={this.friendApprove}>Accept request</button>
+                                <button value={friend.reqID} onClick={this.friendDisapprove}>Decline request</button><br/></div>:<i></i>}
+                            </div>
+                        )}
+                        <hr/>
+                    </div>
+                :<div></div>}
+                {this.state.sentReqs ?
+                    <div>
+                        <b>You have sent the following friend requests;</b>
+                        {this.state.sentReqs.map((friend)=>
+                            <div>
+                                {friend.requestee ? <div id="friendBox"><b>{friend.requestee}</b><br/>
+                                <button value={friend.reqID} onClick={this.friendDisapprove}>Cancel request</button></div>:<i></i>}
+                            </div>
+                        )}
+                        <hr/>
+                    </div>
                 :<div></div>}
             </div>
         )

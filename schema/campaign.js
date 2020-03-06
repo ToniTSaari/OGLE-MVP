@@ -6,8 +6,8 @@ const monster = require('./monster').schema
 const campaign = new mongoose.Schema(
 {
     campaignName:String,
-    GM:[player],
-    players:[player],
+    GM:[String],
+    players:[String],
     characters:[character],
     monsters:[monster]
 })

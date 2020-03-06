@@ -39,7 +39,7 @@ app.post("/findAcc", rRead.player)
 app.post("/findChar", rRead.character)
 app.post("/findRace", rRead.race)
 app.post("/findClass", rRead.charClass)
-app.post("/listChar", rList.character)
+app.post("/findCampaign", rRead.campaign)
 
 /*
 app.get("/listAbility", rList.ability)
@@ -52,11 +52,13 @@ app.get("/listSpell", rList.spell)
 app.get("/listWeapon", rList.weapon)
 */
 
+app.post("/listChar", rList.character)
 app.get("/listRace", rList.race)
 app.get("/listClassSpell", rList.classList)
 app.get("/listClass", rList.Class)
 
 app.post("/makePC", rCreate.character)
+app.post("/makeCamp", rCreate.campaign)
 
 app.post("/delAcc", rDelete.player)
 app.post("/delChar", rDelete.character)
@@ -66,7 +68,7 @@ app.get("/", function(req,res)
     res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
-app.get("/license", function(res)
+app.get("/license", function(req,res)
 {
     res.sendFile(path.join(__dirname, 'OGL-License.html'))
 })

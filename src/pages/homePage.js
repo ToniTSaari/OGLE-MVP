@@ -10,7 +10,6 @@ class HomePage extends React.Component
     this.state = {value: ''}
     this.state = {characters: []}
     this.charDel = this.charDel.bind(this)
-    this.friendApprove = this.friendApprove.bind(this)
     var data = {url:"/findAcc", content:{email:window.localStorage.getItem('email')}}
     requestService.poster(data).then((res) => 
     {
@@ -23,16 +22,11 @@ class HomePage extends React.Component
         window.localStorage.setItem('user', res.playerName)
       })
       this.setState({id:res._id})
-      if(res.friends[0]){this.setState({friends:res.friends})}
     })
     const content = {email:window.localStorage.getItem('email')}
     requestService.poster({url:"/listGot", content}).then((res)=>
     {
       if(res[0]){this.setState({gotReqs:res})}
-    })
-    requestService.poster({url:"/listSent", content}).then((res)=>
-    {
-      if(res[0]){this.setState({sentReqs:res})}
     })
     data = {url:"/listChar", content:{email:window.localStorage.getItem('email')}}
     requestService.poster(data).then((res) =>
@@ -61,32 +55,6 @@ class HomePage extends React.Component
       }
     })
   }
-  friendApprove = (event) =>
-  {
-    const friend =
-    {
-      url:"/appFriend",
-      content:
-      {
-        reqID:event.target.value
-      }
-    }
-    requestService.poster(friend)
-    window.location.reload()
-  }
-  friendDisapprove = (event) =>
-  {
-    const friend =
-    {
-      url:"/decFriend",
-      content:
-      {
-        reqID:event.target.value
-      }
-    }
-    requestService.poster(friend)
-    window.location.reload()
-  }
   charDel = (event) =>
   {
     alert(event.target.value)
@@ -99,41 +67,12 @@ class HomePage extends React.Component
       <div className="main">
        Logged in as: {this.state.email}
       {this.state.user ? <div> With name: {this.state.user}</div>:<div> anonymously</div>}
-      <hr/>
-      {this.state.friends ? 
-        <div>
-          <b>Friends with; </b><br/>
-          {this.state.friends.map((friend)=>
-          <b id="friendBox">{friend}</b>
-          )}
-        </div>
-      :<div></div>}
-      <hr/>
-      {this.state.gotReqs ? 
-        <div>
-          You have recieved the following friend requests;
-          {this.state.gotReqs.map((friend)=>
-          <div>
-            {friend.requester ? <div className="main">{friend.requester} <button value={friend.reqID} onClick={this.friendApprove}>Accept request</button>
-            <button value={friend.reqID} onClick={this.friendDisapprove}>Decline request</button><br/></div>:<i></i>}
-          </div>)}
-          <hr/>
-        </div>
-      :<div></div>}
-      {this.state.sentReqs ?
-      <div>
-        You have following friend requests pending approval;
-        {this.state.sentReqs.map((friend)=>
-        <div>
-          {friend.requestee}
-        </div>)}
-        <hr/>
-      </div>
-      :<div></div>}
+      <hr/>{this.state.gotReqs ? <div>New friend request! Check Friends List!<hr/></div>:<i></i>}
+      <Link to="/Campaign">~ Campaign ~</Link>
       {this.state.characters ?
-        <div><br/>
+        <div>
         <Link to="/PCCreate">~ Create new character ~</Link>
-      <hr/></div>:<div><br/><Link to="/PCCreate">~ Create character ~</Link><hr/></div>}
+      <hr/></div>:<div><Link to="/PCCreate">~ Create character ~</Link><hr/></div>}<br/>
       {this.state.characters.map((character)=>
       (
       <div id="mainBox"><b>{character.charName}</b> a 
