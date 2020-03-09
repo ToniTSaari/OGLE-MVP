@@ -39,7 +39,11 @@ exports.campaign = (req, res) =>
     var obj = req.body
     console.log(obj)
     var camp = new campaign(obj)
-    camp.save().then(res =>{console.log('Campaign ' + camp + ' created! ' + date)})
+    camp.save().then(result =>
+    {
+        console.log('Campaign ' + camp + ' created! ' + date)
+        res.json(result)
+    })
 }
 
 exports.monster = (req, res) =>
