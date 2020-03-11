@@ -1,6 +1,6 @@
 import React from 'react'
+import {BrowserRouter as Router, Link} from 'react-router-dom'
 import requestService from '../services/requestService'
-import rollService from '../services/rollService'
 
 class Campaign extends React.Component
 {
@@ -11,43 +11,68 @@ class Campaign extends React.Component
 
         this.change = this.change.bind(this)
         this.submit = this.submit.bind(this)
+        this.invite = this.invite.bind(this)
+        this.back = this.back.bind(this)
         this.modCampaign = this.modCampaign.bind(this)
 
         const data = {url:"/findAcc", content:{email:window.localStorage.getItem('email')}}
         requestService.poster(data).then((res)=>
         {
-            this.setState({email:res.email,id:res._id,buddies:res.friends})
+            this.setState({email:res.email,id:res._id,friends:res.friends})
             if(res.campaigns[0]){this.setState({campaigns:res.campaigns})}
             if(res.playerName){this.setState({user:res.playerName})}else{this.setState({user:"Anon"})}
         })
     }
     modCampaign = async (event) =>
     {
-        const buddies = []
-        const friends = this.state.buddies
-        const len = friends.length
-        for(var i = 0; i < len; i++)
+        this.setState({thisCampaign:event.target.value})
+        window.localStorage.setItem('campaign', event.target.value)
+        var invChar
+        const invited = []
+        await requestService.poster({url:"/findCampaign", content:{campaignName:event.target.value}}).then((res)=>
+        { 
+            invChar = res.characters
+        })
+        const invLen = invChar.length
+        for(var i = 0; i < invLen; i++)
         {
-            const friend = friends[i]
-            const data = {playerCharacter:{PC:true, email:friends[i]}}
-            await requestService.poster({url:"/findChar", content:data}).then((res)=>
+            await requestService.poster({url:"/findChar", content:{charName:invChar[i]}}).then((res)=>
             {
-                if(res[1])
-                {
-                    const len = res.length
-                    for(var i = 0; i < len; i++)
-                    {
-                        buddies.push({friend:friend,characters:res[i]})
-                    }
-                }
-                else
-                {
-                    buddies.push({friend:friend,characters:res})
-                }
+                invited.push(res.playerCharacter.email)
             })
-            this.setState({buddies})
         }
-        alert(JSON.stringify(this.state.buddies))
+        const buddies = []
+        const friends = this.state.friends
+        const len = friends.length
+        invited.sort()
+        friends.sort()
+        for(i = 0; i < len; i++)
+        {
+            const characters = []
+            const friend = friends[i]
+            const inv = invited[i]
+            const data = {email:friend}
+            if(inv !== friend)
+            {
+                await requestService.poster({url:"/listChar", content:data}).then((res)=>
+                {
+                    if(res[0])
+                    {
+                        const index = res[0].index
+                        for(var i = 1; i <= index; i++)
+                        {
+                            characters.push(res[i])
+                        }
+                    }
+                })
+            }
+            if(characters[0])
+            {
+                buddies.push({characters})
+            }
+        }
+        this.setState({invChar})
+        this.setState({buddies})
     }
     change = (event) =>
     {
@@ -63,11 +88,59 @@ class Campaign extends React.Component
         const campaign = {url:"/makeCamp", content:{GM:this.state.email, campaignName:this.state.campaignName}}
         await requestService.poster(campaign).then((res)  =>
         {
-            alert(JSON.stringify(res))
-            alert('pitäs toimii')
             const data = {url:"/pushPlayer",content:{id:this.state.id,campaign:this.state.campaignName}}
             requestService.poster(data).then(window.location.reload())
         })
+    }
+    invite = (event) =>
+    {
+        var character
+        requestService.poster({url:"/findChar", content:{charName:event.target.value}}).then((res)=>
+        {
+            character = res.charName
+        })
+        requestService.poster({url:"/findCampaign", content:{campaignName:this.state.thisCampaign}}).then((res)=>
+        {
+            var newChar = false
+            const characters = res.characters
+            const pLen = characters.length
+            for(var i = 0; i <= pLen; i++)
+            {
+                if(res.characters[i] !== character)
+                {
+                    newChar = true
+                }
+                else
+                {
+                    newChar = false
+                    break
+                }
+            }
+            if(newChar)
+            {
+                characters.push(character)
+            }
+            const data = 
+            {
+                id:res._id,
+                characters:characters,
+                GM:res.GM,
+                campaignName:res.campaignName,
+                monsters:res.monsters
+            }
+            alert(JSON.stringify(data))
+            requestService.poster({url:"/pushCamp", content:data}).then((res)=>
+            {
+                window.location.reload()
+            })
+        })
+    }
+    back()
+    {
+        this.setState({thisCampaign:undefined, invited:undefined, invChar:undefined, buddies:undefined})
+        window.localStorage.clear('campaign')
+        window.localStorage.setItem('email', this.state.email)
+        window.localStorage.setItem('user', this.state.user)
     }
     render()
     {
@@ -75,19 +148,47 @@ class Campaign extends React.Component
             <div className="main">
                 {this.state.user ? 
                 <div>
-                    <b>Hello, {this.state.user}</b><br/>{this.state.campaignName}
+                    <b>Hello, {this.state.user}, {this.state.email}</b><br/>
                     {this.state.campaigns ?
-                        <div>
+                        <i>
                             {this.state.campaigns.map((campaign)=>
-                            <button id="button" className="bigInput" onClick={this.modCampaign}>
-                                Modify {campaign}
+                            <button id="button" value={campaign} className="bigInput" onClick={this.modCampaign}>
+                                {campaign}
                             </button>)}
-                        <hr/></div>:<i></i>}
-                        <form onSubmit={this.submit}>
-                            <input type="text" name="campaignName" className="bigInput" onChange={this.change}/>
-                            <input type="submit" value="New Campaign" id="button" className="bigInput"/>
-                        </form>
+                        </i>:<i></i>}
+                        {this.state.thisCampaign ? 
+                            <b>
+                                <button id="button" className="bigInput" onClick={this.back}>New</button><hr/>
+                                <Link to="/session">~ Start session of {this.state.thisCampaign} ~</Link><br/><hr/>
+                                
+                            </b>:
+                            <div><hr/>
+                                {this.state.campaignName ? <p><b>New Campaign: </b><i>{this.state.campaignName}</i></p>:<i></i>}
+                                <form onSubmit={this.submit}>
+                                    <input type="text" name="campaignName" className="bigInput" onChange={this.change} required/>
+                                    <input type="submit" value="New Campaign" id="button" className="bigInput"/>
+                                </form>
+                            </div>}
                     </div>:<i></i>}
+                {this.state.invChar ? 
+                    <div id="mainBox">
+                        <br/><b>{this.state.thisCampaign}</b> has following characters;<br/>
+                        {this.state.invChar.map((char)=><i className="main">{char} </i>)}
+                    </div>
+                :<i></i>}
+                {this.state.buddies ? 
+                    <div id="mainBox">
+                       <b>Friends that can be invited to campaign;</b><br/>
+                        {this.state.buddies.map((friend)=>
+                            <div>
+                                <i className="main">{friend.friend}</i><br/>
+                                {friend.characters.map((char)=><i>
+                                    <hr/>{char.character} a level {char.Class.level} {char.race} {char.Class.Class} ~
+                                    <button id="button" style={{float:"right"}} value={char.character} onClick={this.invite}>Invite to {this.state.thisCampaign}</button>
+                                </i>)}
+                            </div>)}
+                    </div>
+                :<i></i>}
             </div>
         )
     }

@@ -26,6 +26,7 @@ const server = app.listen(3001, () =>{
 mongoose.connect(url,{ useNewUrlParser: true, useUnifiedTopology: true })
 
 app.post("/upAcc", rPut.player)
+//app.post("/upCamp", rPut.campaign)
 
 app.post("/login", rAuth.login)
 app.post("/signup", rAuth.signup)
@@ -62,6 +63,7 @@ app.post("/makePC", rCreate.character)
 app.post("/makeCamp", rCreate.campaign)
 
 app.post("/pushPlayer", rPush.player)
+app.post("/pushCamp", rPush.campaign)
 
 app.post("/delAcc", rDelete.player)
 app.post("/delChar", rDelete.character)

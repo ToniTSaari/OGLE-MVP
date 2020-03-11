@@ -81,7 +81,7 @@ class HomePage extends React.Component
           <table>
             <thead>
               <tr>
-                <th>Strenght</th>
+                <th>Strength</th>
                 <th>Dexterity</th>
                 <th>Constitution</th>
                 <th>Intelligence</th>
@@ -111,7 +111,7 @@ class HomePage extends React.Component
         {character.saving ? 
           <div>
             <b>Saving throws: </b>
-            {character.saving.str ? <i>Strenght </i>:<i></i>}
+            {character.saving.str ? <i>Strength </i>:<i></i>}
             {character.saving.dex ? <i>Dexterity </i>:<i></i>}
             {character.saving.con ? <i>Constitution </i>:<i></i>}
             {character.saving.int ? <i>Intelligence </i>:<i></i>}

@@ -42,7 +42,7 @@ exports.campaign = (req, res) =>
     camp.save().then(result =>
     {
         console.log('Campaign ' + camp + ' created! ' + date)
-        res.json(result)
+        res.json(camp)
     })
 }
 

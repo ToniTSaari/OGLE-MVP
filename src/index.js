@@ -9,6 +9,7 @@ import PCCreateForm from './pages/PCCreateForm'
 import HomePage from './pages/homePage'
 import FriendsList from './pages/FriendsList'
 import Campaign from './pages/campaign'
+import Session from './pages/session'
 import './style/pages.scss'
 
 const Home = () =>
@@ -81,6 +82,7 @@ const App = () => {
         <Route exact path="/friends" render={() => <Friends />} />
         <Route exact path="/PCCreate" render={() => <PCCreate />} />
         <Route exact path="/campaign" render={() => <Campaign/>} />
+        <Route exact path="/session" render={() => <Session/>} />
       </Router>
     </nav>
   </div>)

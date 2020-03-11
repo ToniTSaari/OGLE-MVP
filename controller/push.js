@@ -20,7 +20,19 @@ const date = rawDate.getHours() + ':'
             + rawDate.getFullYear()
 
 exports.ability = async (req, res) => {}
-exports.campaign = async (req, res) => {}
+
+exports.campaign = async (req, res) =>
+{
+    const obj = req.body
+    const id = obj.id
+    console.log(obj)
+    campaign.findByIdAndUpdate(id, obj, {new:true}, (err,doc)=>
+    {
+        if(err){console.log(err)}
+        console.log(doc)
+    })
+}
+
 exports.character = async (req, res) => {}
 exports.Class = async (req, res) => {}
 exports.classList = async (req, res) => {}
