@@ -47,7 +47,8 @@ class HomePage extends React.Component
                 stats:res[i].stats,
                 Class:res[i].Class,
                 saving:res[i].saving,
-                armour:res[i].armour
+                armour:res[i].armour,
+                campaign:res[i].campaign
               })
           }
           this.setState({characters:characters})
@@ -76,7 +77,7 @@ class HomePage extends React.Component
       {this.state.characters.map((character)=>
       (
       <div id="mainBox"><b>{character.charName}</b> a 
-      level {character.Class.level} {character.race} {character.Class.Class}.
+      level {character.Class.level} {character.race} {character.Class.Class}. {character.campaign ? <i>In campaign: {character.campaign}</i>:<i></i>}
       <button id="delButton" style={{float:"right"}} value={character.id} onClick={this.charDel}>Delete {character.charName}</button>
           <table>
             <thead>

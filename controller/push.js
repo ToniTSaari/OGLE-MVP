@@ -33,7 +33,18 @@ exports.campaign = async (req, res) =>
     })
 }
 
-exports.character = async (req, res) => {}
+exports.character = async (req, res) =>
+{
+    const obj = req.body
+    const id = obj.id
+    console.log(obj)
+    character.findByIdAndUpdate(id, obj, {new:true}, (err,doc)=>
+    {
+        if(err){console.log(err)}
+        console.log(doc)
+    })
+}
+
 exports.Class = async (req, res) => {}
 exports.classList = async (req, res) => {}
 exports.monster = async (req, res) => {}

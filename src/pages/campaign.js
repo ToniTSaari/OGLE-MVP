@@ -44,28 +44,25 @@ class Campaign extends React.Component
         const buddies = []
         const friends = this.state.friends
         const len = friends.length
-        invited.sort()
-        friends.sort()
         for(i = 0; i < len; i++)
         {
             const characters = []
             const friend = friends[i]
-            const inv = invited[i]
             const data = {email:friend}
-            if(inv !== friend)
+            await requestService.poster({url:"/listChar", content:data}).then((res)=>
             {
-                await requestService.poster({url:"/listChar", content:data}).then((res)=>
+                if(res[0])
                 {
-                    if(res[0])
+                    const index = res[0].index
+                    for(var i = 1; i <= index; i++)
                     {
-                        const index = res[0].index
-                        for(var i = 1; i <= index; i++)
+                        if(!res[i].campaign)
                         {
                             characters.push(res[i])
                         }
                     }
-                })
-            }
+                }
+            })
             if(characters[0])
             {
                 buddies.push({characters})
@@ -94,10 +91,12 @@ class Campaign extends React.Component
     }
     invite = (event) =>
     {
-        var character
+        var name
+        var ID
         requestService.poster({url:"/findChar", content:{charName:event.target.value}}).then((res)=>
         {
-            character = res.charName
+            name = res.charName
+            ID = res._id
         })
         requestService.poster({url:"/findCampaign", content:{campaignName:this.state.thisCampaign}}).then((res)=>
         {
@@ -106,7 +105,7 @@ class Campaign extends React.Component
             const pLen = characters.length
             for(var i = 0; i <= pLen; i++)
             {
-                if(res.characters[i] !== character)
+                if(res.characters[i] !== name)
                 {
                     newChar = true
                 }
@@ -118,7 +117,7 @@ class Campaign extends React.Component
             }
             if(newChar)
             {
-                characters.push(character)
+                characters.push(name)
             }
             const data = 
             {
@@ -133,6 +132,12 @@ class Campaign extends React.Component
             {
                 window.location.reload()
             })
+            const charData =
+            {
+                campaign:this.state.thisCampaign,
+                id:ID
+            }
+            requestService.poster({url:"/pushChar", content:charData})
         })
     }
     back()
@@ -183,7 +188,7 @@ class Campaign extends React.Component
                             <div>
                                 <i className="main">{friend.friend}</i><br/>
                                 {friend.characters.map((char)=><i>
-                                    <hr/>{char.character} a level {char.Class.level} {char.race} {char.Class.Class} ~
+                                    <hr/>{char.character} a level {char.Class.level} {char.race} {char.Class.Class} of {char.player} ~
                                     <button id="button" style={{float:"right"}} value={char.character} onClick={this.invite}>Invite to {this.state.thisCampaign}</button>
                                 </i>)}
                             </div>)}

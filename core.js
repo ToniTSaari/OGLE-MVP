@@ -64,6 +64,7 @@ app.post("/makeCamp", rCreate.campaign)
 
 app.post("/pushPlayer", rPush.player)
 app.post("/pushCamp", rPush.campaign)
+app.post("/pushChar", rPush.character)
 
 app.post("/delAcc", rDelete.player)
 app.post("/delChar", rDelete.character)

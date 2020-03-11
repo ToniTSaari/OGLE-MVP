@@ -48,7 +48,9 @@ exports.character = async (req, res) =>
             stats:find.stats,
             Class:find.Classes[0],
             saving:find.saving,
-            armour:find.proficiencies.armour
+            armour:find.proficiencies.armour,
+            campaign:find.campaign,
+            player:find.playerCharacter.email
         }
         i++
         const n = i-1
