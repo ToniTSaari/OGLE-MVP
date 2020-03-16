@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const campaign = new mongoose.Schema(
 {
     characters:[String],
-    monsters:[String],
+    session:[{type:String, unique:true}],
     campaignName:{type:String, unique:true},
     GM:{type:String, unique:false}
 })

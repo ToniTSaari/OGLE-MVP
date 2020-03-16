@@ -33,13 +33,14 @@ exports.ability = async (req, res) =>
 exports.character = async (req, res) =>
 {
     const obj = req.body
-    console.log("Finding characters by email: " + obj.email)
+    console.log("Finding characters of user: " + obj.email)
     const characters = await character.find({playerCharacter:{PC:true, email:obj.email}})
     var payload = []
     var i = 1
+    console.log('Characters;')
     characters.forEach((find)=>
     {
-        console.log('Found: ' + find.charName + ' - ' + date)
+        console.log(i + ': ' + find.charName + ' - ' + date)
         payload[i] = 
         {
             id:find._id,
@@ -64,6 +65,7 @@ exports.Class = async (req, res) =>
     const classes = await Class.find({})
     var payload = []
     var i = 1
+    console.log('Listing all classes;')
     classes.forEach((find)=>
     {
         console.log('Found: ' + find.className + ' - ' + date)
@@ -107,12 +109,21 @@ exports.campaign = async (req, res) =>
 exports.monster = async (req, res) =>
 {
     const monsters = await monster.find({})
-    const monsterMap = {}
+    var payload = []
+    var i = 0
+    console.log(monsters)
+    console.log('Listing monsters;')
     monsters.forEach((find) =>
     {
-        monsterMap[find.monsterName] = find
+        console.log('Found: ' + find.monsterName + ' - ' + date)
+        payload[i] = 
+        {
+            name:find.monsterName,
+            CR:find.CR
+        }
+        i++
     })
-    res.send(monsterMap)
+    res.send(payload)
 }
 
 exports.player = async (req, res) =>

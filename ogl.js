@@ -5,6 +5,7 @@ const weapon = require('./schema/weapon')
 const armour = require('./schema/armour')
 const classlist = require('./schema/classlist')
 const Class = require('./schema/class')
+const monster = require('./schema/monster')
 const url = "mongodb://localhost:27017/ogl"
 const fs = require('fs')
 
@@ -28,6 +29,7 @@ const rogue = JSON.parse(fs.readFileSync('./ogl/class/rogue.json'))
 const sorcerer = JSON.parse(fs.readFileSync('./ogl/class/sorcerer.json'))
 const warlock = JSON.parse(fs.readFileSync('./ogl/class/warlock.json'))
 const wizard = JSON.parse(fs.readFileSync('./ogl/class/wizard.json'))
+const monsters = JSON.parse(fs.readFileSync('./ogl/creature/monster.json'))
 
 const classes = 
 [
@@ -36,27 +38,13 @@ const classes =
 
 try
 {
-    weapon.insertMany(weapons).then(
-        console.log('Weapons database built'),
-    
-        armour.insertMany(armours).then(
-            console.log('Armours database built'),
-    
-            race.insertMany(races).then(
-                console.log('Races database built'),
-                
-                spell.insertMany(spells).then(
-                    console.log('Spells database built'),
-
-                    Class.insertMany(classes).then(
-                        console.log('Class database built!'),
-
-                        classlist.insertMany(spellLists).then(console.log('Spell lists built!'))
-                    )
-                )
-            )
-        )
-    )
+    weapon.insertMany(weapons).then(console.log('Weapons database built'))
+    armour.insertMany(armours).then(console.log('Armours database built'))
+    race.insertMany(races).then(console.log('Races database built'))
+    spell.insertMany(spells).then(console.log('Spells database built'))
+    Class.insertMany(classes).then(console.log('Class database built!'))
+    classlist.insertMany(spellLists).then(console.log('Spell lists built!'))
+    monster.insertMany(monsters).then(console.log('Monster database built!'))
 }
 catch
 {

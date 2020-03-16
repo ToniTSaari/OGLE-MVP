@@ -41,13 +41,14 @@ exports.ability = async (req, res) =>
 exports.character = async (req, res) =>
 {
     var obj = req.body
+    console.log(obj)
     var read = character.where(obj)
     read.findOne(function(err, find)
     {
         if(err){console.log(err)}
         if(find)
         {
-            console.log(find)
+            console.log('Found character by name: ' + find.charName + ' on ' + date)
             res.json(find)
         }
         else
@@ -106,7 +107,7 @@ exports.player = async (req, res) =>
         if(find)
         {
             find.password = "It's a secret ;)"
-            console.log('Found ' + find.email + ' - ' + date)
+            console.log('Found user ' + find.email + ' - ' + date)
             res.json(find)
         }
         else

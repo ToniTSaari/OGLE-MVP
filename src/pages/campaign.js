@@ -13,6 +13,7 @@ class Campaign extends React.Component
         this.submit = this.submit.bind(this)
         this.invite = this.invite.bind(this)
         this.back = this.back.bind(this)
+        this.disinvite = this.disinvite.bind(this)
         this.modCampaign = this.modCampaign.bind(this)
 
         const data = {url:"/findAcc", content:{email:window.localStorage.getItem('email')}}
@@ -29,16 +30,18 @@ class Campaign extends React.Component
         window.localStorage.setItem('campaign', event.target.value)
         var invChar
         const invited = []
-        await requestService.poster({url:"/findCampaign", content:{campaignName:event.target.value}}).then((res)=>
+        await requestService.poster({url:"/findCampaign", content:{campaignName:event.target.value}})
+        .then((res)=>
         { 
             invChar = res.characters
         })
         const invLen = invChar.length
         for(var i = 0; i < invLen; i++)
         {
-            await requestService.poster({url:"/findChar", content:{charName:invChar[i]}}).then((res)=>
+            await requestService.poster({url:"/findChar", content:{charName:invChar[i]}})
+            .then((res)=>
             {
-                invited.push(res.playerCharacter.email)
+                invited.push({player:res.playerCharacter.email,ID:res._id,name:res.charName})
             })
         }
         const buddies = []
@@ -49,7 +52,8 @@ class Campaign extends React.Component
             const characters = []
             const friend = friends[i]
             const data = {email:friend}
-            await requestService.poster({url:"/listChar", content:data}).then((res)=>
+            await requestService.poster({url:"/listChar", content:data})
+            .then((res)=>
             {
                 if(res[0])
                 {
@@ -68,8 +72,19 @@ class Campaign extends React.Component
                 buddies.push({characters})
             }
         }
-        this.setState({invChar})
+        const monsters = []
+        await requestService.getter({url:"/listMon"})
+        .then((res)=>
+        {
+            const len = res.length
+            for(var i = 0; i < len; i++)
+            {
+                monsters.push(res[i])
+            }
+        })
+        this.setState({monsters})
         this.setState({buddies})
+        this.setState({invited})
     }
     change = (event) =>
     {
@@ -83,7 +98,8 @@ class Campaign extends React.Component
         event.preventDefault()
         requestService.getter({url:"/listChar"})
         const campaign = {url:"/makeCamp", content:{GM:this.state.email, campaignName:this.state.campaignName}}
-        await requestService.poster(campaign).then((res)  =>
+        await requestService.poster(campaign)
+        .then((res)  =>
         {
             const data = {url:"/pushPlayer",content:{id:this.state.id,campaign:this.state.campaignName}}
             requestService.poster(data).then(window.location.reload())
@@ -93,12 +109,14 @@ class Campaign extends React.Component
     {
         var name
         var ID
-        requestService.poster({url:"/findChar", content:{charName:event.target.value}}).then((res)=>
+        requestService.poster({url:"/findChar", content:{charName:event.target.value}})
+        .then((res)=>
         {
             name = res.charName
             ID = res._id
         })
-        requestService.poster({url:"/findCampaign", content:{campaignName:this.state.thisCampaign}}).then((res)=>
+        requestService.poster({url:"/findCampaign", content:{campaignName:this.state.thisCampaign}})
+        .then((res)=>
         {
             var newChar = false
             const characters = res.characters
@@ -128,7 +146,8 @@ class Campaign extends React.Component
                 monsters:res.monsters
             }
             alert(JSON.stringify(data))
-            requestService.poster({url:"/pushCamp", content:data}).then((res)=>
+            requestService.poster({url:"/pushCamp", content:data})
+            .then((res)=>
             {
                 window.location.reload()
             })
@@ -138,6 +157,31 @@ class Campaign extends React.Component
                 id:ID
             }
             requestService.poster({url:"/pushChar", content:charData})
+        })
+    }
+    disinvite(event)
+    {
+        const get = { charName:event.target.value }
+        requestService.poster({url:"/findChar", content:get}).then((res)=>
+        {
+            const character = res.charName
+            const thisCampaign = { campaignName:this.state.thisCampaign }
+            const id = res._id
+            //requestService.poster({url:"/upChar", content:{id:id, campaign:""}})
+            requestService.poster({url:"/findCampaign", content:thisCampaign}).then((res)=>
+            {
+                const campaign = res.campaignName
+                const characters = res.characters
+                const len = characters.length
+                for(var i = 0; i < len; i++)
+                {
+                    if(characters[i] === character)
+                    {
+                        characters.splice(i,1)
+                    }
+                }
+                alert(JSON.stringify(characters))
+            })
         })
     }
     back()
@@ -164,21 +208,26 @@ class Campaign extends React.Component
                         {this.state.thisCampaign ? 
                             <b>
                                 <button id="button" className="bigInput" onClick={this.back}>New</button><hr/>
-                                <Link to="/session">~ Start session of {this.state.thisCampaign} ~</Link><br/><hr/>
-                                
+                                <Link to="/session">
+                                    ~ Start session of {this.state.thisCampaign} ~
+                                </Link><br/><hr/>
                             </b>:
                             <div><hr/>
-                                {this.state.campaignName ? <p><b>New Campaign: </b><i>{this.state.campaignName}</i></p>:<i></i>}
+                                {this.state.campaignName ? <p><b>New Campaign: </b>
+                                <i>{this.state.campaignName}</i></p>:<i></i>}
                                 <form onSubmit={this.submit}>
                                     <input type="text" name="campaignName" className="bigInput" onChange={this.change} required/>
                                     <input type="submit" value="New Campaign" id="button" className="bigInput"/>
                                 </form>
                             </div>}
                     </div>:<i></i>}
-                {this.state.invChar ? 
+                {this.state.invited ? 
                     <div id="mainBox">
-                        <br/><b>{this.state.thisCampaign}</b> has following characters;<br/>
-                        {this.state.invChar.map((char)=><i className="main">{char} </i>)}
+                        <b>{this.state.thisCampaign}</b> has following characters;<br/>
+                        {this.state.invited.map((char)=>
+                        <div id="mainBox">
+                            {char.name} ~ <button value={char.name} onClick={this.disinvite}>Disinvite</button>
+                        </div>)}
                     </div>
                 :<i></i>}
                 {this.state.buddies ? 
@@ -186,13 +235,25 @@ class Campaign extends React.Component
                        <b>Friends that can be invited to campaign;</b><br/>
                         {this.state.buddies.map((friend)=>
                             <div>
-                                <i className="main">{friend.friend}</i><br/>
                                 {friend.characters.map((char)=><i>
-                                    <hr/>{char.character} a level {char.Class.level} {char.race} {char.Class.Class} of {char.player} ~
-                                    <button id="button" style={{float:"right"}} value={char.character} onClick={this.invite}>Invite to {this.state.thisCampaign}</button>
+                                    <hr/>
+                                    <button className="bigInput" id="button"value={char.character} onClick={this.invite}>
+                                        {char.character} a level {char.Class.level}
+                                        {char.race} {char.Class.Class} of {char.player} ~
+                                        Invite to {this.state.thisCampaign}
+                                    </button>
                                 </i>)}
                             </div>)}
                     </div>
+                :<i></i>}
+                {this.state.monsters ? 
+                    <i><hr/>
+                        {this.state.monsters.map((mon)=>
+                        <div id="mainBox">
+                            {mon.name}<br/>Challenge rating: {mon.CR}<br/>
+                        <button>Add to {this.state.thisCampaign}</button>
+                        </div>)}
+                    </i>
                 :<i></i>}
             </div>
         )

@@ -25,10 +25,12 @@ exports.campaign = async (req, res) =>
 {
     const obj = req.body
     const id = obj.id
+    console.log('Recieved object on ' + date + ';')
     console.log(obj)
     campaign.findByIdAndUpdate(id, obj, {new:true}, (err,doc)=>
     {
         if(err){console.log(err)}
+        console.log('Wrote document on ' + date + ';')
         console.log(doc)
     })
 }

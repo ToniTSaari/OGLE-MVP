@@ -105,8 +105,7 @@ class FriendsList extends React.Component
                     <div>
                         <b>Friends with; </b><br/>
                         {this.state.friends.map((friend)=>
-                            <div id="friendBox"><b>{friend}</b><br/>
-                            <button>Invite to Campaign</button></div>
+                            <div id="friendBox"><b>{friend}</b><br/></div>
                         )}
                     </div>
                 :<div></div>}

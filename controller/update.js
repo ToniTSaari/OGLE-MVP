@@ -34,33 +34,22 @@ exports.ability = (req, res) =>
 
 exports.character = (req, res) =>
 {
-    character.where({charName:req.body.name}).findOne(function(err,find)
+    console.log(req.body)
+    character.findOneAndUpdate({_id:req.body.id}, req.body.update, {new:true}, (err, doc) =>
     {
         if(err){console.log(err)}
-        if(find)
-        {
-            find.set(req.body)
-            find.save().then(
-                console.log("Updated " + find + ' ' + date),
-                res.sendStatus(200))
-        }
-        else{console.log('Nothing found!')}
+        console.log(doc)
     })
 }
 
 exports.campaign = (req, res) =>
 {
-    campaign.where({campaignName:req.body.name}).findOne(function(err,find)
+    console.log(req.body)
+    campaign.findOneAndUpdate({_id:req.body.id}, req.body.update, {new:true}, (err, doc) =>
     {
         if(err){console.log(err)}
-        if(find)
-        {
-            find.set(req.body)
-            find.save().then(
-                console.log("Updated " + find + ' ' + date),
-                res.sendStatus(200))
-        }
-        else{console.log('Nothing found!')}
+        doc.password = "It's a secret >:D"
+        console.log(doc)
     })
 }
 
