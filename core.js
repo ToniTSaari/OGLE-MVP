@@ -1,12 +1,45 @@
 const express = require('express')
+const socketIO = require('socket.io')
 const mongoose = require('mongoose')
 const path = require('path')
 const parser = require('body-parser')
-
 const app = express()
+const server = require('http').createServer(app)
+const io = socketIO(server, {pingInterval:1000})
 
 app.use(parser.urlencoded({extended:true}));
 app.use(parser.json());
+
+const serverTime = require('./controller/serverTime')
+
+io.on('connection', socket =>
+{
+    const time = serverTime.time()
+    console.log('User connection recieved on: ' + time)
+    socket.on('disconnect', () => console.log('User disconnect!'))
+    socket.on('getTime', (interval) => 
+    {
+        console.log('Clock started.')
+        setInterval(()=>
+        {
+            const time = serverTime.clock()
+            socket.emit('time', time)
+        }
+        ,interval)
+    })
+})
+
+io.of('/time', socket =>
+{
+    const time = serverTime.time()
+    socket.emit(time)
+})
+
+server.listen(3001, () =>{
+    console.log(server.address().port)
+});
+
+
 
 const rAuth = require('./controller/auth')
 const rDelete = require('./controller/delete')
@@ -18,10 +51,6 @@ const rCreate = require('./controller/create')
 const rFriend = require('./controller/friendRequest')
 
 var url = "mongodb://localhost:27017/ogl"
-
-const server = app.listen(3001, () =>{
-    console.log(server.address().port)
-});
 
 mongoose.connect(url,{ useNewUrlParser: true, useUnifiedTopology: true })
 
@@ -43,6 +72,7 @@ app.post("/findChar", rRead.character)
 app.post("/findRace", rRead.race)
 app.post("/findClass", rRead.charClass)
 app.post("/findCampaign", rRead.campaign)
+app.post("/findMon", rRead.monster)
 
 /*
 app.get("/listAbility", rList.ability)

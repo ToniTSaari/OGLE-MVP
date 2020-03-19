@@ -119,7 +119,10 @@ exports.monster = async (req, res) =>
         payload[i] = 
         {
             name:find.monsterName,
-            CR:find.CR
+            monType:find.monsterType,
+            size:find.size,
+            CR:find.CR,
+            AC:find.AC
         }
         i++
     })

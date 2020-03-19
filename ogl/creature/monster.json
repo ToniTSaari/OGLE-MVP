@@ -1,5 +1,64 @@
 [
     {
+        "monsterName":"Wight",
+        "monsterType":"undead",
+        "size":"medium",
+        "alignment":["Neutral","Evil"],
+        "AC":14,
+        "hitpoints":
+        {
+            "dice":[6,8],
+            "plus":18,
+            "average":45
+        },
+        "speed":30,
+        "swim":0,
+        "fly":0,
+        "stats":
+        {
+            "str":{"base":15,"bonus":2},
+            "dex":{"base":14,"bonus":1},
+            "con":{"base":16,"bonus":3},
+            "int":{"base":10,"bonus":0},
+            "wis":{"base":13,"bonus":1},
+            "cha":{"base":15,"bonus":2}
+        },
+        "saving":{},
+        "skills":
+        [
+            {
+                "skill":"Stealth",
+                "bonus":4
+            },
+            {
+                "skill":"Perception",
+                "bonus":3
+            }
+        ],
+        "senses":
+        {
+            "extraSensory":
+            [
+                {
+                    "sensoryType":"darkvision",
+                    "distance":60
+                }
+            ],
+            "passivePerception":13
+        },
+        "languages":["..."],
+        "CR":3,
+        "XP":700,
+        "abilities":
+        [
+            "Sunlight Sensitivity"
+        ],
+        "actions":
+        {
+            "multiattack":true
+        }
+    },
+    {
         "monsterName":"Aboleth",
         "monsterType":"aberration",
         "size":"large",

@@ -71,6 +71,13 @@ tr:nth-child(even)
     background-color: rgb(245, 206, 180);
 }
 td{border:none}
+#clock
+{
+    float: right;
+    padding: 15px;
+    color: white;
+    height: 25px;
+}
 #mainBox
 {
     border: 2px solid rgb(128, 55, 55);

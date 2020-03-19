@@ -9,8 +9,31 @@ import PCCreateForm from './pages/PCCreateForm'
 import HomePage from './pages/homePage'
 import FriendsList from './pages/FriendsList'
 import Campaign from './pages/campaign'
-import Session from './pages/session'
+import ModuleBuilder from './pages/ModuleBuilder'
+import Timer from './services/getTime'
 import './style/pages.scss'
+
+class Time extends React.Component 
+{
+  constructor(props)
+  {
+    super(props)
+    this.state = {clock:undefined}
+    Timer((err, clock)=>this.setState({clock}))
+  }
+  render()
+  {
+    return(
+      <b>
+        {this.state.clock ? 
+          <b>
+            {this.state.clock.time} - {this.state.clock.date}
+          </b>
+        :<i></i>}
+      </b>
+    )
+  }
+}
 
 const Home = () =>
 (
@@ -53,13 +76,14 @@ const SignUp = () =>
   <div><SignUpForm /></div>
 )
 
-const App = () => {
+const App = () =>
+{
   const email = window.localStorage.getItem('email')
   return(
   <div>
     <nav>
       <Router >
-        <div className="mainControl">
+        <div className="mainControl"><div id="clock"></div>
           {email ?
             <div className="navbar">
               <Link to="/">~ Home ~</Link>  
@@ -82,9 +106,10 @@ const App = () => {
         <Route exact path="/friends" render={() => <Friends />} />
         <Route exact path="/PCCreate" render={() => <PCCreate />} />
         <Route exact path="/campaign" render={() => <Campaign/>} />
-        <Route exact path="/session" render={() => <Session/>} />
+        <Route exact path="/ModuleBuilder" render={() => <ModuleBuilder/>} />
       </Router>
     </nav>
   </div>)
 }
 ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<Time />, document.getElementById('clock'))

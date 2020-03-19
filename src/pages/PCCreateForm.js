@@ -395,7 +395,7 @@ class PCCreateForm extends React.Component
 
           </div>}
 
-        {this.state.SR && this.state.race || this.state.race == "Human" ? 
+        {this.state.SR && this.state.race || this.state.race === "Human" ? 
           <div>
             
             {this.state.Class ? <div></div>:
