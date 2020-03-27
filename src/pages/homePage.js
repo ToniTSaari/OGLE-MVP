@@ -1,5 +1,7 @@
 import React from 'react'
 import requestService from '../services/requestService'
+import socketService from '../services/socketService'
+import rollService from '../services/rollService'
 import {BrowserRouter as Router, Link} from 'react-router-dom'
 
 class HomePage extends React.Component
@@ -7,9 +9,12 @@ class HomePage extends React.Component
   constructor(props)
   {
     super(props)
+    this.state = {roll:undefined}
     this.state = {value: ''}
     this.state = {characters: []}
     this.charDel = this.charDel.bind(this)
+    this.roll = this.roll.bind(this)
+    
     var data = {url:"/findAcc", content:{email:window.localStorage.getItem('email')}}
     requestService.poster(data).then((res) => 
     {
@@ -56,6 +61,25 @@ class HomePage extends React.Component
       }
     })
   }
+  change = (event) =>
+  {
+    let nam = event.target.name
+    let val = event.target.value
+    this.setState({[nam]:val})
+    document.getElementById("init").disabled = true
+  }
+  roll = () =>
+  {
+    alert('roll ' + this.state.diceNum + 'D' + this.state.diceDie)
+    const roll = rollService(this.state.diceNum, this.state.diceDie)
+    alert('result: ' + roll)
+    const message = 
+    {
+        event:'broadcastSend',
+        data:roll
+    }
+    socketService.emitter(message)
+}
   charDel = (event) =>
   {
     alert(event.target.value)
@@ -69,16 +93,20 @@ class HomePage extends React.Component
        Logged in as: {this.state.email}
       {this.state.user ? <div> With name: {this.state.user}</div>:<div> anonymously</div>}
       <hr/>{this.state.gotReqs ? <div>New friend request! Check Friends List!<hr/></div>:<i></i>}
+      {this.state.msg ? <i>{this.state.msg}<hr/></i>:<i></i>}
       <Link to="/Campaign">~ Campaign ~</Link>
       {this.state.characters ?
         <div>
         <Link to="/PCCreate">~ Create new character ~</Link>
-      <hr/></div>:<div><Link to="/PCCreate">~ Create character ~</Link><hr/></div>}<br/>
+      <hr/></div>:<div><Link to="/PCCreate">~ Create character ~</Link><hr/></div>}
       {this.state.characters.map((character)=>
       (
       <div id="mainBox"><b>{character.charName}</b> a 
-      level {character.Class.level} {character.race} {character.Class.Class}. {character.campaign ? <i>In campaign: {character.campaign}</i>:<i></i>}
-      <button id="delButton" style={{float:"right"}} value={character.id} onClick={this.charDel}>Delete {character.charName}</button>
+      level {character.Class.level} {character.race} {character.Class.Class}.
+      {character.campaign ? <i>In campaign: {character.campaign}</i>:<i></i>}
+      <button id="delButton" style={{float:"right"}} value={character.id} onClick={this.charDel}>
+        Delete {character.charName}
+      </button>
           <table>
             <thead>
               <tr>

@@ -1,5 +1,6 @@
 import React from 'react'
 import requestService from '../services/requestService'
+import socketService from '../services/socketService'
 
 class LoginForm extends React.Component
 {

@@ -1,4 +1,4 @@
-const player = require('../schema/player');
+const player = require('../schema/player')
 const friend = require('../schema/friend')
 
 const rawDate = new Date()

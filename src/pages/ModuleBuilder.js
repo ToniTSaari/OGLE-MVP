@@ -24,21 +24,19 @@ class ModuleBuilder extends React.Component
         }
         requestService.poster(data).then((res)=>
         {
-            const moduList = res.content.moduleList
+            const moduList = res.modules
             const moduLength = moduList.length
             const modules = []
             for(var i = 0; i < moduLength; i++)
             {
-                modules.push(res.content.module[i])
+                modules.push(res.modules[i])
             }
             this.setState(
             {
                 campaign:res.campaignName,
                 characters:res.characters,
                 GM:res.GM,
-                modMon:res.monsters,
-                modules:modules,
-                moduleName:"Enter name to construct new module!"
+                modules:modules
             })
         })
     }
@@ -57,39 +55,7 @@ class ModuleBuilder extends React.Component
     }
     addMon(event)
     {
-        const monster = event.target.value
-        const modules = this.state.modules
-        const modLen = modules.length
-        for(var i = 0; i < modLen; i++)
-        {
-            if(modules[i]._id===this.state.thisModuleID)
-            {
-                const y = i
-                const module = modules[i]
-                alert(JSON.stringify(module))
-                const monsters = []
-                const thisCampaign = { campaignName:this.state.campaign }
-                requestService.poster({url:"/findCampaign", content:thisCampaign}).then((res)=>
-                {
-                    var number = 1
-                    const campaign = res
-                    const len = module.monsters.length
-                    for(var x = 0; x < len; x++)
-                    {
-                        if(module.monsters[x].name===monster)
-                        {
-                            number++
-                        }
-                    }
-                    monsters.push({monName:monster, number:number, monNick:""})
-                    campaign.content.module[y].monsters = monsters
-                    alert(JSON.stringify(campaign))
-                    requestService.poster({url:"/upCamp", content:{id:campaign._id, update:campaign}})
-                    .then(window.location.reload())
-                })
-                break
-            }
-        }
+        alert('empty for now')
     }
     removeMon(event)
     {
@@ -97,21 +63,9 @@ class ModuleBuilder extends React.Component
     }
     module(event)
     {
-        var module
-        const modules = this.state.modules
-        const modLen = modules.length
-        for(var i = 0; i < modLen; i++)
+        requestService.poster({url:"/findModule",content:{moduleName:event.target.value}}).then((res)=>
         {
-            if(modules[i]._id === event.target.value)
-            {
-                module = modules[i]
-            }
-        }
-        this.setState(
-        {
-            thisModule:module.moduleName,
-            thisModuleID:module._id,
-            modMon:module.monsters
+            this.setState({thisModule:res})
         })
     }
     change = (event) =>
@@ -128,16 +82,25 @@ class ModuleBuilder extends React.Component
     submit = async (event) =>
     {
         event.preventDefault()
-        alert(JSON.stringify(this.state))
         const data = {campaignName:this.state.campaign}
         requestService.poster({url:"/findCampaign", content:data}).then((res)=>
         {
             const campaign = res
-            campaign.content.moduleList.push(this.state.moduleName)
-            campaign.content.module.push({moduleName:this.state.moduleName})
-            alert(JSON.stringify(campaign))
+            campaign.modules.push(this.state.moduleName)
             requestService.poster({url:"/upCamp", content:{id:campaign._id, update:campaign}})
-                .then(window.location.reload())
+            const data =
+            {
+                campaignName:this.state.campaign,
+                moduleName:this.state.moduleName,
+                GM:campaign.GM,
+                characters:campaign.cha,
+                levels:
+                {
+                    from:this.state.lowLevel,
+                    to:this.state.highLevel
+                }
+            }
+            requestService.poster({url:"/makeModule", content:data}).then(window.location.reload())
         })
     }
     render()
@@ -154,8 +117,14 @@ class ModuleBuilder extends React.Component
                         :<i></i>}
                     </h3>
                 :<p></p>}
-                <div id="mainBox"><b>{this.state.moduleName}</b>
+                <div id="mainBox">
                     <form onSubmit={this.submit}>
+                        {this.state.moduleName ? <div><b>{this.state.moduleName}</b><br/>
+                            Level range;<br/>
+                            from <input type="number" className="levelBox" name="lowLevel" min="1" max="20" onChange={this.change} required/><br/>
+                            <p>to <input type="number" className="levelBox" name="highLevel" min={this.state.lowLevel} onChange={this.change} max="20" required/></p><hr/>
+                        </div>
+                        :<b>Enter name to construct new module!<br/></b>}
                         <input type="text" name="moduleName" className="bigInput" onChange={this.change} required/>
                         <input type="submit" value="New Module" id="button" className="bigInput"/>
                     </form>
@@ -164,8 +133,8 @@ class ModuleBuilder extends React.Component
                         <div className="main">
                             {this.state.modules.map((mod)=>
                             <div id="mainBox">
-                                <button id="button" value={mod._id} onClick={this.module} className="bigInput">
-                                    Modify {mod.moduleName}
+                                <button id="button" value={mod} onClick={this.module} className="bigInput">
+                                    Modify {mod}
                                 </button>
                             </div>)}
                         </div>
@@ -173,7 +142,8 @@ class ModuleBuilder extends React.Component
                 <hr/>
                 {this.state.thisModule ? 
                 <div>
-                    <h3>Module: {this.state.thisModule}</h3>
+                    <h3>Module: {this.state.thisModule.moduleName} in campaign {this.state.thisModule.campaignName}</h3>
+                    Level range from {this.state.thisModule.levels.from} to {this.state.thisModule.levels.to}<hr/>
                     {this.state.modMon ? 
                         <div>
                             {this.state.modMon.map((mon)=>
@@ -191,7 +161,7 @@ class ModuleBuilder extends React.Component
                         </div>
                     :<i></i>}
                     {this.state.monsters ? 
-                        <div><hr/>
+                        <div>
                             {this.state.monsters.map((mon)=>
                             <div id="mainBox">
                                 <b>{mon.name}</b><br/>
@@ -199,7 +169,7 @@ class ModuleBuilder extends React.Component
                                 Challenge rating: {mon.CR}<br/>
                                 Armour class: {mon.AC}<hr/>
                                 <button id="button" className="bigInput" onClick={this.addMon} value={mon.name}>
-                                    Add to {this.state.campaign}
+                                    Add to {this.state.thisModule.moduleName}
                                 </button>
                             </div>)}
                         </div>

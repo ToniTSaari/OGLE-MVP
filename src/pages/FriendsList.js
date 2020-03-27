@@ -1,5 +1,6 @@
 import React from 'react'
 import requestService from '../services/requestService'
+import socketService from '../services/socketService'
 
 class FriendsList extends React.Component
 {
@@ -14,19 +15,35 @@ class FriendsList extends React.Component
         const data = {url:"/findAcc", content:content}
         this.friendApprove = this.friendApprove.bind(this)
         this.friendDisapprove = this.friendDisapprove.bind(this)
+        this.PM = this.PM.bind(this)
         requestService.poster(data).then((res)=>
         {
+            const sock = 
+            {
+                data:res.email,
+                event:"login"
+            }
+            socketService.emitter(sock)
             this.setState({user:res.email,id:res._id})
             if(res.friends[0]){this.setState({friends:res.friends})}
         })
         requestService.poster({url:"/listGot", content}).then((res)=>
         {
-        if(res[0]){this.setState({gotReqs:res})}
+            if(res[0]){this.setState({gotReqs:res})}
         })
         requestService.poster({url:"/listSent", content}).then((res)=>
         {
-        if(res[0]){this.setState({sentReqs:res})}
+            if(res[0]){this.setState({sentReqs:res})}
         })
+        
+    }
+    componentDidMount()
+    {
+        setInterval(()=>
+        {
+            const message = JSON.parse(window.localStorage.getItem('message'))
+            this.setState({message:message})
+        },5000)
     }
     change = (event) =>
     {
@@ -84,10 +101,36 @@ class FriendsList extends React.Component
         requestService.poster(friend)
         window.location.reload()
     }
+    PM(event)
+    {
+        const message = 
+        {
+            event:'room',
+            data:
+            {
+                room:event.target.PMfriend.value,
+                event:'PM',
+                data:
+                {
+                    sender:this.state.user,
+                    text:this.state.PM
+                }
+            }
+        }
+        socketService.emitter(message)
+    }
+    PMget()
+    {
+        socketService.getter(mes=>
+        {
+            this.setState({message:mes})
+        })
+    }
     render()
     {
         return(
             <div className="main">
+                {this.state.message ? <i>{this.state.message.sender}: {this.state.message.text}</i>:<i>No MSG</i>}
                 <b><p>{this.state.user} is searching friends by email {this.state.friendMail}:</p></b>
                 <form onSubmit={this.submit}>
                     <input type="text" name="friendMail" onChange={this.change} required></input>
@@ -105,7 +148,15 @@ class FriendsList extends React.Component
                     <div>
                         <b>Friends with; </b><br/>
                         {this.state.friends.map((friend)=>
-                            <div id="friendBox"><b>{friend}</b><br/></div>
+                            <div id="friendBox">
+                                <b>{friend}</b><br/>
+                                Send private message<br/>
+                                <form onSubmit={this.PM}>
+                                    <input type="hidden" value={friend} name="PMfriend"/>
+                                    <input type="text" name="PM" onChange={this.change}/>
+                                    <input type="submit" value="Send"/>
+                                </form>
+                            </div>
                         )}
                     </div>
                 :<div></div>}
@@ -115,8 +166,13 @@ class FriendsList extends React.Component
                         <b>You have recieved the following friend requests;</b>
                         {this.state.gotReqs.map((friend)=>
                             <div>
-                                {friend.requester ? <div id="friendBox">{friend.requester} <button value={friend.reqID} onClick={this.friendApprove}>Accept request</button>
-                                <button value={friend.reqID} onClick={this.friendDisapprove}>Decline request</button><br/></div>:<i></i>}
+                                {friend.requester ? <div id="friendBox">{friend.requester}
+                                <button value={friend.reqID} onClick={this.friendApprove}>
+                                    Accept request
+                                </button>
+                                <button value={friend.reqID} onClick={this.friendDisapprove}>
+                                    Decline request
+                                </button><br/></div>:<i></i>}
                             </div>
                         )}
                         <hr/>
@@ -128,7 +184,9 @@ class FriendsList extends React.Component
                         {this.state.sentReqs.map((friend)=>
                             <div>
                                 {friend.requestee ? <div id="friendBox"><b>{friend.requestee}</b><br/>
-                                <button value={friend.reqID} onClick={this.friendDisapprove}>Cancel request</button></div>:<i></i>}
+                                <button value={friend.reqID} onClick={this.friendDisapprove}>
+                                    Cancel request
+                                </button></div>:<i></i>}
                             </div>
                         )}
                         <hr/>

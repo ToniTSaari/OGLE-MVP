@@ -19,7 +19,11 @@ class Time extends React.Component
   {
     super(props)
     this.state = {clock:undefined}
-    Timer((err, clock)=>this.setState({clock}))
+    Timer((err, clock)=>
+    {
+      this.setState({clock})
+      if(err){alert(err)}
+    })
   }
   render()
   {

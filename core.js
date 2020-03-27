@@ -6,40 +6,17 @@ const parser = require('body-parser')
 const app = express()
 const server = require('http').createServer(app)
 const io = socketIO(server, {pingInterval:1000})
+const socket = require('./controller/socket')
 
 app.use(parser.urlencoded({extended:true}));
 app.use(parser.json());
-
-const serverTime = require('./controller/serverTime')
-
-io.on('connection', socket =>
-{
-    const time = serverTime.time()
-    console.log('User connection recieved on: ' + time)
-    socket.on('disconnect', () => console.log('User disconnect!'))
-    socket.on('getTime', (interval) => 
-    {
-        console.log('Clock started.')
-        setInterval(()=>
-        {
-            const time = serverTime.clock()
-            socket.emit('time', time)
-        }
-        ,interval)
-    })
-})
-
-io.of('/time', socket =>
-{
-    const time = serverTime.time()
-    socket.emit(time)
-})
+socket.socket(io)
 
 server.listen(3001, () =>{
     console.log(server.address().port)
 });
 
-
+module.exports.socket = socket
 
 const rAuth = require('./controller/auth')
 const rDelete = require('./controller/delete')
@@ -73,6 +50,7 @@ app.post("/findRace", rRead.race)
 app.post("/findClass", rRead.charClass)
 app.post("/findCampaign", rRead.campaign)
 app.post("/findMon", rRead.monster)
+app.post("/findModule", rRead.modu)
 
 /*
 app.get("/listAbility", rList.ability)
@@ -92,6 +70,7 @@ app.get("/listMon", rList.monster)
 
 app.post("/makePC", rCreate.character)
 app.post("/makeCamp", rCreate.campaign)
+app.post("/makeModule", rCreate.modu)
 
 app.post("/pushPlayer", rPush.player)
 app.post("/pushCamp", rPush.campaign)

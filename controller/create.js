@@ -5,6 +5,7 @@ const monster = require('../schema/monster')
 const spell = require('../schema/spell')
 const weapon = require('../schema/weapon')
 const armour = require('../schema/armour')
+const modu = require('../schema/module')
 
 const rawDate = new Date()
 const date = rawDate.getHours() + ':'
@@ -19,7 +20,7 @@ exports.ability = (req, res) =>
 {
     var obj = req.body
     var abil = new ability(obj)
-    abil.save().then(result =>{console.log('Ability ' + abil + ' created! ' + date)})
+    abil.save().then(doc =>{console.log('Ability ' + abil + ' created! ' + date)})
 }
 
 exports.character = (req, res) =>
@@ -27,7 +28,7 @@ exports.character = (req, res) =>
     var obj = req.body
     var char = new character(obj)
     console.log(obj.proficiencies)
-    char.save().then(result =>
+    char.save().then(doc =>
         {
             console.log('Character ' + char.charName + ' created! ' + date)
             res.json(char)
@@ -39,10 +40,22 @@ exports.campaign = (req, res) =>
     var obj = req.body
     console.log(obj)
     var camp = new campaign(obj)
-    camp.save().then(result =>
+    camp.save().then(doc =>
     {
         console.log('Campaign ' + camp + ' created! ' + date)
         res.json(camp)
+    })
+}
+
+exports.modu = (req, res) =>
+{
+    var obj = req.body
+    console.log(obj)
+    var mod = new modu(obj)
+    mod.save().then(doc =>
+    {
+        console.log('Module ' + doc + ' created! ' + date)
+        res.json(doc)
     })
 }
 
@@ -50,26 +63,26 @@ exports.monster = (req, res) =>
 {
     var obj = req.body
     var mon = new monster(obj)
-    mon.save().then(result =>{console.log('Monster ' + mon + ' created! ' + date)})
+    mon.save().then(doc =>{console.log('Monster ' + mon + ' created! ' + date)})
 }
 
 exports.spell = (req, res) =>
 {
     var obj = req.body
     var mag = new spell(obj)
-    mag.save().then(result =>{console.log('Spell ' + mag + ' created! ' + date)})
+    mag.save().then(doc =>{console.log('Spell ' + mag + ' created! ' + date)})
 }
 
 exports.weapon = (req, res) =>
 {
     var obj = req.body
     var wep = new weapon(obj)
-    wep.save().then(result =>{console.log('Weapon ' + wep + ' created! ' + date)})
+    wep.save().then(doc =>{console.log('Weapon ' + wep + ' created! ' + date)})
 }
 
 exports.armour = (req, res) =>
 {
     var obj = req.body
     var arm = new armour(obj)
-    arm.save().then(result =>{console.log('Weapon ' + arm + ' created! ' + date)})
+    arm.save().then(doc =>{console.log('Weapon ' + arm + ' created! ' + date)})
 }

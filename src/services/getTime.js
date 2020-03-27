@@ -1,10 +1,10 @@
 import Socket from "socket.io-client"
 const sock = Socket('http://localhost:3000')
 
-function timer(back)
+const timer = res =>
 {
-    sock.on('time', time => back(null, time))
-    sock.emit('getTime', 1000)
+    sock.on('time', time => res(null, time))
+    sock.emit('getTime', 500)
 }
 
 export default timer

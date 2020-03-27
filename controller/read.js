@@ -9,6 +9,7 @@ const armour = require('../schema/armour')
 const race = require('../schema/race')
 const Class = require('../schema/class')
 const classList = require('../schema/classlist')
+const modu = require('../schema/module')
 
 const rawDate = new Date()
 const date = rawDate.getHours() + ':'
@@ -62,6 +63,25 @@ exports.campaign = async (req, res) =>
 {
     var obj = req.body
     var read = campaign.where(obj)
+    read.findOne(function(err, find)
+    {
+        if(err){console.log(err)}
+        if(find)
+        {
+            console.log(find)
+            res.json(find)
+        }
+        else
+        {
+            console.log('Nothing found!')
+        }
+    })
+}
+
+exports.modu = async (req, res) =>
+{
+    var obj = req.body
+    var read = modu.where(obj)
     read.findOne(function(err, find)
     {
         if(err){console.log(err)}

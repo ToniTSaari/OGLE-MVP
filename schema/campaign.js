@@ -1,14 +1,9 @@
 const mongoose = require('mongoose');
-const modu = require('./module').schema
 
 const campaign = new mongoose.Schema(
 {
     characters:[String],
-    content:
-    {
-        moduleList:[String],
-        module:[modu]
-    },
+    modules:[String],
     campaignName:{type:String, unique:true},
     GM:{type:String, unique:false}
 })

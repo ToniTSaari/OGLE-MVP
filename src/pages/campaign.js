@@ -36,7 +36,7 @@ class Campaign extends React.Component
         .then((res)=>
         { 
             invChar = res.characters
-            moduList = res.content.moduleList
+            moduList = res.modules
         })
         const invLen = invChar.length
         for(var i = 0; i < invLen; i++)
@@ -146,8 +146,7 @@ class Campaign extends React.Component
                 id:res._id,
                 characters:characters,
                 GM:res.GM,
-                campaignName:res.campaignName,
-                monsters:res.monsters
+                campaignName:res.campaignName
             }
             requestService.poster({url:"/pushCamp", content:data}).then((res)=>
             {

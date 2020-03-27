@@ -96,20 +96,6 @@ class PCCreateForm extends React.Component
 
   race = (event) =>
   {
-    //resetting stat minus and plus button states
-    /*document.getElementById("strMinus").disabled = false
-    document.getElementById("strPlus").disabled = false
-    document.getElementById("dexMinus").disabled = false
-    document.getElementById("dexPlus").disabled = false
-    document.getElementById("conMinus").disabled = false
-    document.getElementById("conPlus").disabled = false
-    document.getElementById("intMinus").disabled = false
-    document.getElementById("intPlus").disabled = false
-    document.getElementById("wisMinus").disabled = false
-    document.getElementById("wisPlus").disabled = false
-    document.getElementById("chaMinus").disabled = false
-    document.getElementById("chaPlus").disabled = false*/
-
     //resetting stats to defaults before loading racial stat bonuses
     const defStats = statService.reset()
     this.setState({stats:defStats})
@@ -397,7 +383,6 @@ class PCCreateForm extends React.Component
 
         {this.state.SR && this.state.race || this.state.race === "Human" ? 
           <div>
-            
             {this.state.Class ? <div></div>:
             <div><button onClick={this.backRace}>Back</button><br/>
               {this.state.classes ?
