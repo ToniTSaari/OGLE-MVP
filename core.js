@@ -34,6 +34,7 @@ mongoose.connect(url,{ useNewUrlParser: true, useUnifiedTopology: true })
 app.post("/upAcc", rPut.player)
 app.post("/upCamp", rPut.campaign)
 app.post("/upChar", rPut.character)
+app.post("/upMod", rPut.modu)
 
 app.post("/login", rAuth.login)
 app.post("/signup", rAuth.signup)
@@ -68,7 +69,7 @@ app.get("/listClassSpell", rList.classList)
 app.get("/listClass", rList.Class)
 app.get("/listMon", rList.monster)
 
-app.post("/makePC", rCreate.character)
+app.post("/makeChar", rCreate.character)
 app.post("/makeCamp", rCreate.campaign)
 app.post("/makeModule", rCreate.modu)
 

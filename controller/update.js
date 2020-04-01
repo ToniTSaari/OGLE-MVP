@@ -6,6 +6,7 @@ const player = require('../schema/player')
 const spell = require('../schema/spell')
 const weapon = require('../schema/weapon')
 const armour = require('../schema/armour')
+const modu = require('../schema/module')
 
 const rawDate = new Date()
 const date = rawDate.getHours() + ':'
@@ -46,6 +47,16 @@ exports.campaign = (req, res) =>
 {
     console.log(req.body)
     campaign.findOneAndUpdate({_id:req.body.id}, req.body.update, {new:true}, (err, doc) =>
+    {
+        if(err){console.log(err)}
+        console.log(doc)
+    })
+}
+
+exports.modu = (req, res) =>
+{
+    console.log(req.body)
+    modu.findOneAndUpdate({_id:req.body.id}, req.body.update, {new:true}, (err, doc) =>
     {
         if(err){console.log(err)}
         console.log(doc)

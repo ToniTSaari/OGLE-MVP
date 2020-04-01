@@ -211,12 +211,16 @@ class Campaign extends React.Component
                         </i>:<i></i>}
                         {this.state.thisCampaign ? 
                             <b>
+                                
                                 <button id="button" className="bigInput" onClick={this.back}>New</button><hr/>
                                 {this.state.modules ? 
                                 <i>
                                     <Link to="/ModuleBuilder">
-                                        ~ Construct new module for {this.state.thisCampaign} ~
+                                        ~ Modify modules of {this.state.thisCampaign} ~
                                     </Link>
+                                    <Link to="/NPC">
+                                        ~ Create NPC for {this.state.thisCampaign} ~
+                                    </Link><hr/>
                                     {this.state.modules.map((module)=><div id="mainBox">{module}</div>)}
                                 </i>
                                 :<i>

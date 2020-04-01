@@ -1,4 +1,5 @@
 import React from 'react'
+import {BrowserRouter as Router, Link} from 'react-router-dom'
 import requestService from '../services/requestService'
 
 class ModuleBuilder extends React.Component
@@ -8,11 +9,16 @@ class ModuleBuilder extends React.Component
         super(props)
         this.state = {value:''}
         this.state = {index:1}
+        this.state = {encounterName:'Unnamed combat encounter'}
+        this.state = {encounterType:'combat'}
 
         this.module = this.module.bind(this)
         this.addMon = this.addMon.bind(this)
         this.removeMon = this.removeMon.bind(this)
-        this.modMon = this.modMon.bind(this)
+        this.modMonAll = this.modMonAll.bind(this)
+        this.modMonLvl = this.modMonLvl.bind(this)
+        this.addEncounter = this.addEncounter.bind(this)
+        this.removeEncounter = this.removeEncounter.bind(this)
         
         const data =
         {
@@ -40,8 +46,9 @@ class ModuleBuilder extends React.Component
             })
         })
     }
-    modMon = async () =>
+    modMonAll = async (event) =>
     {
+        this.setState({encounterID:event.target.value})
         const monsters = []
         await requestService.getter({url:"/listMon"}).then((res)=>
         {
@@ -53,20 +60,82 @@ class ModuleBuilder extends React.Component
             this.setState({monsters})
         })
     }
+    modMonLvl = async (event) =>
+    {
+        this.setState({encounterID:event.target.value})
+        const monsters = []
+        await requestService.getter({url:"/listMon"}).then((res)=>
+        {
+            const len = res.length
+            for(var i = 0; i < len; i++)
+            {
+                if(res[i].CR >= this.state.thisModule.levels.from && res[i].CR <= this.state.thisModule.levels.to)
+                {
+                    monsters.push(res[i])
+                }
+            }
+            this.setState({monsters})
+        })
+    }
     addMon(event)
     {
-        alert('empty for now')
+        alert(this.state.encounterID)
+    }
+    addEncounter = async ()=>
+    {
+        const type = 
+        {
+            social:false,
+            combat:false,
+            skill:false
+        }
+        switch(this.state.encounterType)
+        {
+            case "combat":
+                type.combat = true
+                break
+            case "social":
+                type.social = true
+                break
+            case "skill":
+                type.skill = true
+                break
+            default:
+                alert('this.state.encounterType value not transmitted')
+        }
+        alert(JSON.stringify(type))
+        const encounter = 
+        {
+            encounterName:this.state.encounterName,
+            type:type
+        }
+        alert(JSON.stringify(encounter))
+        await requestService.poster({url:"/findModule", content:{_id:this.state.thisModule._id}}).then(res=>
+        {
+            const modu = res
+            modu.encounters.push(encounter)
+            alert(JSON.stringify(modu))
+            requestService.poster({url:"/upMod", content:{id:this.state.thisModule._id,update:modu}}).then(this.module)
+        })
     }
     removeMon(event)
     {
         alert(event.target.value)
     }
+    removeEncounter(event)
+    {
+        alert(event.target.value)
+    }
     module(event)
     {
-        requestService.poster({url:"/findModule",content:{moduleName:event.target.value}}).then((res)=>
+        const modu = event.target.value
+        this.setState({monsters:undefined})
+        requestService.poster({url:"/findModule",content:{moduleName:modu}}).then((res)=>
         {
             this.setState({thisModule:res})
+            window.localStorage.setItem('module', modu)
         })
+        
     }
     change = (event) =>
     {
@@ -141,9 +210,47 @@ class ModuleBuilder extends React.Component
                     :<i></i>}
                 <hr/>
                 {this.state.thisModule ? 
-                <div>
+                <div id="mainBox">
                     <h3>Module: {this.state.thisModule.moduleName} in campaign {this.state.thisModule.campaignName}</h3>
                     Level range from {this.state.thisModule.levels.from} to {this.state.thisModule.levels.to}<hr/>
+                    {this.state.thisModule.characters[0] ? 
+                        <div>
+                            {this.state.thisModule.characters.map(char=>
+                            <i>
+                                {char}
+                            </i>)}
+                        </div>
+                    :<i></i>}<br/>
+                    {this.state.thisModule.encounters[0] ? 
+                        <div>
+                            {this.state.thisModule.encounters.map(encounter=>
+                            <b>
+                                {encounter.encounterName} ~
+                                {encounter.type.social ? <b>~ a Social encounter.</b>:<i></i>}
+                                {encounter.type.skill ? <b>~ a Skill encounter.</b>:<i></i>}
+                                {encounter.type.combat ? 
+                                    <b>
+                                        ~ a Combat encounter;<br/>
+                                        <button value={encounter._id} onClick={this.modMonLvl}>Add monsters of appropriate challenge rating</button>
+                                        <br/>
+                                        <button value={encounter._id} onClick={this.modMonAll}>Add monsters of any challenge rating</button>
+                                    </b>
+                                :<i></i>}
+                                <button id="delButton" style={{float:"right"}} value={encounter._id} onClick={this.removeEncounter}>
+                                    Delete {encounter.encounterName}
+                                </button>
+                                <hr/>
+                            </b>)}
+                        </div>
+                    :<b></b>}
+                        <input type="text" name="encounterName" onChange={this.change} required/>
+                        <select name="encounterType" onChange={this.change}>
+                            <option value="combat">Combat</option>
+                            <option value="skill">Skill</option>
+                            <option value="social">Social</option>
+                        </select><br/>
+                        <button onClick={this.addEncounter}>Add encounter</button>
+                    <hr/>
                     {this.state.modMon ? 
                         <div>
                             {this.state.modMon.map((mon)=>
@@ -173,7 +280,8 @@ class ModuleBuilder extends React.Component
                                 </button>
                             </div>)}
                         </div>
-                    :<div><button onClick={this.modMon}>Modify monsters</button></div>}
+                    :<div>
+                    </div>}
                     </div>
                     :<i></i>}
             </div>

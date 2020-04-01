@@ -4,7 +4,7 @@ import statService from '../services/statService'
 import statMod from '../services/statModService'
 import lister from '../services/listService'
 
-class PCCreateForm extends React.Component
+class NPCCreateForm extends React.Component
 {
   constructor(props)
   {
@@ -36,11 +36,11 @@ class PCCreateForm extends React.Component
     this.state = {stats:defStats}
 
     //finding user and setting user email as key
-    const email = window.localStorage.getItem('email')
-    const findUser = {url:"/findAcc", content:{email:email}}
-    requestService.poster(findUser).then((res) => 
+    const camp = window.localStorage.getItem('campaign')
+    const findCamp = {url:"/findCampaign", content:{campaignName:camp}}
+    requestService.poster(findCamp).then((res) => 
     {
-      this.setState({email:res.email})
+      this.setState({campaign:res})
     })
 
     //fetching playable races from mongo and listing them
@@ -304,7 +304,6 @@ class PCCreateForm extends React.Component
     alert(JSON.stringify(stats))
     const character = 
     {
-        playerCharacter:{PC:true, email:this.state.email},
         charName:this.state.charName,
         race:this.state.race,
         stats:
@@ -330,8 +329,14 @@ class PCCreateForm extends React.Component
 
     try
     {
-      await requestService.poster(charData)
-      window.location.href = "/"
+      await requestService.poster(charData).then(()=>
+      {
+          const campaign = this.state.campaign
+          campaign.characters.push(this.state.charName)
+          requestService.poster({url:"/upCamp", content:{id:this.state.campaign._id, update:campaign}})
+          //window.location.href = "/ModuleBuilder"
+      })
+      
     }
     catch
     {
@@ -345,7 +350,7 @@ class PCCreateForm extends React.Component
   {
     return(
       <div>
-        <h3>Account {this.state.email} creating; <br/> 
+        <h3>Creating NPC for {window.localStorage.getItem('campaign')}<br/> 
         {this.state.charName} a level {this.state.level} {this.state.race} {this.state.Class}</h3>
 
         {this.state.race ? 
@@ -574,4 +579,4 @@ class PCCreateForm extends React.Component
   }
 }
 
-export default PCCreateForm
+export default NPCCreateForm
