@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const character = new mongoose.Schema(
 {
     playerCharacter:{PC:{type:Boolean, default:false}, email:String},
+    alive:{type:Boolean, default:true},
     campaign:String,
     charName:String,
     race:String,

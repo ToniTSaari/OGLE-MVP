@@ -9,6 +9,10 @@ class DeleteForm extends React.Component
         this.state = {value:''}
 
         this.submit = this.submit.bind(this)
+        if(!window.localStorage.getItem('email'))
+        {
+            window.location.href = "/"
+        }
     }
     submit = async (event) =>
     {

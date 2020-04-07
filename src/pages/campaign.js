@@ -15,7 +15,10 @@ class Campaign extends React.Component
         this.back = this.back.bind(this)
         this.disinvite = this.disinvite.bind(this)
         this.modCampaign = this.modCampaign.bind(this)
-
+        if(!window.localStorage.getItem('email'))
+        {
+            window.location.href = "/"
+        }
         const data = {url:"/findAcc", content:{email:window.localStorage.getItem('email')}}
         requestService.poster(data).then((res)=>
         {
@@ -35,7 +38,7 @@ class Campaign extends React.Component
         await requestService.poster({url:"/findCampaign", content:{campaignName:event.target.value}})
         .then((res)=>
         { 
-            invChar = res.characters
+            invChar = res.PCs
             moduList = res.modules
         })
         const invLen = invChar.length
@@ -123,11 +126,11 @@ class Campaign extends React.Component
         .then((res)=>
         {
             var newChar = false
-            const characters = res.characters
+            const characters = res.PCs
             const pLen = characters.length
             for(var i = 0; i <= pLen; i++)
             {
-                if(res.characters[i] !== name)
+                if(res.PCs[i] !== name)
                 {
                     newChar = true
                 }
@@ -144,14 +147,11 @@ class Campaign extends React.Component
             const data = 
             {
                 id:res._id,
-                characters:characters,
+                PCs:characters,
                 GM:res.GM,
                 campaignName:res.campaignName
             }
-            requestService.poster({url:"/pushCamp", content:data}).then((res)=>
-            {
-                window.location.reload()
-            })
+            requestService.poster({url:"/pushCamp", content:data})
             const charData =
             {
                 campaign:this.state.thisCampaign,

@@ -79,6 +79,7 @@ app.post("/pushChar", rPush.character)
 
 app.post("/delAcc", rDelete.player)
 app.post("/delChar", rDelete.character)
+app.post("/delMod", rDelete.modu)
 
 app.get("/", function(req,res)
 {

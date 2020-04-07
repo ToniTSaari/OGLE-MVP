@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const spell = require('./spell').schema
 
 var monster = new mongoose.Schema(
 {
@@ -54,7 +53,7 @@ var monster = new mongoose.Schema(
     spellcaster:
     {
         casterLevel:{type:Number, default:0},
-        spellbook:[spell],
+        spellbook:[String],
         maxSlots:[Number],
         currentSlots:[Number]
     },

@@ -11,6 +11,10 @@ class UpdateForm extends React.Component
     this.change = this.change.bind(this)
     this.submit = this.submit.bind(this)
     const url = "/findAcc"
+    if(!window.localStorage.getItem('email'))
+    {
+        window.location.href = "/"
+    }
     const data = {url:url, content:{email:window.localStorage.getItem('email')}}
     requestService.poster(data).then((res) => 
     {

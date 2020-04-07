@@ -1,6 +1,9 @@
 $BGcolor:rgb(228, 222, 208);
 $navColor:rgb(87, 89, 177);
 $highlight:rgb(133, 134, 197);
+$buttonColor:rgb(187, 131, 87);
+$buttonHover: rgb(26, 8, 75);
+$brighter: rgba(255, 255, 255, 0.493);
 body
 {
     background-color:  $BGcolor;
@@ -8,13 +11,13 @@ body
 button, .button, #button
 {
     margin: 1px;
-    background-color:rgb(187, 131, 87);
+    background-color:$buttonColor;
     border:none;
     color: white;
 }
 button,#button:hover
 {
-    background-color: rgb(26, 8, 75);
+    background-color: $buttonHover;
     transition-duration: 1s;
 }
 button:disabled
@@ -86,6 +89,32 @@ td{border:none}
     margin: 5px;
     margin-top: 10px;
     padding: 15px;
+}
+#gridBox
+{
+    display:inline-grid;
+    grid-template-columns: max-content max-content max-content max-content;
+    grid-auto-flow: dense;
+    grid-auto-rows:max-content;
+    grid-auto-columns:max-content;
+}
+#innerBox
+{
+    background-color: $brighter;
+    border: 2px solid $highlight;
+    border-radius: 6px;
+    float: left;
+    margin: 5px;
+    margin-bottom: 20px;
+    padding: 15px;
+    position: relative;
+}
+.bottomRight
+{
+    margin-top: auto;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
 }
 .levelBox
 {

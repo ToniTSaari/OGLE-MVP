@@ -6,6 +6,7 @@ const player = require('../schema/player')
 const spell = require('../schema/spell')
 const weapon = require('../schema/weapon')
 const armour = require('../schema/armour')
+const modu = require('../schema/module')
 
 const rawDate = new Date()
 const date = rawDate.getHours() + ':'
@@ -48,6 +49,14 @@ exports.campaign = async (req, res) =>
     campaign.deleteOne({campaignName:req.body.name}, function(err)
     {
         if(err){console.log(err)}else{console.log('Campaign deletion successful! ' + date)}
+    })
+}
+
+exports.modu = async (req, res) =>
+{
+    modu.deleteOne({_id:req.body.id}, function(err, del)
+    {
+        if(err){console.log(err)}else{console.log('Module deletion successful! ' + date)}
     })
 }
 

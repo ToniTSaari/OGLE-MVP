@@ -36,6 +36,10 @@ class NPCCreateForm extends React.Component
     this.state = {stats:defStats}
 
     //finding user and setting user email as key
+    if(!window.localStorage.getItem('campaign'))
+    {
+        window.location.href = "/campaign"
+    }
     const camp = window.localStorage.getItem('campaign')
     const findCamp = {url:"/findCampaign", content:{campaignName:camp}}
     requestService.poster(findCamp).then((res) => 
@@ -332,9 +336,9 @@ class NPCCreateForm extends React.Component
       await requestService.poster(charData).then(()=>
       {
           const campaign = this.state.campaign
-          campaign.characters.push(this.state.charName)
+          campaign.NPCs.push(this.state.charName)
           requestService.poster({url:"/upCamp", content:{id:this.state.campaign._id, update:campaign}})
-          //window.location.href = "/ModuleBuilder"
+          window.location.href = "/ModuleBuilder"
       })
       
     }

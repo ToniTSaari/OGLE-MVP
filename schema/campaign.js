@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const campaign = new mongoose.Schema(
 {
-    characters:[String],
+    PCs:[String],
+    NPCs:[String],
     modules:[String],
     campaignName:{type:String, unique:true},
     GM:{type:String, unique:false}

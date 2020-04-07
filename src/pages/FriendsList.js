@@ -11,6 +11,10 @@ class FriendsList extends React.Component
 
         this.submit = this.submit.bind(this)
         this.request = this.request.bind(this)
+        if(!window.localStorage.getItem('email'))
+        {
+            window.location.href = "/"
+        }
         const content = {email:window.localStorage.getItem('email')}
         const data = {url:"/findAcc", content:content}
         this.friendApprove = this.friendApprove.bind(this)

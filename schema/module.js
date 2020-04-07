@@ -10,11 +10,25 @@ const encounter = new mongoose.Schema(
         combat:{type:Boolean, default:false},
         skill:{type:Boolean, default:false}
     },
+    test:
+    {
+        skill:
+        {
+            str:{type:Boolean, default:false},
+            dex:{type:Boolean, default:false},
+            con:{type:Boolean, default:false},
+            int:{type:Boolean, default:false},
+            wis:{type:Boolean, default:false},
+            cha:{type:Boolean, default:false}
+        },
+        difficulty:Number
+    },
     monsters:
     [{
         monName:String,
         nickname:String,
-        Nth:Number
+        Nth:Number,
+        alive:{type:Boolean, default:true}
     }],
     npc:[String]
 })
@@ -30,7 +44,7 @@ const modu = new mongoose.Schema(
     campaignName:String,
     moduleName:{type:String, unique:true},
     GM:{type:String, unique:false},
-    characters:[String]
+    PCs:[String]
 })
 
 module.exports = mongoose.model('module', modu)
