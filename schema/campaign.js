@@ -6,7 +6,8 @@ const campaign = new mongoose.Schema(
     NPCs:[String],
     modules:[String],
     campaignName:{type:String, unique:true},
-    GM:{type:String, unique:false}
+    GM:{type:String, unique:false},
+    activeModule:String
 })
 
 module.exports = mongoose.model('campaign', campaign)

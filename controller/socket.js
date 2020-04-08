@@ -6,7 +6,10 @@ exports.socket = (io) =>
     {
         const time = serverTime.time()
         console.log('User connection recieved on: ' + time)
-        socket.on('disconnect', () => console.log('User disconnect!'))
+        socket.on('disconnect', () => 
+        {
+            console.log('User disconnect! Attempting reconnect!')
+        })
         socket.on('connect_timeout', () => console.log('User timed-out!'))
         socket.on('connect_error', (error) => console.log(error))
         socket.on('getTime', (interval) => 
@@ -24,9 +27,8 @@ exports.socket = (io) =>
         })
         socket.on('room', (msg) =>
         {
-            console.log('Message to ' + msg.room + ' recieved on ' + time)
-            console.log(msg.event)
-            console.log(msg.data)
+            console.log('A "'+ msg.event + '" namespace message "' 
+                        + msg.data + '" to "' + msg.room + '" recieved on ' + time)
             io.in(msg.room).emit(msg.event, msg.data)
         })
         socket.on('session', (data) =>

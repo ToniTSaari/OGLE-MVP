@@ -15,6 +15,7 @@ class Campaign extends React.Component
         this.back = this.back.bind(this)
         this.disinvite = this.disinvite.bind(this)
         this.modCampaign = this.modCampaign.bind(this)
+        this.run = this.run.bind(this)
         if(!window.localStorage.getItem('email'))
         {
             window.location.href = "/"
@@ -40,6 +41,10 @@ class Campaign extends React.Component
         { 
             invChar = res.PCs
             moduList = res.modules
+            if(res.activeModule)
+            {
+                this.setState({activeModule:res.activeModule})
+            }
         })
         const invLen = invChar.length
         for(var i = 0; i < invLen; i++)
@@ -160,7 +165,6 @@ class Campaign extends React.Component
             requestService.poster({url:"/pushChar", content:charData}).then(window.location.reload())
         })
     }
-    
     disinvite(event)
     {
         const get = { charName:event.target.value }
@@ -195,13 +199,37 @@ class Campaign extends React.Component
         window.localStorage.setItem('email', this.state.email)
         window.localStorage.setItem('user', this.state.user)
     }
+    run(event)
+    {
+        const modu = event.target.value
+        const camp = this.state.thisCampaign
+        requestService.poster({url:"/findAcc", content:{playerName:this.state.user}}).then(res=>
+        {
+            const user = res
+            const update = 
+            {
+                activeCampaign:this.state.thisCampaign
+            }
+            requestService.poster({url:"/upAcc", content:{id:user._id, update:update}})
+        })
+        requestService.poster({url:"/findCampaign", content:{campaignName:camp}}).then(res=>
+        {
+            const campaign = res
+            campaign.activeModule = modu
+            requestService.poster({url:"/upCamp", content:{id:campaign._id, update:campaign}})
+        })
+        setInterval(() =>
+        {
+            window.location.href = "/GMSession"
+        },1000)
+    }
     render()
     {
         return(
             <div className="main">
                 {this.state.user ? 
                 <div>
-                    <b>Hello, {this.state.user}, {this.state.email}</b><br/>
+                    <h3>Hello, {this.state.user}, {this.state.email}</h3><br/>
                     {this.state.campaigns ?
                         <i>
                             {this.state.campaigns.map((campaign)=>
@@ -210,8 +238,7 @@ class Campaign extends React.Component
                             </button>)}
                         </i>:<i></i>}
                         {this.state.thisCampaign ? 
-                            <b>
-                                
+                            <div id="main">
                                 <button id="button" className="bigInput" onClick={this.back}>New</button><hr/>
                                 {this.state.modules ? 
                                 <i>
@@ -221,7 +248,24 @@ class Campaign extends React.Component
                                     <Link to="/NPC">
                                         ~ Create NPC for {this.state.thisCampaign} ~
                                     </Link><hr/>
-                                    {this.state.modules.map((module)=><div id="mainBox">{module}</div>)}
+                                    {this.state.activeModule ? 
+                                        <div>
+                                            <Link to="/GMSession">
+                                                ~ Run {this.state.activeModule} ~
+                                            </Link>
+                                        <hr/></div>
+                                    :<i></i>}
+                                    {this.state.modules.map((module)=>
+                                    <div id="mainBox">
+                                        {module === this.state.activeModule ? 
+                                        <p>
+                                            {module}<br/><div id="innerBox">Currently active</div>
+                                        </p>
+                                        :<i>
+                                            {module}<br/>
+                                            <button value={module} onClick={this.run}>Activate {module}</button>
+                                        </i>}
+                                    </div>)}
                                 </i>
                                 :<i>
                                     <Link to="/ModuleBuilder">
@@ -229,7 +273,7 @@ class Campaign extends React.Component
                                     </Link>
                                 </i>}
                                 <br/><hr/>
-                            </b>:
+                            </div>:
                             <div><hr/>
                                 {this.state.campaignName ? <p><b>New Campaign: </b>
                                 <i>{this.state.campaignName}</i></p>:<i></i>}
@@ -241,9 +285,9 @@ class Campaign extends React.Component
                     </div>:<i></i>}
                 {this.state.invited ? 
                     <div id="mainBox">
-                        <b>{this.state.thisCampaign}</b> has following characters;<br/>
+                        <b>{this.state.thisCampaign}</b> has following player characters;<br/>
                         {this.state.invited.map((char)=>
-                        <div id="mainBox">
+                        <div id="innerBox">
                             {char.name} ~ <button value={char.name} onClick={this.disinvite}>Disinvite</button>
                         </div>)}
                     </div>
@@ -257,7 +301,7 @@ class Campaign extends React.Component
                                     <hr/>
                                     <button className="bigInput" id="button" value={char.character} onClick={this.invite}>
                                         {char.character} a level {char.Class.level}
-                                        {char.race} {char.Class.Class} of {char.player} ~
+                                        , {char.race} {char.Class.Class} of {char.player} ~
                                         Invite to {this.state.thisCampaign}
                                     </button>
                                 </i>)}

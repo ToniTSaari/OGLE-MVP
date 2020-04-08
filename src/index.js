@@ -11,6 +11,8 @@ import FriendsList from './pages/FriendsList'
 import Campaign from './pages/campaign'
 import ModuleBuilder from './pages/ModuleBuilder'
 import NPC from './pages/NPCCreateForm'
+import GMS from './pages/GMSession'
+import PCS from './pages/PCSession'
 import Timer from './services/getTime'
 import './style/pages.scss'
 
@@ -113,6 +115,8 @@ const App = () =>
         <Route exact path="/campaign" render={() => <Campaign/>} />
         <Route exact path="/ModuleBuilder" render={() => <ModuleBuilder/>} />
         <Route exact path="/NPC" render={() => <NPC/>}/>
+        <Route exact path="/PCSession" render={() => <PCS/>}/>
+        <Route exact path="/GMSession" render={() => <GMS/>}/>
       </Router>
     </nav>
   </div>)

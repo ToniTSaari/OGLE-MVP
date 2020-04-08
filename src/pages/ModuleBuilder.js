@@ -486,17 +486,32 @@ class ModuleBuilder extends React.Component
                                     <i>
                                         {encounter.test.skill.str ? 
                                         <i>
-                                            A strenght test!
+                                            A strenght test of DC {encounter.test.difficulty}
                                         </i>
                                         :<i></i>}
                                         {encounter.test.skill.dex ? 
                                         <i>
-                                            A dexterity test!
+                                            A dexterity test of DC {encounter.test.difficulty}
                                         </i>
                                         :<i></i>}
                                         {encounter.test.skill.con ? 
                                         <i>
-                                            A constitution test!
+                                            A constitution test of DC {encounter.test.difficulty}!
+                                        </i>
+                                        :<i></i>}
+                                        {encounter.test.skill.int ? 
+                                        <i>
+                                            A intelligence test of DC {encounter.test.difficulty}!
+                                        </i>
+                                        :<i></i>}
+                                        {encounter.test.skill.wis ? 
+                                        <i>
+                                            A wisdom test of DC {encounter.test.difficulty}!
+                                        </i>
+                                        :<i></i>}
+                                        {encounter.test.skill.cha ? 
+                                        <i>
+                                            A charisma test of DC {encounter.test.difficulty}!
                                         </i>
                                         :<i></i>}
                                     </i>

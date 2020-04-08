@@ -44,7 +44,8 @@ const modu = new mongoose.Schema(
     campaignName:String,
     moduleName:{type:String, unique:true},
     GM:{type:String, unique:false},
-    PCs:[String]
+    PCs:[String],
+    activeEncounter:String
 })
 
 module.exports = mongoose.model('module', modu)
