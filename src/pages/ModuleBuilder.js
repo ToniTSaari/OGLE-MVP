@@ -174,29 +174,7 @@ class ModuleBuilder extends React.Component
             if(encList[i].encounterName === enc)
             {
                 const test = encList[i].test
-                switch(this.state.ability)
-                {
-                    case "str":
-                        test.skill.str = true
-                        break
-                    case "dex":
-                        test.skill.dex = true
-                        break
-                    case "con":
-                        test.skill.con = true
-                        break
-                    case "int":
-                        test.skill.int = true
-                        break
-                    case "wis":
-                        test.skill.wis = true
-                        break
-                    case "cha":
-                        test.skill.cha = true
-                        break
-                    default:
-                        alert('this.state.ability value not transmitted')
-                }
+                test.skill = this.state.ability
                 test.difficulty = this.state.difficulty
                 encList[i].test = test
                 modu.encounters = encList
@@ -367,7 +345,6 @@ class ModuleBuilder extends React.Component
                 campaignName:this.state.campaign,
                 moduleName:this.state.moduleName,
                 GM:campaign.GM,
-                PCs:campaign.PCs,
                 levels:
                 {
                     from:this.state.lowLevel,
@@ -483,46 +460,17 @@ class ModuleBuilder extends React.Component
                                 <div style={{display:"inline"}}>
                                     <i> a Skill encounter.</i><br/>
                                     {encounter.test.difficulty ?
-                                    <i>
-                                        {encounter.test.skill.str ? 
                                         <i>
-                                            A strenght test of DC {encounter.test.difficulty}
+                                            A {encounter.test.skill} test of DC {encounter.test.difficulty}
                                         </i>
-                                        :<i></i>}
-                                        {encounter.test.skill.dex ? 
-                                        <i>
-                                            A dexterity test of DC {encounter.test.difficulty}
-                                        </i>
-                                        :<i></i>}
-                                        {encounter.test.skill.con ? 
-                                        <i>
-                                            A constitution test of DC {encounter.test.difficulty}!
-                                        </i>
-                                        :<i></i>}
-                                        {encounter.test.skill.int ? 
-                                        <i>
-                                            A intelligence test of DC {encounter.test.difficulty}!
-                                        </i>
-                                        :<i></i>}
-                                        {encounter.test.skill.wis ? 
-                                        <i>
-                                            A wisdom test of DC {encounter.test.difficulty}!
-                                        </i>
-                                        :<i></i>}
-                                        {encounter.test.skill.cha ? 
-                                        <i>
-                                            A charisma test of DC {encounter.test.difficulty}!
-                                        </i>
-                                        :<i></i>}
-                                    </i>
                                     :<p>
                                         <select name="ability" onChange={this.change}>
-                                            <option value="str">Str</option>
-                                            <option value="dex">Dex</option>
-                                            <option value="con">Con</option>
-                                            <option value="int">Int</option>
-                                            <option value="wis">Wis</option>
-                                            <option value="cha">Cha</option>
+                                            <option value="strenght">Str</option>
+                                            <option value="dexterity">Dex</option>
+                                            <option value="constitution">Con</option>
+                                            <option value="intelligence">Int</option>
+                                            <option value="wisdom">Wis</option>
+                                            <option value="charisma">Cha</option>
                                         </select><br/>
                                         <input min="1" max="30" type="number" name="difficulty" onChange={this.change}/><br/>
                                         <button value={encounter.encounterName} onClick={this.addTest}>
@@ -575,8 +523,9 @@ class ModuleBuilder extends React.Component
                             {this.state.monsters.map((mon)=>
                             <div id="mainBox">
                                 <b>{mon.name}</b><br/>
-                                <i>{mon.size} {mon.monType}</i><hr/>
+                                <i>{mon.alignment[0]} {mon.alignment[1]} {mon.size} {mon.monType}</i><hr/>
                                 Challenge rating: {mon.CR}<br/>
+                                XP yield: {mon.XP}<br/>
                                 Armour class: {mon.AC}<hr/>
                                 <button id="button" className="bigInput" onClick={this.addMon} value={mon.name}>
                                     Add to {this.state.thisModule.moduleName}

@@ -54,7 +54,16 @@ const character = new mongoose.Schema(
         maxSlots:[Number],
         currentSlots:[Number]
     },
-    features:[String]
+    features:[String],
+    abilities:[
+    {
+        ability:String,
+        duration:
+        {
+            num:Number,
+            magnitude:String
+        }
+    }]
 })
 
 module.exports = mongoose.model('character', character)

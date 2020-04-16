@@ -33,6 +33,7 @@ button:disabled
 {
     margin:15px;
     padding: 5px;
+    position: relative;
 }
 hr
 {
@@ -99,15 +100,78 @@ td{border:none}
     grid-auto-rows:max-content;
     grid-auto-columns:max-content;
 }
+#msgBox
+{
+    display:grid;
+    grid-template-columns: max-content;
+    grid-auto-flow: row;
+    grid-auto-rows: auto;
+    position: relative;
+}
+#eventGrid
+{
+    display:inline-grid;
+    grid-template-columns: max-content max-content max-content;
+    grid-auto-flow: row;
+    grid-auto-rows:max-content;
+    grid-auto-columns:max-content;
+    #PCBox
+    {
+        grid-area: 1 / 1;
+        background-color: $brighter;
+        border: 2px solid $highlight;
+        border-radius: 6px;
+        padding: 15px;
+        margin: 5px;
+    }
+    #eventBox
+    {
+        grid-area: 1 / 2;
+        grid-auto-columns: max-content;
+        background-color: $brighter;
+        border: 2px solid $highlight;
+        border-radius: 6px;
+        padding: 15px;
+        margin: 5px;
+        position: relative;
+    }
+    #encounterBox
+    {
+        grid-area: 1 / 3;
+        background-color: $brighter;
+        border: 2px solid $highlight;
+        border-radius: 6px;
+        padding: 15px;
+        margin: 5px;
+    }
+    #selfBox
+    {
+        grid-area: 1 / 1;
+        background-color: $brighter;
+        border: 2px solid $highlight;
+        border-radius: 6px;
+        padding: 15px;
+        margin: 5px;
+    }
+    #partyBox
+    {
+        grid-area: 2 / 1;
+        background-color: $brighter;
+        border: 2px solid $highlight;
+        border-radius: 6px;
+        padding: 15px;
+        margin: 5px;
+    }
+}
 #innerBox
 {
     background-color: $brighter;
     border: 2px solid $highlight;
     border-radius: 6px;
     float: left;
-    margin: 5px;
-    margin-bottom: 20px;
     padding: 15px;
+    margin-bottom: 20px;
+    margin: 5px;
     position: relative;
 }
 .bottomRight

@@ -13,7 +13,6 @@ class HomePage extends React.Component
     this.state = {value: ''}
     this.state = {characters: []}
     this.charDel = this.charDel.bind(this)
-    this.roll = this.roll.bind(this)
     this.play = this.play.bind(this)
     
     var data = {url:"/findAcc", content:{email:window.localStorage.getItem('email')}}
@@ -28,6 +27,12 @@ class HomePage extends React.Component
         window.localStorage.setItem('user', res.playerName)
       })
       this.setState({id:res._id})
+      const sock = 
+      {
+          data:res.playerName,
+          event:"login"
+      }
+      socketService.emitter(sock)
     })
     const content = {email:window.localStorage.getItem('email')}
     requestService.poster({url:"/listGot", content}).then((res)=>
@@ -68,18 +73,6 @@ class HomePage extends React.Component
     let val = event.target.value
     this.setState({[nam]:val})
     document.getElementById("init").disabled = true
-  }
-  roll = () =>
-  {
-    alert('roll ' + this.state.diceNum + 'D' + this.state.diceDie)
-    const roll = rollService(this.state.diceNum, this.state.diceDie)
-    alert('result: ' + roll)
-    const message = 
-    {
-        event:'broadcastSend',
-        data:roll
-    }
-    socketService.emitter(message)
   }
   charDel = (event) =>
   {

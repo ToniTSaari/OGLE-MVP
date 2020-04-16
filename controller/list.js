@@ -122,7 +122,9 @@ exports.monster = async (req, res) =>
             monType:find.monsterType,
             size:find.size,
             CR:find.CR,
-            AC:find.AC
+            AC:find.AC,
+            alignment:find.alignment,
+            XP:find.XP
         }
         i++
     })

@@ -12,6 +12,15 @@ exports.time = () =>
     return date
 }
 
+exports.stamp = () =>
+{
+    const rawDate = new Date()
+    const time = rawDate.getHours() + ':'
+                + rawDate.getMinutes() + ':'
+                + rawDate.getSeconds()
+    return time
+}
+
 exports.clock = () =>
 {
     const rawDate = new Date()
@@ -24,6 +33,5 @@ exports.clock = () =>
                 + rawDate.getSeconds()
 
     const clock = {date:date, time:time}
-    //console.log('Sending json: ' + JSON.stringify(clock))
     return clock
 }

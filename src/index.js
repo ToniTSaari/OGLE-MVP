@@ -13,7 +13,7 @@ import ModuleBuilder from './pages/ModuleBuilder'
 import NPC from './pages/NPCCreateForm'
 import GMS from './pages/GMSession'
 import PCS from './pages/PCSession'
-import Timer from './services/getTime'
+import Clock from './services/getTime'
 import './style/pages.scss'
 
 class Time extends React.Component 
@@ -22,10 +22,9 @@ class Time extends React.Component
   {
     super(props)
     this.state = {clock:undefined}
-    Timer((err, clock)=>
+    Clock.clock((clock)=>
     {
       this.setState({clock})
-      if(err){alert(err)}
     })
   }
   render()

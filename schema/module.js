@@ -12,23 +12,23 @@ const encounter = new mongoose.Schema(
     },
     test:
     {
-        skill:
+        skill:String,
+        difficulty:Number,
+        success:
         {
-            str:{type:Boolean, default:false},
-            dex:{type:Boolean, default:false},
-            con:{type:Boolean, default:false},
-            int:{type:Boolean, default:false},
-            wis:{type:Boolean, default:false},
-            cha:{type:Boolean, default:false}
-        },
-        difficulty:Number
+            collective:{type:Boolean, default:false},
+            individual:[String],
+            successful:{type:Boolean,default:false}
+        }
     },
     monsters:
     [{
         monName:String,
         nickname:String,
         Nth:Number,
-        alive:{type:Boolean, default:true}
+        alive:{type:Boolean, default:true},
+        CR:Number,
+        XP:Number
     }],
     npc:[String]
 })
@@ -44,7 +44,6 @@ const modu = new mongoose.Schema(
     campaignName:String,
     moduleName:{type:String, unique:true},
     GM:{type:String, unique:false},
-    PCs:[String],
     activeEncounter:String
 })
 

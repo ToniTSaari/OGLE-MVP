@@ -1,8 +1,9 @@
 import Socket from "socket.io-client"
+
 const socket = Socket('http://localhost:3000',
 {
     reconnection:true,
-    reconnectionAttempts:100,
+    reconnectionAttempts:9999,
     reconnectionDelay:1000,
     reconnectionDelayMax: 5000
 })
@@ -20,13 +21,21 @@ socket.on('disconnect', () =>
 })
 socket.on('PM', msg =>
 {
-    const message = JSON.stringify(msg)
-    window.localStorage.setItem('message', message)
+    window.localStorage.setItem('message', msg)
 })
-socket.on('event', msg =>
+socket.on('event', (data, sender)=>
 {
-    const event = JSON.stringify(msg)
-    window.localStorage.setItem('event', event)
+    window.localStorage.setItem('event', data.msg)
+    window.localStorage.setItem('stamp', data.time)
+    window.localStorage.setItem('sender', sender)
+    window.localStorage.setItem('followback', false)
+})
+socket.on('followback', (msg, sender) =>
+{
+    window.localStorage.setItem('sender', sender)
+    window.localStorage.setItem('followback', true)
+    setInterval(()=>{ document.getElementById('roller').disabled = false },3000)
+    
 })
 socket.on('broadcastGet', msg =>
 {

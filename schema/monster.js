@@ -8,6 +8,7 @@ var monster = new mongoose.Schema(
     alignment:[String],
     CR:Number,
     AC:Number,
+    XP:Number,
     HP:
     {
         max:Number,

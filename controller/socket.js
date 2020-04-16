@@ -12,14 +12,25 @@ exports.socket = (io) =>
         })
         socket.on('connect_timeout', () => console.log('User timed-out!'))
         socket.on('connect_error', (error) => console.log(error))
-        socket.on('getTime', (interval) => 
+        socket.on('getClock', (interval) => 
         {
             console.log('Clock started with refresh interval of ' + interval + ' milliseconds.')
             setInterval(()=>
             {
                 const time = serverTime.clock()
-                socket.emit('time', time)
+                socket.emit('clock', time)
             },interval)
+        })
+        socket.on('getTime', ()=>
+        {
+            console.log('sending timestamp: ' + time)
+            socket.emit('time', time)
+        })
+        socket.on('getStamp', ()=>
+        {
+            const stamp = serverTime.stamp()
+            console.log('sending timestamp: ' + stamp)
+            socket.emit('stamp', stamp)
         })
         socket.on('broadcastSend', msg =>
         {
@@ -27,15 +38,23 @@ exports.socket = (io) =>
         })
         socket.on('room', (msg) =>
         {
-            console.log('A "'+ msg.event + '" namespace message "' 
-                        + msg.data + '" to "' + msg.room + '" recieved on ' + time)
-            io.in(msg.room).emit(msg.event, msg.data)
+            console.log('A "'+ msg.event + '" namespace message "' + msg.data.time + ': ' 
+                        + msg.data.msg + '" from ' + msg.sender + ' to "' + msg.room + '" recieved on ' + time)
+            io.in(msg.room).emit(msg.event, msg.data, msg.sender)
+        })
+        socket.on('followback', (data) =>
+        {
+            console.log('Followback message to ' + data.room + ' by ' + data.sender + ' sent.')
+            io.in(data.room).emit(data.event, "recieved", data.sender)
         })
         socket.on('session', (data) =>
         {
             const room = data
-            console.log('Starting session of ' + room + ' on ' + time)
+            const msg = "Connection to " + room
+            const report = {msg:msg, time:time}
+            console.log('Joining room "' + room + '" on ' + time)
             socket.join(room)
+            io.in(room).emit('event', report, 'server')
         })
         socket.on('login', (data) =>
         {

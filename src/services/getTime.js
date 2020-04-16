@@ -1,10 +1,22 @@
 import Socket from "socket.io-client"
 const sock = Socket('http://localhost:3000')
 
-const timer = res =>
+const clock = res =>
 {
-    sock.on('time', time => res(null, time))
-    sock.emit('getTime', 500)
+    sock.on('clock', time => res(time))
+    sock.emit('getClock', 500)
 }
 
-export default timer
+const timer = res =>
+{
+    sock.emit('getTime')
+    sock.on('time', time => res(time))
+}
+
+const stamp = res =>
+{
+    sock.emit('getStamp')
+    sock.on('stamp', time => res(time))
+}
+
+export default { clock, timer, stamp}

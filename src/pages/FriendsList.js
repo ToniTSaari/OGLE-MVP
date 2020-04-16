@@ -24,11 +24,11 @@ class FriendsList extends React.Component
         {
             const sock = 
             {
-                data:res.email,
+                data:res.playerName,
                 event:"login"
             }
             socketService.emitter(sock)
-            this.setState({user:res.email,id:res._id})
+            this.setState({user:res.playerName,id:res._id})
             if(res.friends[0]){this.setState({friends:res.friends})}
         })
         requestService.poster({url:"/listGot", content}).then((res)=>
@@ -62,7 +62,7 @@ class FriendsList extends React.Component
         const data = {url:"/findAcc", content:{email:this.state.friendMail}}
         requestService.poster(data).then((res) =>
         {
-            this.setState({friendName:res.playerName,friend:res.email,friendID:res._id})
+            this.setState({friend:res.playerName,friendEmail:res.email,friendID:res._id})
         })
     }
     request = async () =>
@@ -123,13 +123,6 @@ class FriendsList extends React.Component
         }
         socketService.emitter(message)
     }
-    PMget()
-    {
-        socketService.getter(mes=>
-        {
-            this.setState({message:mes})
-        })
-    }
     render()
     {
         return(
@@ -142,7 +135,7 @@ class FriendsList extends React.Component
                 </form>
                 {this.state.friend ? 
                     <div id="mainBox">
-                        {this.state.friend.friendName ? <b>{this.state.friend.friendName}</b>:<b></b>}
+                        {this.state.friend.friend ? <b>{this.state.friend.friend}</b>:<b></b>}
                         <b>{this.state.friend}</b><br/>
                         <button value={this.state.id} onClick={this.request}>Send friend request</button>
                     </div>
