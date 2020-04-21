@@ -97,6 +97,29 @@ class SessionPage extends React.Component
                                             this.setState({latest:msg})
                                         })
                                     }
+                                    if(thisEncounter.type.social)
+                                    {
+                                        const chars = thisEncounter.npc
+                                        const charLen = chars.length
+                                        const charData = []
+                                        for(x = 0; x < charLen; x++)
+                                        {
+                                            const thisChar = chars[x]
+                                            requestService.poster({url:"/findChar", content:{charName:thisChar}})
+                                            .then(res=>
+                                            {
+                                                charData.push(res)
+                                            })
+                                        }
+                                        this.setState({NPCData:charData}, () =>
+                                        {
+                                            const msg = "Starting Encounter"
+                                            const events = this.state.events
+                                            events.push(msg)
+                                            this.setState({events})
+                                            this.setState({latest:msg})
+                                        })
+                                    }
                                 }
                             }
                         }
@@ -162,14 +185,28 @@ class SessionPage extends React.Component
             time = clock
         })
         document.getElementById('roller').disabled = true
+        var plus = 0
         const GM = this.state.GM.playerName
         const die = this.state.diceDie
+        if(this.state.plus)
+        {
+            plus = this.state.plus
+        }
         var num = this.state.diceNum
         if(!num){num=1}
         if(die)
         {
             const roll = rollService(num, die)
-            const msg = 'GM ' + GM + ' rolls ' + num + 'D'+ die + ' = ' + roll
+            var msg = ""
+            if(plus !== 0)
+            {
+                const total = +roll + +plus
+                msg = 'GM ' + GM + ' rolls ' + num + 'D'+ die + ' = ' + roll + ' + ' + plus + ' = ' + total
+            }
+            else
+            {
+                msg = 'GM ' + GM + ' rolls ' + num + 'D'+ die + ' = ' + roll
+            }
             const data = {msg:msg, time:time}
             socketService.emitter(
             {
@@ -204,7 +241,7 @@ class SessionPage extends React.Component
     {
         
     }
-    activateEncounter = async (event) =>
+    activateEncounter(event)
     {
         const encName = event.target.value
         const moduName = this.state.module.moduleName
@@ -228,9 +265,9 @@ class SessionPage extends React.Component
                 const events = this.state.events
                 events.push(event)
                 this.setState({events})
-                window.location.reload()
             })
         })
+        setInterval(()=>{ window.location.reload() },5000)
     }
     clearEvents()
     {
@@ -267,7 +304,7 @@ class SessionPage extends React.Component
                                         WIS: {pc.stats.wis.base} / + {pc.stats.wis.bonus}<br/>
                                         CHA: {pc.stats.cha.base} / + {pc.stats.cha.bonus}<br/>
                                     </p>
-                                </div>)}
+                            </div>)}
                         </p>
                         :<div id="PCBox">Loading</div>}
                         {this.state.events[0] ? 
@@ -281,15 +318,30 @@ class SessionPage extends React.Component
                                     </b>)}
                                 </div>
                             </div>
-                        :<i></i>}
+                        :<div id="eventBox">Loading</div>}
                     {this.state.thisEncounter.type.skill ? 
                         <div>
                             skill
                         </div>
                     :<i></i>}
                     {this.state.thisEncounter.type.social ? 
-                        <div>
-                            
+                        <div id="encounterBox">
+                            {this.state.NPCData ? 
+                                <div>
+                                    {this.state.NPCData.map(npc=>
+                                    <div>
+                                        <b>{npc.charName} ~ level {npc.Classes[0].level} {npc.Classes[0].Class}</b><hr/>
+                                        <p>
+                                            STR: {npc.stats.str.base} / + {npc.stats.str.bonus}<br/>
+                                            DEX: {npc.stats.dex.base} / + {npc.stats.dex.bonus}<br/>
+                                            CON: {npc.stats.con.base} / + {npc.stats.con.bonus}<br/>
+                                            INT: {npc.stats.int.base} / + {npc.stats.int.bonus}<br/>
+                                            WIS: {npc.stats.wis.base} / + {npc.stats.wis.bonus}<br/>
+                                            CHA: {npc.stats.cha.base} / + {npc.stats.cha.bonus}<br/>
+                                        </p>
+                                    </div>)}
+                                <br/></div>
+                            :<i></i>}
                         </div>
                     :<i></i>}
                     {this.state.thisEncounter.type.combat ? 
@@ -425,6 +477,7 @@ class SessionPage extends React.Component
                     <option value="12">D12</option>
                     <option value="20">D20</option>
                 </select>
+                <input type="number" name="plus" onChange={this.change}/>
                 <button id="roller" onClick={this.roll}>Roll</button>
             </div>
         </div>)

@@ -9,6 +9,7 @@ const spell = require('../schema/spell')
 const weapon = require('../schema/weapon')
 const armour = require('../schema/armour')
 const race = require('../schema/race')
+const skill = require('../schema/skills')
 
 const rawDate = new Date()
 const date = rawDate.getHours() + ':'
@@ -64,7 +65,7 @@ exports.Class = async (req, res) =>
 {
     const classes = await Class.find({})
     var payload = []
-    var i = 1
+    var i = 0
     console.log('Listing all classes;')
     classes.forEach((find)=>
     {
@@ -74,8 +75,29 @@ exports.Class = async (req, res) =>
             Class:find.className
         }
         i++
-        const n = i-1
-        payload[0] = {index:n}
+    })
+    res.send(payload)
+}
+
+exports.skill = async (req, res) =>
+{
+    const skills = await skill.find({})
+    var payload = []
+    var i = 0
+    console.log('Listing all classes;')
+    skills.forEach((find)=>
+    {
+        console.log('Found: skill list - ' + date)
+        payload[i] = 
+        {
+            str:find.str,
+            dex:find.dex,
+            con:find.con,
+            int:find.int,
+            wis:find.wis,
+            cha:find.cha
+        }
+        i++
     })
     res.send(payload)
 }
@@ -158,30 +180,58 @@ exports.spell = async (req, res) =>
 exports.weapon = async (req, res) =>
 {
     const weapons = await weapon.find({})
-    const weaponMap = {}
-    weapons.forEach((find) =>
+    var payload = []
+    var i = 0
+    console.log('Listing all armours;')
+    weapons.forEach((find)=>
     {
-        weaponMap[find.weaponName] = find
+        console.log('Found: ' + find.weaponName + ' - ' + date)
+        payload[i] = 
+        {
+            name:find.weaponName,
+            group:find.group[0],
+            type:find.group[1],
+            weight:find.weight,
+            damage:find.damage,
+            properties:find.properties,
+            range:find.range,
+            twoHanded:find.twohanded
+        }
+        i++
     })
-    res.send(weaponMap)
+    res.send(payload)
 }
 
 exports.armour = async (req, res) =>
 {
     const armours = await armour.find({})
-    const armourMap = {}
-    armours.forEach((find) =>
+    var payload = []
+    var i = 0
+    console.log('Listing all armours;')
+    armours.forEach((find)=>
     {
-        armourMap[find.armourName] = find
+        console.log('Found: ' + find.armourName + ' - ' + date)
+        payload[i] = 
+        {
+            name:find.armourName,
+            group:find.group,
+            cost:find.cost,
+            AC:find.AC,
+            dex:find.dex,
+            str:find.str,
+            noisy:find.noisy,
+            weight:find.weight
+        }
+        i++
     })
-    res.send(armourMap)
+    res.send(payload)
 }
 
 exports.race = async (req, res) =>
 {
     const races = await race.find({})
     var payload = []
-    var i = 1
+    var i = 0
     races.forEach((find)=>
     {
         console.log('Found: ' + find.raceName + ' - ' + date)
@@ -192,8 +242,6 @@ exports.race = async (req, res) =>
             stats:find.stats
         }
         i++
-        const n = i-1
-        payload[0] = {index:n}
     })
     res.send(payload)
 }

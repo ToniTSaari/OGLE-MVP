@@ -1,0 +1,27 @@
+[
+    {
+        "stat":"str",
+        "skill":["Athletics"]
+    },
+    {
+        "stat":"dex",
+        "skill":["Acrobatics", "Sleight of Hand", "Stealth"]
+    },
+    {
+        "stat":"con",
+        "skill":[]
+    },
+    {
+        "stat":"int",
+        "skill":["Arcana","History","Investigation", "Nature", "Religion"]
+    },
+    {
+        "stat":"wis",
+        "skill":["Animal Handling", "Insight", "Medicine", "Perception", "Survival"]
+    },
+    {
+        "stat":"cha",
+        "skill":["Deception", "Intimidation", "Performance", "Persuation"]
+    }
+]
+    

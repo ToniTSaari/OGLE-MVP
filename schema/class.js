@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Class = new mongoose.Schema(
 {
     className:{type:String, required:true},
-    hitpoints:
+    hitPoints:
     {
         dice:Number,
         average:Number
@@ -17,6 +17,7 @@ const Class = new mongoose.Schema(
         wis:{type:Boolean, default:false},
         cha:{type:Boolean, default:false}
     },
+    equipment:[String],
     proficiencies:
     {
         armour:[String],

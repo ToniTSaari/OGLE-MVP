@@ -4,12 +4,14 @@ const character = new mongoose.Schema(
 {
     playerCharacter:{PC:{type:Boolean, default:false}, email:String},
     alive:{type:Boolean, default:true},
+    levelUp:{type:Boolean, default:false},
+    unfinished:{type:Boolean, default:true},
     campaign:String,
     charName:String,
     race:String,
     Classes:[{Class:String, level:{type:Number, default:1}}],
     experience:{type:Number, default:0},
-    alignment:{lawChaos:String,goodEvil:String},
+    alignment:[String],
     specialization:String,
     AC:Number,
     speed:Number,
@@ -17,17 +19,75 @@ const character = new mongoose.Schema(
     inspiration:Boolean,
     HP:
     {
-        maxHP:{type:Number},
-        currentHP:{type:Number}
+        maxHP:Number,
+        currentHP:Number,
+        tempHP:Number
+    },
+    skills:
+    {
+        str:
+        {
+            trained:[String],
+            expertise:[String]
+        },
+        dex:
+        {
+            trained:[String],
+            expertise:[String]
+        },
+        con:
+        {
+            trained:[String],
+            expertise:[String]
+        },
+        int:
+        {
+            trained:[String],
+            expertise:[String]
+        },
+        wis:
+        {
+            trained:[String],
+            expertise:[String]
+        },
+        cha:
+        {
+            trained:[String],
+            expertise:[String]
+        }
     },
     stats:
     {
-        str:{base:{type:Number, default:10}, bonus:{type:Number, default:0}},
-        dex:{base:{type:Number, default:10}, bonus:{type:Number, default:0}},
-        con:{base:{type:Number, default:10}, bonus:{type:Number, default:0}},
-        int:{base:{type:Number, default:10}, bonus:{type:Number, default:0}},
-        wis:{base:{type:Number, default:10}, bonus:{type:Number, default:0}},
-        cha:{base:{type:Number, default:10}, bonus:{type:Number, default:0}}
+        str:
+        {
+            base:{type:Number, default:10},
+            bonus:{type:Number, default:0}
+        },
+        dex:
+        {
+            base:{type:Number, default:10}, 
+            bonus:{type:Number, default:0}
+        },
+        con:
+        {
+            base:{type:Number, default:10}, 
+            bonus:{type:Number, default:0}
+        },
+        int:
+        {
+            base:{type:Number, default:10}, 
+            bonus:{type:Number, default:0}
+        },
+        wis:
+        {
+            base:{type:Number, default:10}, 
+            bonus:{type:Number, default:0}
+        },
+        cha:
+        {
+            base:{type:Number, default:10}, 
+            bonus:{type:Number, default:0}
+        }
     },
     saving:
     {
@@ -42,11 +102,8 @@ const character = new mongoose.Schema(
     {
         armour:[String],
         tools:String,
-        skill:[String],
-        expertize:Boolean,
         bonus:Number
     },
-    pBonus:Number,
     spellcaster:
     {
         casterLevel:{type:Number, default:0},
@@ -54,16 +111,7 @@ const character = new mongoose.Schema(
         maxSlots:[Number],
         currentSlots:[Number]
     },
-    features:[String],
-    abilities:[
-    {
-        ability:String,
-        duration:
-        {
-            num:Number,
-            magnitude:String
-        }
-    }]
+    features:[String]
 })
 
 module.exports = mongoose.model('character', character)

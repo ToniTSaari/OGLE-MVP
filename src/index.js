@@ -6,6 +6,7 @@ import SignUpForm from './pages/SignUpForm'
 import DeleteForm from './pages/DeleteForm'
 import UpdateForm from './pages/UpdateForm'
 import PCCreateForm from './pages/PCCreateForm'
+import PCCreateFormNew from './pages/PCCreateFormNew'
 import HomePage from './pages/homePage'
 import FriendsList from './pages/FriendsList'
 import Campaign from './pages/campaign'
@@ -64,7 +65,7 @@ const Logout = () =>
 
 const PCCreate = () => 
 (
-  <div><PCCreateForm /></div>
+  <div><PCCreateFormNew /></div>
 )
 
 const Friends = () =>

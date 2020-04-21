@@ -1,7 +1,7 @@
 [
     {
         "armourName":"Padded",
-        "group":"medium",
+        "group":"light",
         "cost":5,
         "AC":11,
         "dex":5,
@@ -11,7 +11,7 @@
     },
     {
         "armourName":"Leather",
-        "group":"medium",
+        "group":"light",
         "cost":10,
         "AC":11,
         "dex":5,
@@ -21,7 +21,7 @@
     },
     {
         "armourName":"Studded Leather",
-        "group":"medium",
+        "group":"light",
         "cost":45,
         "AC":12,
         "dex":5,
@@ -31,7 +31,7 @@
     },    
     {
         "armourName":"Hide",
-        "group":"heavy",
+        "group":"medium",
         "cost":10,
         "AC":12,
         "dex":2,
@@ -41,7 +41,7 @@
     },
     {
         "armourName":"Chain Shirt",
-        "group":"heavy",
+        "group":"medium",
         "cost":50,
         "AC":13,
         "dex":2,
@@ -51,7 +51,7 @@
     },
     {
         "armourName":"Scale mail",
-        "group":"heavy",
+        "group":"medium",
         "cost":50,
         "AC":14,
         "dex":2,
@@ -61,7 +61,7 @@
     },
     {
         "armourName":"Breastplate",
-        "group":"heavy",
+        "group":"medium",
         "cost":400,
         "AC":14,
         "dex":2,
@@ -71,7 +71,7 @@
     },
     {
         "armourName":"Half plate",
-        "group":"heavy",
+        "group":"medium",
         "cost":750,
         "AC":15,
         "dex":2,

@@ -1,5 +1,6 @@
 const mon = require('mongoose')
 const spell = require('./schema/spell')
+const skill = require('./schema/skills')
 const race = require('./schema/race')
 const weapon = require('./schema/weapon')
 const armour = require('./schema/armour')
@@ -11,6 +12,7 @@ const fs = require('fs')
 
 mon.connect(url,{ useNewUrlParser: true, useUnifiedTopology: true })
 
+const skills = JSON.parse(fs.readFileSync('./ogl/skills.json'))
 const spells = JSON.parse(fs.readFileSync('./ogl/spell/Spells.json'))
 const spellLists = JSON.parse(fs.readFileSync('./ogl/spell/spellLists.json'))
 const races = JSON.parse(fs.readFileSync('./ogl/creature/race.json'))
@@ -42,6 +44,7 @@ try
     armour.insertMany(armours).then(console.log('Armours database built'))
     race.insertMany(races).then(console.log('Races database built'))
     spell.insertMany(spells).then(console.log('Spells database built'))
+    skill.insertMany(skills).then(console.log('Skills database built'))
     Class.insertMany(classes).then(console.log('Class database built!'))
     classlist.insertMany(spellLists).then(console.log('Spell lists built!'))
     monster.insertMany(monsters).then(console.log('Monster database built!'))

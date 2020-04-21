@@ -284,9 +284,8 @@ class SessionPage extends React.Component
                                 <div>
                                     {this.state.monsters.map(mon=>
                                     <div>
-                                        <b>{mon.nickname} ~ {mon.data.monsterName}, CR {mon.data.CR}</b><hr/>
-                                        <p>{mon.data.size}, {mon.data.alignment[0]} {mon.data.alignment[1]},  
-                                        {mon.data.monsterType}</p>
+                                        <b>{mon.nickname} ~ {mon.data.monsterName}</b><hr/>
+                                        <p>{mon.data.size}, {mon.data.monsterType}</p>
                                         <p>
                                             STR: {mon.data.stats.str.base} / + {mon.data.stats.str.bonus}<br/>
                                             DEX: {mon.data.stats.dex.base} / + {mon.data.stats.dex.bonus}<br/>

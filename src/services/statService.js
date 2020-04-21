@@ -18,17 +18,17 @@ const reset = () =>
     return stat
 }
 
-const buy = stat =>
+const buy = (stat, ABImp) =>
 {
     var buy = 1
-    if(stat >= 13){ buy = 2 }
+    if(stat >= 13 && !ABImp){ buy = 2 }
     return buy
 }
 
-const sell = stat =>
+const sell = (stat, ABImp) =>
 {
     var sell = 1
-    if(stat >= 14){ sell = 2 }
+    if(stat >= 14 && !ABImp){ sell = 2 }
     return sell
 }
 

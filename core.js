@@ -55,12 +55,12 @@ app.post("/findModule", rRead.modu)
 
 /*
 app.get("/listAbility", rList.ability)
-app.get("/listArmour", rList.armour)
+
 app.get("/listCampaign", rList.campaign)
 app.post("/findSpells", rRead.classList)
 app.get("/listPlayer", rList.player)
 app.get("/listSpell", rList.spell)
-app.get("/listWeapon", rList.weapon)
+
 */
 
 app.post("/listChar", rList.character)
@@ -68,6 +68,9 @@ app.get("/listRace", rList.race)
 app.get("/listClassSpell", rList.classList)
 app.get("/listClass", rList.Class)
 app.get("/listMon", rList.monster)
+app.get("/listArmour", rList.armour)
+app.get("/listWeapon", rList.weapon)
+app.get("/listSkills", rList.skill)
 
 app.post("/makeChar", rCreate.character)
 app.post("/makeCamp", rCreate.campaign)
