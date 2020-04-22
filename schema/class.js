@@ -17,7 +17,13 @@ const Class = new mongoose.Schema(
         wis:{type:Boolean, default:false},
         cha:{type:Boolean, default:false}
     },
-    equipment:[String],
+    wealth:
+    {
+        diceNum:Number,
+        diceDie:Number,
+        multiplier:Number,
+        average:Number
+    },
     proficiencies:
     {
         armour:[String],
@@ -30,7 +36,29 @@ const Class = new mongoose.Schema(
             skill:[String]
         }
     },
-    leveling:[]
+    leveling:
+    [
+        /*{
+            proficiency:Number,
+            features:[String],
+            classResources:
+            [
+                {
+                    name:String,
+                    amount:Number
+                }
+            ],
+            spellsKnown:Number,
+            slots:[Number],
+            abilities:
+            [
+                {
+                    name:String,
+                    amount:String
+                }
+            ]
+        }*/
+    ]
 })
 
 module.exports = mongoose.model('Class', Class)

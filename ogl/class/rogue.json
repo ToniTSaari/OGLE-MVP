@@ -10,6 +10,13 @@
         "dex":true,
         "int":true
     },
+    "wealth":
+    {
+        "diceNum":4,
+        "diceDie":4,
+        "multiplier":10,
+        "average":100
+    },
     "proficiencies":
     {
         "armour":["Light"],

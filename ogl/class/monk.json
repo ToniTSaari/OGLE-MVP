@@ -10,6 +10,13 @@
         "str":true,
         "dex":true
     },
+    "wealth":
+    {
+        "diceNum":5,
+        "diceDie":4,
+        "multiplier":1,
+        "average":13
+    },
     "proficiencies":
     {
         "weapons":["Simple","Shortsword"],

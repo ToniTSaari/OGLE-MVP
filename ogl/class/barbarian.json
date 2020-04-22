@@ -10,6 +10,13 @@
         "str":true,
         "con":true
     },
+    "wealth":
+    {
+        "diceNum":2,
+        "diceDie":4,
+        "multiplier":10,
+        "average":50
+    },
     "proficiencies":
     {
         "armour":["Light", "Medium", "Shield"],
@@ -29,137 +36,149 @@
         {
             "proficiency":2,
             "features":["Rage","Unarmored Defence"],
-            "infiniteRage":false,
-            "rages":2,
-            "rageDamage":2
+            "classResources":
+            [
+                {
+                    "name":"Rage",
+                    "amount":2
+                },
+                {
+                    "name":"Rage Damage",
+                    "amount":2
+                }
+            ]
         },
         {
             "proficiency":2,
-            "features":["Recless Attack","Danger Sense"],
-            "rages":2,
-            "rageDamage":2
+            "features":["Recless Attack","Danger Sense"]
         },
         {
             "proficiency":2,
-            "features":["Primal Path"],
-            "rages":3,
-            "rageDamage":2
+            "features":["Subclass"],
+            "classResources":
+            [
+                {
+                    "name":"Rage",
+                    "amount":3
+                }
+            ]
         },
         {
             "proficiency":2,
-            "features":["Ability Score Improvement"],
-            "rages":3,
-            "rageDamage":2
+            "features":["Ability Score Improvement"]
         },
         {
             "proficiency":3,
             "features":["Fast Movement"],
-            "extraAttack":1,
-            "rages":3,
-            "rageDamage":2
+            "classResources":
+            [
+                {
+                    "name":"Extra Attack",
+                    "amount":1
+                }
+            ]
         },
         {
             "proficiency":3,
-            "features":["Path feature"],
-            "rages":4,
-            "rageDamage":2
+            "features":["Subclass feature"],
+            "classResources":
+            [
+                {
+                    "name":"Rage",
+                    "amount":4
+                }
+            ]
         },
         {
             "proficiency":3,
-            "features":["Feral Instinct"],
-            "rages":4,
-            "rageDamage":2
+            "features":["Feral Instinct"]
         },
         {
             "proficiency":3,
+            "features":["Ability Score Improvement"]
+        },
+        {
+            "proficiency":4,
+            "features":["Brutal Critical"]
+        },
+        {
+            "proficiency":4,
+            "features":["Subclass feature"],
+            "classResources":
+            [
+                {
+                    "name":"Rage Damage",
+                    "amount":3
+                }
+            ]
+        },
+        {
+            "proficiency":4,
+            "features":["Relentless Rage"]
+        },
+        {
+            "proficiency":4,
             "features":["Ability Score Improvement"],
-            "rages":4,
-            "rageDamage":2
-        },
-        {
-            "proficiency":4,
-            "features":[],
-            "brutalCritical":1,
-            "rages":4,
-            "rageDamage":3
-        },
-        {
-            "proficiency":4,
-            "features":["Path feature"],
-            "brutalCritical":1,
-            "rages":4,
-            "rageDamage":3
-        },
-        {
-            "proficiency":4,
-            "features":["Relentless Rage"],
-            "brutalCritical":1,
-            "rages":4,
-            "rageDamage":3
-        },
-        {
-            "proficiency":4,
-            "features":["Ability Score Improvement"],
-            "brutalCritical":1,
-            "rages":5,
-            "rageDamage":3
+            "classResources":
+            [
+                {
+                    "name":"Rage",
+                    "amount":5
+                }
+            ]
         },
         {
             "proficiency":5,
-            "features":[],
-            "brutalCritical":2,
-            "rages":5,
-            "rageDamage":3
+            "features":["Brutal Critical"]
         },
         {
             "proficiency":5,
-            "features":["Path feature"],
-            "brutalCritical":2,
-            "rages":5,
-            "rageDamage":3
+            "features":["Subclass feature"]
         },
         {
             "proficiency":5,
-            "features":["Persistent Rage"],
-            "brutalCritical":2,
-            "rages":5,
-            "rageDamage":3
+            "features":["Persistent Rage"]
         },
         {
             "proficiency":5,
             "features":["Ability Score Improvement"],
-            "brutalCritical":2,
-            "rages":5,
-            "rageDamage":4
+            "classResources":
+            [
+                {
+                    "name":"Rage Damage",
+                    "amount":4
+                }
+            ]
         },
         {
             "proficiency":5,
-            "features":[],
-            "brutalCritical":3,
-            "rages":5,
-            "rageDamage":4
+            "features":["Brutal Critical"]
         },
         {
             "proficiency":6,
             "features":["Indominable Might"],
-            "brutalCritical":3,
-            "rages":6,
-            "rageDamage":4
+            "classResources":
+            [
+                {
+                    "name":"Rage",
+                    "amount":6
+                }
+            ]
         },
         {
             "proficiency":6,
-            "features":["Ability Score Improvement"],
-            "brutalCritical":3,
-            "rages":6,
-            "rageDamage":4
+            "features":["Ability Score Improvement"]
         },
         {
             "proficiency":6,
-            "features":["Primal Champion"],
-            "brutalCritical":3,
-            "rages":null,
-            "infiniteRage":true,
-            "rageDamage":4
+            "features":["Primal Champion", "Unlimited Rage"],
+            "classResources":
+            [
+                {
+                    "name":"Rage",
+                    "amount":0
+                }
+            ]
         }
     ]
 }

@@ -10,6 +10,13 @@
         "int":true,
         "wis":true
     },
+    "wealth":
+    {
+        "diceNum":4,
+        "diceDie":4,
+        "multiplier":10,
+        "average":100
+    },
     "proficiencies":
     {
         "weapons":["Dagger","Dart","Sling","Quarterstaff","Light Crossbow"],
@@ -31,122 +38,102 @@
             {
                 "int":true
             },
-            "slots":[2],
-            "cantrips":3
+            "slots":[3,2]
         },
         {
             "proficiency":2,
             "features":["Arcane Tradition"],
-            "slots":[3],
-            "cantrips":3
+            "slots":[3,3]
         },
         {
             "proficiency":2,
             "features":[],
-            "slots":[4,2],
-            "cantrips":3
+            "slots":[3,4,2]
         },
         {
             "proficiency":2,
             "features":["Ability Score Improvement"],
-            "slots":[4,3],
-            "cantrips":4
+            "slots":[4,4,3]
         },
         {
             "proficiency":3,
             "features":[],
-            "slots":[4,3,2],
-            "cantrips":4
+            "slots":[4,4,3,2]
         },
         {
             "proficiency":3,
             "features":["Arcane Tradition feature"],
-            "slots":[4,3,3],
-            "cantrips":4
+            "slots":[4,4,3,3]
         },
         {
             "proficiency":3,
             "features":[],
-            "slots":[4,3,3,1],
-            "cantrips":4
+            "slots":[4,4,3,3,1]
         },
         {
             "proficiency":3,
             "features":["Ability Score Improvement"],
-            "slots":[4,3,3,2],
-            "cantrips":4
+            "slots":[4,4,3,3,2]
         },
         {
             "proficiency":4,
             "features":[],
-            "slots":[4,3,3,3,1],
-            "cantrips":4
+            "slots":[4,4,3,3,3,1]
         },
         {
             "proficiency":4,
             "features":["Arcane Tradition feature"],
-            "slots":[4,3,3,3,2],
-            "cantrips":5
+            "slots":[5,4,3,3,3,2]
         },
         {
             "proficiency":4,
             "features":[],
-            "slots":[4,3,3,3,2,1],
-            "cantrips":5
+            "slots":[5,4,3,3,3,2,1]
         },
         {
             "proficiency":4,
             "features":["Ability Score Improvement"],
-            "slots":[4,3,3,3,2,1],
-            "cantrips":5
+            "slots":[5,4,3,3,3,2,1]
         },
         {
             "proficiency":5,
             "features":[],
-            "slots":[4,3,3,3,2,1,1],
-            "cantrips":5
+            "slots":[5,4,3,3,3,2,1,1]
         },
         {
             "proficiency":5,
             "features":["Arcane Tradition feature"],
-            "slots":[4,3,3,3,2,1,1],
-            "cantrips":5
+            "slots":[5,4,3,3,3,2,1,1]
         },
         {
             "proficiency":5,
             "features":[],
-            "slots":[4,3,3,3,2,1,1,1],
-            "cantrips":5
+            "slots":[5,4,3,3,3,2,1,1,1]
         },
         {
             "proficiency":5,
             "features":["Ability Score Improvement"],
-            "slots":[4,3,3,3,2,1,1,1],
-            "cantrips":5
+            "slots":[5,4,3,3,3,2,1,1,1]
         },
         {
             "proficiency":6,
             "features":[],
-            "slots":[4,3,3,3,2,1,1,1,1],
-            "cantrips":5
+            "slots":[5,4,3,3,3,2,1,1,1,1]
         },
         {
             "proficiency":6,
             "features":["Spell Mastery"],
-            "slots":[4,3,3,3,3,1,1,1,1],
-            "cantrips":5
+            "slots":[5,4,3,3,3,3,1,1,1,1]
         },
         {
             "proficiency":6,
             "features":["Ability Score Improvement"],
-            "slots":[4,3,3,3,3,2,1,1,1],
-            "cantrips":5
+            "slots":[5,4,3,3,3,3,2,1,1,1]
         },
         {
             "proficiency":6,
             "features":["Signature Spell"],
-            "slots":[4,3,3,3,3,2,2,1,1],
-            "cantrips":5
+            "slots":[5,4,3,3,3,3,2,2,1,1]
         }
     ]
 }

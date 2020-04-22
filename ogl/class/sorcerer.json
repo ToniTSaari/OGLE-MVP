@@ -10,6 +10,13 @@
         "con":true,
         "cha":true
     },
+    "wealth":
+    {
+        "diceNum":3,
+        "diceDie":4,
+        "multiplier":10,
+        "average":75
+    },
     "proficiencies":
     {
         "weapons":["Dagger","Dart","Sling","Quarterstaff","Light Crossbow"],

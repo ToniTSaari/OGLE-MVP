@@ -195,7 +195,8 @@ exports.weapon = async (req, res) =>
             damage:find.damage,
             properties:find.properties,
             range:find.range,
-            twoHanded:find.twohanded
+            twoHanded:find.twohanded,
+            cost:find.cost
         }
         i++
     })

@@ -10,6 +10,13 @@
         "dex":true,
         "cha":true
     },
+    "wealth":
+    {
+        "diceNum":5,
+        "diceDie":4,
+        "multiplier":10,
+        "average":125
+    },
     "proficiencies":
     {
         "armour":["Light"],
@@ -26,155 +33,127 @@
     [
         {
             "proficiency":2,
-            "features":[],
+            "features":["Bardic Inspiration"],
             "spellcasting":
             {
                 "cha":true
             },
-            "bardicInspiration":6,
-            "cantrips":2,
             "spellsKnown":4,
-            "slots":[2]
+            "slots":[2,2]
         },
         {
             "proficiency":2,
-            "features":["Jack of All Trades"],
-            "songRest":6,
-            "cantrips":2,
+            "features":["Jack of All Trades", "Song of Rest"],
             "spellsKnown":5,
-            "slots":[3]
+            "slots":[2,3]
         },
         {
             "proficiency":2,
-            "features":["Bard College","Expertise"],
-            "cantrips":2,
+            "features":["Subclass","Expertise"],
             "spellsKnown":6,
-            "slots":[4,2]
+            "slots":[2,4,2]
         },
         {
             "proficiency":3,
             "features":["Ability Score Improvement"],
-            "cantrips":3,
             "spellsKnown":7,
-            "slots":[4,3]
+            "slots":[3,4,3]
         },
         {
             "proficiency":3,
-            "features":["Font of Inspiration"],
-            "bardicInspiration":8,
-            "cantrips":3,
+            "features":["Font of Inspiration","Bardic Inspiration"],
             "spellsKnown":8,
-            "slots":[4,3,2]
+            "slots":[3,4,3,2]
         },
         {
             "proficiency":3,
             "features":["Countercharm","Bard College Feature"],
-            "cantrips":3,
             "spellsKnown":9,
-            "slots":[4,3,3]
+            "slots":[3,4,3,3]
         },
         {
             "proficiency":3,
             "features":[],
-            "cantrips":3,
             "spellsKnown":10,
-            "slots":[4,3,3,1]
+            "slots":[3,4,3,3,1]
         },
         {
             "proficiency":3,
             "features":["Ability Score Improvement"],
-            "cantrips":3,
             "spellsKnown":11,
-            "slots":[4,3,3,2]
+            "slots":[3,4,3,3,2]
         },
         {
             "proficiency":4,
-            "features":[],
-            "songRest":8,
-            "cantrips":3,
+            "features":["Song of Rest"],
             "spellsKnown":12,
-            "slots":[4,3,3,3,1]
+            "slots":[3,4,3,3,3,1]
         },
         {
             "proficiency":4,
-            "features":["Expertise","Magical Secrets"],
-            "bardicInspiration":10,
-            "cantrips":4,
+            "features":["Expertise","Magical Secrets","Bardic Inspiration"],
             "spellsKnown":14,
-            "slots":[4,3,3,3,2]
+            "slots":[4,4,3,3,3,2]
         },
         {
             "proficiency":4,
             "features":[],
-            "cantrips":4,
             "spellsKnown":15,
-            "slots":[4,3,3,3,2,1]
+            "slots":[4,4,3,3,3,2,1]
         },
         {
             "proficiency":4,
             "features":["Ability Score Improvement"],
-            "cantrips":4,
             "spellsKnown":15,
-            "slots":[4,3,3,3,2,1]
+            "slots":[4,4,3,3,3,2,1]
         },
         {
             "proficiency":5,
-            "features":[],
-            "songRest":10,
-            "cantrips":4,
+            "features":["Song of Rest"],
             "spellsKnown":16,
-            "slots":[4,3,3,3,2,1,1]
+            "slots":[4,4,3,3,3,2,1,1]
         },
         {
             "proficiency":5,
             "features":["Magical Secrets","Bard College Feature"],
-            "cantrips":4,
             "spellsKnown":18,
-            "slots":[4,3,3,3,2,1,1]
+            "slots":[4,4,3,3,3,2,1,1]
         },
         {
             "proficiency":5,
-            "features":[],
-            "bardicInspiration":12,
-            "cantrips":4,
+            "features":["Bardic Inspiration"],
             "spellsKnown":19,
-            "slots":[4,3,3,3,2,1,1,1]
+            "slots":[4,4,3,3,3,2,1,1,1]
         },
         {
             "proficiency":5,
             "features":["Ability Score Improvement"],
-            "cantrips":4,
             "spellsKnown":19,
-            "slots":[4,3,3,3,2,1,1,1]
+            "slots":[4,4,3,3,3,2,1,1,1]
         },
         {
             "proficiency":6,
-            "features":[],
-            "songRest":12,
-            "cantrips":4,
+            "features":["Song of Rest"],
             "spellsKnown":20,
-            "slots":[4,3,3,3,2,1,1,1,1]
+            "slots":[4,4,3,3,3,2,1,1,1,1]
         },
         {
             "proficiency":6,
             "features":["Magical Secrets"],
-            "cantrips":4,
             "spellsKnown":22,
-            "slots":[4,3,3,3,3,1,1,1,1]
+            "slots":[4,4,3,3,3,3,1,1,1,1]
         },
         {
             "proficiency":6,
             "features":["Ability Score Improvement"],
-            "cantrips":4,
             "spellsKnown":22,
-            "slots":[4,3,3,3,3,2,1,1,1]
+            "slots":[4,4,3,3,3,3,2,1,1,1]
         },
         {
             "proficiency":6,
             "features":["Superior Inspiration"],
-            "cantrips":4,
             "spellsKnown":22,
-            "slots":[4,3,3,3,3,2,2,1,1]
+            "slots":[4,4,3,3,3,3,2,2,1,1]
         }
     ]
 }

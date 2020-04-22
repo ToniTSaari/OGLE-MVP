@@ -18,6 +18,8 @@ const race = new mongoose.Schema(
         size:String,
         darkvision:{type:Boolean, default:false},
         racials:[String],
+        racialWeapons:[String],
+        racialArmours:[String],
         languages:[String],
         subraces:
         [{
@@ -32,7 +34,9 @@ const race = new mongoose.Schema(
                 int:{type:Number, default:0},
                 cha:{type:Number, default:0}
             },
-            racials:[String]
+            racials:[String],
+            racialWeapons:[String],
+            racialArmours:[String]
         }]
     })
 
