@@ -52,6 +52,8 @@ app.post("/findClass", rRead.charClass)
 app.post("/findCampaign", rRead.campaign)
 app.post("/findMon", rRead.monster)
 app.post("/findModule", rRead.modu)
+app.post("/findWeapon", rRead.weapon)
+app.post("/findArmour", rRead.armour)
 
 /*
 app.get("/listAbility", rList.ability)

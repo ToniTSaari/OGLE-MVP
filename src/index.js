@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom'
+import License from './pages/license'
 import LoginForm from './pages/LoginForm'
 import SignUpForm from './pages/SignUpForm'
 import DeleteForm from './pages/DeleteForm'
@@ -46,7 +47,12 @@ const Home = () =>
 (
   <div><HomePage /></div>
 )
-  
+
+const LicensePage = () =>
+(
+  <div><License /></div>
+)
+
 const Login = () => 
 (
   <div><LoginForm /></div>
@@ -98,13 +104,16 @@ const App = () =>
               <Link to="/logOut">~ LogOut ~</Link> 
               <Link to="/del">~ Delete account ~</Link> 
               <Link to="/friends">~ Friends List ~</Link>
+              <Link to="/license">~ License ~</Link>
             </div>:
             <div className="navbar">
               <Link to="/login">~ Login ~</Link> 
-              <Link to="/signUp">~ Sign Up ~</Link> 
+              <Link to="/signUp">~ Sign Up ~</Link>
+              <Link to="/license">~ License ~</Link> 
             </div>}
         </div>
         <Route exact path="/" render={() => email ? <Home /> : <Redirect to="/login"/>}/>
+        <Route exact path="/license" render={() => <LicensePage />} />
         <Route exact path="/login" render={() => <Login />} />
         <Route exact path="/upAcc" render={() => <Update />} />
         <Route exact path="/signUp" render={() => <SignUp />} />

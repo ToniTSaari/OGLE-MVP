@@ -27,7 +27,8 @@
             [
                 "Arcana","History","Insight","Investigation","Medicine","Religion"
             ]
-        }
+        },
+        "learnSpells":true
     },
     "leveling":
     [
@@ -38,12 +39,14 @@
             {
                 "int":true
             },
-            "slots":[3,2]
+            "slots":[3,2],
+            "spellsKnown":6
         },
         {
             "proficiency":2,
             "features":["Arcane Tradition"],
-            "slots":[3,3]
+            "slots":[3,3],
+            "spellsKnown":8
         },
         {
             "proficiency":2,
@@ -53,87 +56,104 @@
         {
             "proficiency":2,
             "features":["Ability Score Improvement"],
-            "slots":[4,4,3]
+            "slots":[4,4,3],
+            "spellsKnown":10
         },
         {
             "proficiency":3,
             "features":[],
-            "slots":[4,4,3,2]
+            "slots":[4,4,3,2],
+            "spellsKnown":12
         },
         {
             "proficiency":3,
             "features":["Arcane Tradition feature"],
-            "slots":[4,4,3,3]
+            "slots":[4,4,3,3],
+            "spellsKnown":14
         },
         {
             "proficiency":3,
             "features":[],
-            "slots":[4,4,3,3,1]
+            "slots":[4,4,3,3,1],
+            "spellsKnown":16
         },
         {
             "proficiency":3,
             "features":["Ability Score Improvement"],
-            "slots":[4,4,3,3,2]
+            "slots":[4,4,3,3,2],
+            "spellsKnown":18
         },
         {
             "proficiency":4,
             "features":[],
-            "slots":[4,4,3,3,3,1]
+            "slots":[4,4,3,3,3,1],
+            "spellsKnown":20
         },
         {
             "proficiency":4,
             "features":["Arcane Tradition feature"],
-            "slots":[5,4,3,3,3,2]
+            "slots":[5,4,3,3,3,2],
+            "spellsKnown":22
         },
         {
             "proficiency":4,
             "features":[],
-            "slots":[5,4,3,3,3,2,1]
+            "slots":[5,4,3,3,3,2,1],
+            "spellsKnown":24
         },
         {
             "proficiency":4,
             "features":["Ability Score Improvement"],
-            "slots":[5,4,3,3,3,2,1]
+            "slots":[5,4,3,3,3,2,1],
+            "spellsKnown":26
         },
         {
             "proficiency":5,
             "features":[],
-            "slots":[5,4,3,3,3,2,1,1]
+            "slots":[5,4,3,3,3,2,1,1],
+            "spellsKnown":28
         },
         {
             "proficiency":5,
             "features":["Arcane Tradition feature"],
-            "slots":[5,4,3,3,3,2,1,1]
+            "slots":[5,4,3,3,3,2,1,1],
+            "spellsKnown":30
         },
         {
             "proficiency":5,
             "features":[],
-            "slots":[5,4,3,3,3,2,1,1,1]
+            "slots":[5,4,3,3,3,2,1,1,1],
+            "spellsKnown":32
         },
         {
             "proficiency":5,
             "features":["Ability Score Improvement"],
-            "slots":[5,4,3,3,3,2,1,1,1]
+            "slots":[5,4,3,3,3,2,1,1,1],
+            "spellsKnown":34
         },
         {
             "proficiency":6,
             "features":[],
-            "slots":[5,4,3,3,3,2,1,1,1,1]
+            "slots":[5,4,3,3,3,2,1,1,1,1],
+            "spellsKnown":36
         },
         {
             "proficiency":6,
             "features":["Spell Mastery"],
-            "slots":[5,4,3,3,3,3,1,1,1,1]
+            "slots":[5,4,3,3,3,3,1,1,1,1],
+            "spellsKnown":38
         },
         {
             "proficiency":6,
             "features":["Ability Score Improvement"],
-            "slots":[5,4,3,3,3,3,2,1,1,1]
+            "slots":[5,4,3,3,3,3,2,1,1,1],
+            "spellsKnown":40
         },
         {
             "proficiency":6,
             "features":["Signature Spell"],
-            "slots":[5,4,3,3,3,3,2,2,1,1]
+            "slots":[5,4,3,3,3,3,2,2,1,1],
+            "spellsKnown":42
         }
     ]
 }

@@ -17,6 +17,7 @@ const character = new mongoose.Schema(
     speed:Number,
     size:String,
     inspiration:Boolean,
+    stealthDis:{type:Boolean,default:false},
     HP:
     {
         maxHP:Number,

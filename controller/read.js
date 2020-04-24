@@ -39,6 +39,46 @@ exports.ability = async (req, res) =>
     })
 }
 
+exports.armour = async (req, res) =>
+{
+    var obj = req.body
+    console.log(obj)
+    var read = armour.where(obj)
+    read.findOne(function(err, find)
+    {
+        if(err){console.log(err)}
+        if(find)
+        {
+            console.log('Found armour: ' + find.armourName + ' on ' + date)
+            res.json(find)
+        }
+        else
+        {
+            console.log('Nothing found!')
+        }
+    })
+}
+
+exports.weapon = async (req, res) =>
+{
+    var obj = req.body
+    console.log(obj)
+    var read = weapon.where(obj)
+    read.findOne(function(err, find)
+    {
+        if(err){console.log(err)}
+        if(find)
+        {
+            console.log('Found weapon: ' + find.weaponName + ' on ' + date)
+            res.json(find)
+        }
+        else
+        {
+            console.log('Nothing found!')
+        }
+    })
+}
+
 exports.character = async (req, res) =>
 {
     var obj = req.body

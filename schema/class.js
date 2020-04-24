@@ -34,7 +34,8 @@ const Class = new mongoose.Schema(
             num:Number,
             any:Boolean,
             skill:[String]
-        }
+        },
+        learnSpells:{type:Boolean, default:false}
     },
     leveling:
     [
